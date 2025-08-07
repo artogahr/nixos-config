@@ -47,6 +47,14 @@
       # The alias to rebuild your entire system!
       nrs = "sudo nixos-rebuild switch --flake /nixos-config#fukurowl-pc && git -C /nixos-config commit -a";
     };
+    plugins = [
+      { name = "z"; src = pkgs.fishPlugins.z; }
+    ];
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   # Let Home Manager manage its own configuration file
