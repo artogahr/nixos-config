@@ -13,7 +13,7 @@
     delta
     helix
     neovim
-
+    telegram-desktop
     htop      
     ripgrep  
     fd      
@@ -45,7 +45,7 @@
       ".." = "cd ..";
       ll = "ls -alh";
       # The alias to rebuild your entire system!
-      nrs = "sudo nixos-rebuild switch --flake /nixos-config#fukurowl-pc";
+      nrs = "sudo nixos-rebuild switch --flake /nixos-config#fukurowl-pc && git -C /nixos-config commit -a";
     };
   };
 
