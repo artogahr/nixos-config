@@ -24,6 +24,7 @@
 
   hardware.bluetooth.enable = true;
   hardware.i2c.enable = true;
+  hardware.amdgpu.overdrive.enable = true;
 
   # Time, Locale, and Fonts
   time.timeZone = "Europe/Prague";
@@ -37,6 +38,7 @@
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "arto";
   services.ddccontrol.enable = true;
+  services.lact.enable = true;
 
   # Sound
   services.pipewire = { enable = true; pulse.enable = true; alsa.enable = true; alsa.support32Bit = true; };
@@ -68,7 +70,7 @@
 
   # System-wide Packages and Programs
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ wget git btrfs-progs kdePackages.plasma-browser-integration ];
+  environment.systemPackages = with pkgs; [ wget git btrfs-progs kdePackages.plasma-browser-integration lact ];
   programs.fish.enable = true;
   programs.steam.enable = true;
   programs.firefox.enable = true;
