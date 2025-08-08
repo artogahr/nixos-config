@@ -13,7 +13,7 @@
   boot.loader.grub = { enable = true; device = "nodev"; efiSupport = true; };
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelModules = ["i2c-dev"];
+  boot.kernelModules = [ "i2c-dev" "amdgpu" ];
   services.udev.extraRules = ''
         KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
@@ -25,6 +25,8 @@
   hardware.bluetooth.enable = true;
   hardware.i2c.enable = true;
   hardware.amdgpu.overdrive.enable = true;
+  hardware.amdgpu.overdrive.ppfeaturemask = "0xffffffff";
+  hardware.amdgpu.initrd.enable = true;
 
   # Time, Locale, and Fonts
   time.timeZone = "Europe/Prague";
@@ -38,7 +40,10 @@
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "arto";
   services.ddccontrol.enable = true;
-  services.lact.enable = true;
+
+  systemd.packages = with pkgs; [ lact ];
+  systemd.services.lactd.wantedBy = ["multi-user.target"];
+
 
   # Sound
   services.pipewire = { enable = true; pulse.enable = true; alsa.enable = true; alsa.support32Bit = true; };
