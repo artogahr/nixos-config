@@ -21,6 +21,9 @@
     fd
   ];
 
-  # Enable Home Manager
   programs.home-manager.enable = true;
+  catppuccin.fish = {
+    enable = true;
+    flavor = "frappe";
+  };
 }

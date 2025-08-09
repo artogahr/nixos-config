@@ -66,13 +66,6 @@
     deps = [ "users" ];
   };
   
-  # Home Manager Integration
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    useGlobalPkgs = true;
-    users.arto = import ./home.nix;
-  };
-
   # System-wide Packages and Programs
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [ wget git btrfs-progs kdePackages.plasma-browser-integration lact ];
