@@ -23,8 +23,7 @@
   programs.home-manager.enable = true;
   catppuccin.enable = true;
   catppuccin.flavor = "frappe";
-#  catppuccin.fish = {
-#    enable = true;
-#    flavor = "frappe";
-#  };
+
+  qt.style.name = "kvantum";
+  qt.platformTheme.name = "kvantum";
 }
