@@ -32,6 +32,7 @@
       
         {
           home-manager = {
+	    backupFileExtension = "backup";
 	    extraSpecialArgs = { inherit inputs; };
 	    useGlobalPkgs = true;
             users.arto = {

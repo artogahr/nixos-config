@@ -73,5 +73,10 @@
   programs.steam.enable = true;
   programs.firefox.enable = true;
 
+  catppuccin.enable = true;
+  catppuccin.flavor = "frappe";
+
+  #catppuccin.grub.enable = true;
+
   system.stateVersion = "25.05";
 }

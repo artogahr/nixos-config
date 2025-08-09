@@ -22,8 +22,10 @@
   ];
 
   programs.home-manager.enable = true;
-  catppuccin.fish = {
-    enable = true;
-    flavor = "frappe";
-  };
+  catppuccin.enable = true;
+  catppuccin.flavor = "frappe";
+#  catppuccin.fish = {
+#    enable = true;
+#    flavor = "frappe";
+#  };
 }
