@@ -14,7 +14,6 @@
     gh
     delta
     helix
-    neovim
     telegram-desktop
     htop
     ripgrep
