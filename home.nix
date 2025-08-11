@@ -22,7 +22,7 @@
 
   programs.home-manager.enable = true;
   catppuccin.enable = true;
-  catppuccin.flavor = "frappe";
+  catppuccin.flavor = "mocha";
 
   catppuccin.kvantum.enable = true;
   catppuccin.kvantum.apply = true;
