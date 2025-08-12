@@ -86,7 +86,7 @@
   
   # System-wide Packages and Programs
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ wget git btrfs-progs kdePackages.plasma-browser-integration lact catppuccin-kde ];
+  environment.systemPackages = with pkgs; [ wget git btrfs-progs kdePackages.plasma-browser-integration lact catppuccin-kde unzip];
   programs.fish.enable = true;
   programs.steam.enable = true;
   programs.firefox.enable = true;

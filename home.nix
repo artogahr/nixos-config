@@ -13,7 +13,6 @@
     anydesk
     gh
     delta
-    helix
     telegram-desktop
     htop
     ripgrep
