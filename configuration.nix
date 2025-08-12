@@ -31,7 +31,25 @@
   # Time, Locale, and Fonts
   time.timeZone = "Europe/Prague";
   i18n.defaultLocale = "en_US.UTF-8";
-  fonts.packages = with pkgs; [ noto-fonts noto-fonts-cjk-sans noto-fonts-emoji ];
+
+  fonts = {
+    enableDefaultPackages = true;
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = [ "Cascadia Code" ];
+        # sansSerif = [ "Noto Sans" ];
+        # serif = [ "Noto Serif" ];
+      };
+    };
+
+    packages = with pkgs; [
+      cascadia-code
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+    ];
+  };
 
   # Desktop Environment: KDE Plasma 6
   services.xserver.enable = true;

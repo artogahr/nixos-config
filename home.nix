@@ -29,15 +29,4 @@
 
   qt.style.name = "kvantum";
   qt.platformTheme.name = "kvantum";
-
-  programs.alacritty = {
-    enable = true;
-    theme = "catppuccin_mocha";
-    settings = {
-      window = {
-        opacity = 0.75;
-        blur = true;
-      };
-    };
-  };
 }
