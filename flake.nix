@@ -17,33 +17,42 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, catppuccin, disko, home-manager,  ... }@inputs: {
-    nixosConfigurations.fukurowl-pc = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; }; # Pass flake inputs to our modules
-      modules = [
-        ./disko-config.nix
-        ./configuration.nix
-        ./hardware-configuration.nix
-      
-        disko.nixosModules.default
-        catppuccin.nixosModules.catppuccin
-        home-manager.nixosModules.home-manager
-      
-        {
-          home-manager = {
-	    backupFileExtension = "backup";
-	    extraSpecialArgs = { inherit inputs; };
-	    useGlobalPkgs = true;
-            users.arto = {
-              imports = [
-                ./home.nix
-                catppuccin.homeModules.catppuccin  # fixed attribute name
-              ];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      catppuccin,
+      disko,
+      home-manager,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.fukurowl-pc = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; }; # Pass flake inputs to our modules
+        modules = [
+          ./disko-config.nix
+          ./configuration.nix
+          ./hardware-configuration.nix
+
+          disko.nixosModules.default
+          catppuccin.nixosModules.catppuccin
+          home-manager.nixosModules.home-manager
+
+          {
+            home-manager = {
+              backupFileExtension = "backup";
+              extraSpecialArgs = { inherit inputs; };
+              useGlobalPkgs = true;
+              users.arto = {
+                imports = [
+                  ./home.nix
+                  catppuccin.homeModules.catppuccin # fixed attribute name
+                ];
+              };
             };
-	  };
-        }
-      ];
+          }
+        ];
+      };
     };
-  };
 }

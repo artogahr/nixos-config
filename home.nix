@@ -1,9 +1,13 @@
 { pkgs, lib, ... }:
 
 {
-  imports = map (name: ./modules + "/${name}") 
-    (builtins.attrNames (lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".nix" name) 
-      (builtins.readDir ./modules)));
+  imports = map (name: ./modules + "/${name}") (
+    builtins.attrNames (
+      lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".nix" name) (
+        builtins.readDir ./modules
+      )
+    )
+  );
 
   home.stateVersion = "25.05";
 

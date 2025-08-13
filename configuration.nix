@@ -1,21 +1,40 @@
 # /nixos-config/configuration.nix
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   # Core NixOS Settings
   nix = {
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     settings.auto-optimise-store = true;
-    gc = { automatic = true; dates = "weekly"; options = "--delete-older-than 30d"; };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
   };
 
   # Bootloader and Kernel
-  boot.loader.grub = { enable = true; device = "nodev"; efiSupport = true; };
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    efiSupport = true;
+  };
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelModules = [ "i2c-dev" "amdgpu" ];
+  boot.kernelModules = [
+    "i2c-dev"
+    "amdgpu"
+  ];
   services.udev.extraRules = ''
-        KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+    KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
 
   # Networking
@@ -54,17 +73,24 @@
   # Desktop Environment: KDE Plasma 6
   services.xserver.enable = true;
   services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm = { enable = true; wayland.enable = true; };
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "arto";
   services.ddccontrol.enable = true;
 
   systemd.packages = with pkgs; [ lact ];
-  systemd.services.lactd.wantedBy = ["multi-user.target"];
-
+  systemd.services.lactd.wantedBy = [ "multi-user.target" ];
 
   # Sound
-  services.pipewire = { enable = true; pulse.enable = true; alsa.enable = true; alsa.support32Bit = true; };
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+  };
 
   # System Services
   services.openssh.enable = true;
@@ -73,7 +99,11 @@
   # User Management (delegates to Home Manager)
   users.users.arto = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "i2c" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "i2c"
+    ];
     shell = pkgs.fish;
   };
 
@@ -83,10 +113,22 @@
     '';
     deps = [ "users" ];
   };
-  
+
   # System-wide Packages and Programs
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ wget git btrfs-progs kdePackages.plasma-browser-integration lact catppuccin-kde unzip];
+  environment.systemPackages = with pkgs; [
+    wget
+    git
+    btrfs-progs
+    kdePackages.plasma-browser-integration
+    lact
+    catppuccin-kde
+    unzip
+    nixfmt
+    nixd
+    typst
+    tinymist
+  ];
   programs.fish.enable = true;
   programs.steam.enable = true;
   programs.firefox.enable = true;
