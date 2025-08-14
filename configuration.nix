@@ -143,10 +143,19 @@
     tinymist
     typstyle
     zotero
+    tidal-hifi
+    inputs.fenix.packages.${pkgs.system}.complete.toolchain
+    bpftools
+    llvm
+    clang
+    linuxPackages.kernel.dev
+    linuxPackages.bpftrace
   ];
+
   programs.fish.enable = true;
   programs.steam.enable = true;
   programs.firefox.enable = true;
+  programs.bcc.enable = true;
 
   catppuccin.enable = true;
   catppuccin.flavor = "frappe";
