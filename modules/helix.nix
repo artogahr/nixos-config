@@ -3,6 +3,8 @@
 {
   programs.helix = {
     enable = true;
+    # package = pkgs.evil-helix;
+    defaultEditor = true;
     settings = {
       theme = lib.mkForce "catppuccin-mocha-transparent";
     };
@@ -19,6 +21,11 @@
         name = "nix";
         auto-format = true;
         formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+      }
+      {
+        name = "typst";
+        auto-format = true;
+        formatter.command = "${pkgs.typstyle}/bin/typstyle";
       }
     ];
   };

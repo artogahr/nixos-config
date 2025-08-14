@@ -121,6 +121,19 @@
     git
     btrfs-progs
     kdePackages.plasma-browser-integration
+    kdePackages.discover
+    kdePackages.kcalc
+    kdePackages.kcharselect
+    kdePackages.kolourpaint
+    kdePackages.ksystemlog
+    kdePackages.kjournald
+    kdePackages.sddm-kcm
+    kdePackages.isoimagewriter
+    kdePackages.partitionmanager
+    hardinfo2
+    haruna
+    wayland-utils
+    wl-clipboard-rs
     lact
     catppuccin-kde
     unzip
@@ -128,6 +141,8 @@
     nixd
     typst
     tinymist
+    typstyle
+    zotero
   ];
   programs.fish.enable = true;
   programs.steam.enable = true;
@@ -135,8 +150,7 @@
 
   catppuccin.enable = true;
   catppuccin.flavor = "frappe";
-
-  #catppuccin.grub.enable = true;
+  catppuccin.accent = "green";
 
   system.stateVersion = "25.05";
 }

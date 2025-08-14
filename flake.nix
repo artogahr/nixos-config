@@ -15,44 +15,41 @@
     # Home Manager for declarative user-environment management
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Plasma Manager for declarative KDE Plasma configuration
+    plasma-manager.url = "github:nix-community/plasma-manager";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.inputs.home-manager.follows = "home-manager";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      catppuccin,
-      disko,
-      home-manager,
-      ...
-    }@inputs:
-    {
-      nixosConfigurations.fukurowl-pc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; }; # Pass flake inputs to our modules
-        modules = [
-          ./disko-config.nix
-          ./configuration.nix
-          ./hardware-configuration.nix
+  outputs = { self, nixpkgs, catppuccin, disko, home-manager, plasma-manager, ... }@inputs: {
+    nixosConfigurations.fukurowl-pc = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; }; # Pass flake inputs to our modules
+      modules = [
+        ./disko-config.nix
+        ./configuration.nix
+        ./hardware-configuration.nix
 
-          disko.nixosModules.default
-          catppuccin.nixosModules.catppuccin
-          home-manager.nixosModules.home-manager
+        disko.nixosModules.default
+        catppuccin.nixosModules.catppuccin
+        home-manager.nixosModules.home-manager
 
-          {
-            home-manager = {
-              backupFileExtension = "backup";
-              extraSpecialArgs = { inherit inputs; };
-              useGlobalPkgs = true;
-              users.arto = {
-                imports = [
-                  ./home.nix
-                  catppuccin.homeModules.catppuccin # fixed attribute name
-                ];
-              };
+        {
+          home-manager = {
+            backupFileExtension = "backup";
+            extraSpecialArgs = { inherit inputs; };
+            useGlobalPkgs = true;
+            users.arto = {
+              imports = [
+                ./home.nix
+                catppuccin.homeModules.catppuccin
+                plasma-manager.homeManagerModules.plasma-manager
+              ];
             };
-          }
-        ];
-      };
+          };
+        }
+      ];
     };
+  };
 }

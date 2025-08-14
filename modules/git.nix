@@ -13,7 +13,7 @@
       rerere.enabled = true;
       help.autocorrect = "prompt";
       core.pager = "delta";
-      core.editor = "nvim";
+      core.editor = "hx";
       diff.algorithm = "histogram";
       branch.sort = "-committerdate";
     };
