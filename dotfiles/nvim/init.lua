@@ -1,1 +1,0 @@
--- Basic Neovim configuration
