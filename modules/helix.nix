@@ -7,6 +7,7 @@
     defaultEditor = true;
     settings = {
       theme = lib.mkForce "catppuccin-mocha-transparent";
+      editor.cursor-shape.insert = "bar";
     };
     themes = {
       "catppuccin-mocha-transparent" = {

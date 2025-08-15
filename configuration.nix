@@ -80,6 +80,7 @@
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "arto";
   services.ddccontrol.enable = true;
+  # services.rustdesk-server.enable = true;
 
   systemd.packages = with pkgs; [ lact ];
   systemd.services.lactd.wantedBy = [ "multi-user.target" ];
@@ -150,10 +151,16 @@
     clang
     linuxPackages.kernel.dev
     linuxPackages.bpftrace
+    onlyoffice-bin
+    rustdesk-flutter
+    vesktop
   ];
 
   programs.fish.enable = true;
   programs.steam.enable = true;
+  programs.steam.extraCompatPackages = with pkgs; [
+    proton-ge-bin
+  ];
   programs.firefox.enable = true;
   programs.bcc.enable = true;
 
