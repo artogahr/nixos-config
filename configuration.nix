@@ -6,84 +6,60 @@
   ...
 }:
 {
-  # Core NixOS Settings
   nix = {
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    settings.auto-optimise-store = true;
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      auto-optimise-store = true;
+    };
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
   };
-  # Bootloader and Kernel
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    efiSupport = true;
-  };
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelModules = [
-    "i2c-dev"
-    "amdgpu"
-  ];
-  services.udev.extraRules = ''
-    KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
-  '';
-  # Networking
-  networking.hostName = "fukurowl-pc";
-  networking.networkmanager.enable = true;
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings.General.Experimental = true;
-  };
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-
-  hardware.i2c.enable = true;
-  hardware.amdgpu.overdrive.enable = true;
-  hardware.amdgpu.overdrive.ppfeaturemask = "0xffffffff";
-  hardware.amdgpu.initrd.enable = true;
-
-  # Time, Locale, and Fonts
-  time.timeZone = "Europe/Prague";
-  i18n.defaultLocale = "en_US.UTF-8";
-  fonts = {
-    enableDefaultPackages = true;
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        monospace = [ "Cascadia Code" ];
-        # sansSerif = [ "Noto Sans" ];
-        # serif = [ "Noto Serif" ];
+  boot = {
+    loader = {
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
       };
+      efi.canTouchEfiVariables = true;
     };
-    packages = with pkgs; [
-      cascadia-code
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
+    kernelPackages = pkgs.linuxPackages_zen;
+    kernelModules = [
+      "i2c-dev"
+      "amdgpu"
     ];
   };
-  # Desktop Environment: KDE Plasma 6
-  services.xserver.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
+
+  networking = {
+    hostName = "fukurowl-pc";
+    networkmanager.enable = true;
   };
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "arto";
-  services.ddccontrol.enable = true;
-  # services.rustdesk-server.enable = true;
-  systemd.packages = with pkgs; [ lact ];
-  systemd.services.lactd.wantedBy = [ "multi-user.target" ];
+
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings.General.Experimental = true;
+    };
+    pulseaudio.enable = false;
+    i2c.enable = true;
+    amdgpu = {
+      overdrive = {
+        enable = true;
+        ppfeaturemask = "0xffffffff";
+      };
+      initrd.enable = true;
+    };
+  };
+
+  security.rtkit.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -109,10 +85,51 @@
     };
   };
 
-  # System Services
-  services.openssh.enable = true;
+  time.timeZone = "Europe/Prague";
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  fonts = {
+    enableDefaultPackages = true;
+    fontconfig = {
+      enable = true;
+      defaultFonts.monospace = [ "Cascadia Code" ];
+    };
+    packages = with pkgs; [
+      cascadia-code
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+    ];
+  };
+
+  services = {
+    xserver.enable = true;
+    desktopManager.plasma6.enable = true;
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
+      autoLogin = {
+        enable = true;
+        user = "arto";
+      };
+    };
+    openssh.enable = true;
+    ddccontrol.enable = true;
+  };
+
+  services.udev.extraRules = ''
+    KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+  '';
+
+  systemd = {
+    packages = with pkgs; [ lact ];
+    services.lactd.wantedBy = [ "multi-user.target" ];
+  };
+
   zramSwap.enable = true;
-  # User Management (delegates to Home Manager)
+
   users.users.arto = {
     isNormalUser = true;
     extraGroups = [
@@ -122,18 +139,59 @@
     ];
     shell = pkgs.fish;
   };
+
   system.activationScripts.fixDownloadsOwnership = {
-    text = ''
-      chown arto:users /home/arto/Downloads
-    '';
+    text = ''chown arto:users /home/arto/Downloads'';
     deps = [ "users" ];
   };
-  # System-wide Packages and Programs
+
+  programs = {
+    fish.enable = true;
+    firefox.enable = true;
+    bcc.enable = true;
+    steam = {
+      enable = true;
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    };
+  };
+
+  catppuccin = {
+    enable = true;
+    flavor = "frappe";
+    accent = "green";
+  };
+
   nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     wget
     git
+    unzip
     btrfs-progs
+    nixfmt
+    nixd
+    inputs.fenix.packages.${pkgs.system}.complete.toolchain
+    bpftools
+    llvm
+    clang
+    linuxPackages.kernel.dev
+    linuxPackages.bpftrace
+    typst
+    tinymist
+    typstyle
+    zotero
+    onlyoffice-bin
+    haruna
+    tidal-hifi
+    libldac
+    pavucontrol
+    pwvucontrol
+    vesktop
+    rustdesk-flutter
+    hardinfo2
+    lact
+    wayland-utils
+    wl-clipboard-rs
     kdePackages.plasma-browser-integration
     kdePackages.discover
     kdePackages.kcalc
@@ -144,43 +202,9 @@
     kdePackages.sddm-kcm
     kdePackages.isoimagewriter
     kdePackages.partitionmanager
-    hardinfo2
-    haruna
-    wayland-utils
-    wl-clipboard-rs
-    lact
     catppuccin-kde
-    unzip
-    nixfmt
-    nixd
-    typst
-    tinymist
-    typstyle
-    zotero
-    tidal-hifi
-    inputs.fenix.packages.${pkgs.system}.complete.toolchain
-    bpftools
-    llvm
-    clang
-    linuxPackages.kernel.dev
-    linuxPackages.bpftrace
-    onlyoffice-bin
-    rustdesk-flutter
-    vesktop
     prusa-slicer
-    libldac
-    pavucontrol
-    pwvucontrol
   ];
-  programs.fish.enable = true;
-  programs.steam.enable = true;
-  programs.steam.extraCompatPackages = with pkgs; [
-    proton-ge-bin
-  ];
-  programs.firefox.enable = true;
-  programs.bcc.enable = true;
-  catppuccin.enable = true;
-  catppuccin.flavor = "frappe";
-  catppuccin.accent = "green";
+
   system.stateVersion = "25.05";
 }
