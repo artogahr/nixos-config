@@ -48,7 +48,7 @@
       powerOnBoot = true;
       settings.General.Experimental = true;
     };
-    pulseaudio.enable = false;
+
     i2c.enable = true;
     amdgpu = {
       overdrive = {
@@ -67,20 +67,10 @@
     alsa.enable = true;
     alsa.support32Bit = true;
 
-    extraConfig.pipewire."99-best-quality" = {
+    extraConfig.pipewire."99-sensible-settings" = {
       context.properties = {
-        default.clock.allowed-rates = [
-          44100
-          48000
-          88200
-          96000
-          176400
-          192000
-        ];
         resample.quality = 10;
         default.clock.quantum = 1024;
-        default.clock.min-quantum = 32;
-        default.clock.max-quantum = 2048;
       };
     };
   };
@@ -183,7 +173,6 @@
     onlyoffice-bin
     haruna
     tidal-hifi
-    libldac
     pavucontrol
     pwvucontrol
     vesktop
