@@ -24,6 +24,9 @@
     # Rust development stuff
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Tidal client
+    tidaLuna.url = "github:Inrixia/TidaLuna";
   };
 
   outputs =
@@ -34,6 +37,7 @@
       disko,
       home-manager,
       plasma-manager,
+      tidaLuna,
       fenix,
       ...
     }@inputs:

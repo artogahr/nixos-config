@@ -160,7 +160,6 @@
     btrfs-progs
     nixfmt
     nixd
-    inputs.fenix.packages.${pkgs.system}.complete.toolchain
     bpftools
     llvm
     clang
@@ -172,7 +171,7 @@
     zotero
     onlyoffice-bin
     haruna
-    tidal-hifi
+    # tidal-hifi
     pavucontrol
     pwvucontrol
     vesktop
@@ -193,6 +192,8 @@
     kdePackages.partitionmanager
     catppuccin-kde
     prusa-slicer
+    inputs.fenix.packages.${pkgs.system}.complete.toolchain
+    inputs.tidaLuna.packages.${pkgs.system}.default
   ];
 
   system.stateVersion = "25.05";
