@@ -50,6 +50,13 @@
     };
 
     i2c.enable = true;
+
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [ amdvlk ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [ driversi686Linux.amdvlk ];
+    };
     amdgpu = {
       overdrive = {
         enable = true;
@@ -153,6 +160,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  environment.variables = {
+    AMD_VULKAN_ICD = "RADV";
+  };
+
   environment.systemPackages = with pkgs; [
     wget
     git
@@ -194,6 +205,10 @@
     prusa-slicer
     inputs.fenix.packages.${pkgs.system}.complete.toolchain
     inputs.tidaLuna.packages.${pkgs.system}.default
+    oneko
+    wayneko
+    lm_sensors
+    dmidecode
   ];
 
   system.stateVersion = "25.05";
