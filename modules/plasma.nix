@@ -1,7 +1,4 @@
 {
-  config,
-  pkgs,
-  lib,
   ...
 }:
 
@@ -15,5 +12,12 @@
       command = "wezterm";
     };
     kwin.effects.dimInactive.enable = true;
+    powerdevil.AC = {
+      powerButtonAction = "sleep";
+      dimDisplay.enable = true;
+      dimDisplay.idleTimeout = 300;
+      autoSuspend.action = "sleep";
+      autoSuspend.idleTimeout = 600;
+    };
   };
 }
