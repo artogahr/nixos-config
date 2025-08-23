@@ -46,5 +46,6 @@
     lm_sensors
     dmidecode
     gemini-cli
+    stremio
   ];
 }
