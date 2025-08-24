@@ -47,5 +47,6 @@
     dmidecode
     gemini-cli
     stremio
+    google-chrome
   ];
 }
