@@ -11,7 +11,6 @@
 
   home.stateVersion = "25.05";
 
-  # User-level packages
   home.packages = with pkgs; [
     tree
     anydesk
@@ -32,4 +31,21 @@
 
   qt.style.name = "kvantum";
   qt.platformTheme.name = "kvantum";
+
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps.associations.added = {
+    "x-scheme-handler/prusaslicer" = [ "PrusaSlicerURLProtocol.desktop" ];
+  };
+  xdg.mimeApps.defaultApplications = {
+    "x-scheme-handler/prusaslicer" = [ "PrusaSlicerURLProtocol.desktop" ];
+  };
+
+  xdg.desktopEntries.PrusaSlicerURLProtocol = {
+    name = "PrusaSlicer URL Protocol";
+    exec = "${pkgs.prusa-slicer}/bin/prusa-slicer --single-instance %u";
+    terminal = false;
+    type = "Application";
+    mimeType = [ "x-scheme-handler/prusaslicer" ];
+    noDisplay = true;
+  };
 }
