@@ -1,4 +1,5 @@
-{ ... }:
+# /nixos-config/modules/alacritty.nix
+{ config, pkgs, ... }:
 
 {
   programs.alacritty = {
@@ -26,3 +27,4 @@
     };
   };
 }
+

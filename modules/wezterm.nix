@@ -1,4 +1,5 @@
-{ ... }:
+# /nixos-config/modules/wezterm.nix
+{ config, pkgs, ... }:
 
 {
   programs.wezterm = {

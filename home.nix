@@ -1,10 +1,10 @@
 { pkgs, lib, ... }:
 
 {
-  imports = map (name: ./home-modules + "/${name}") (
+  imports = map (name: ./modules + "/${name}") (
     builtins.attrNames (
       lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".nix" name) (
-        builtins.readDir ./home-modules
+        builtins.readDir ./modules
       )
     )
   );
@@ -32,11 +32,4 @@
 
   qt.style.name = "kvantum";
   qt.platformTheme.name = "kvantum";
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "x-scheme-handler/prusaslicer" = [ "PrusaSlicerURLProtocol.desktop" ];
-    };
-  };
 }
