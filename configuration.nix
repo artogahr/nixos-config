@@ -8,6 +8,7 @@
 {
   imports = [
     ./applications.nix
+    ./system-modules/prusaslicer.nix
   ];
   nix = {
     settings = {
