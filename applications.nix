@@ -48,5 +48,7 @@
     gemini-cli
     stremio
     google-chrome
+    ffmpeg
+    jellyfin-media-player
   ];
 }
