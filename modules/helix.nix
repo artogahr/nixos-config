@@ -9,6 +9,7 @@
       theme = lib.mkForce "catppuccin-mocha-transparent";
       editor.cursor-shape.insert = "bar";
       editor.line-number = "relative";
+      editor.soft-wrap.enable = true;
     };
     themes = {
       "catppuccin-mocha-transparent" = {
