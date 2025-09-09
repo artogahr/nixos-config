@@ -50,5 +50,6 @@
     google-chrome
     ffmpeg
     jellyfin-media-player
+    easyeffects
   ];
 }
