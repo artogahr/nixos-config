@@ -46,10 +46,11 @@
     lm_sensors
     dmidecode
     gemini-cli
-    stremio
+    # stremio
     google-chrome
     ffmpeg
     jellyfin-media-player
     easyeffects
+    code-cursor
   ];
 }

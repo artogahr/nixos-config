@@ -63,7 +63,7 @@
                 imports = [
                   ./home.nix
                   catppuccin.homeModules.catppuccin
-                  plasma-manager.homeManagerModules.plasma-manager
+                  plasma-manager.homeModules.plasma-manager
                 ];
               };
             };

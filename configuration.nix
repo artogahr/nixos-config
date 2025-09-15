@@ -1,4 +1,5 @@
 # /nixos-config/configuration.nix
+#
 {
   config,
   pkgs,
@@ -39,6 +40,10 @@
       "amdgpu"
     ];
   };
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
 
   networking = {
     hostName = "fukurowl-pc";
