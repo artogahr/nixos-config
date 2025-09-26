@@ -49,8 +49,10 @@
     # stremio
     google-chrome
     ffmpeg
-    jellyfin-media-player
+    # jellyfin-media-player
     easyeffects
     code-cursor
+    todoist
+    cursor-cli
   ];
 }
