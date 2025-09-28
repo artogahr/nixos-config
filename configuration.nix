@@ -163,7 +163,7 @@
       "video"
     ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMp2klUtEik/25L89NqS5aTr3tShn+d8d2v0b7eY2bX3 yann@example.com"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIjbRvb1ruMTx3fzyEPuw/gouvLixN/F/dmiN4FIWcOV openpgp:0x4C086962"
     ];
   };
 
