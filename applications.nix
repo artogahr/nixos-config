@@ -54,5 +54,6 @@
     code-cursor
     todoist
     cursor-cli
+    radeontop
   ];
 }

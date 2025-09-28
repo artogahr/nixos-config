@@ -120,8 +120,12 @@
         user = "arto";
       };
     };
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      settings.PasswordAuthentication = false;
+    };
     ddccontrol.enable = true;
+    tailscale.enable = true;
   };
 
   services.udev.extraRules = ''
@@ -137,12 +141,30 @@
 
   users.users.arto = {
     isNormalUser = true;
+    homeMode = "0700";
     extraGroups = [
       "wheel"
       "networkmanager"
       "i2c"
+      "docker"
     ];
     shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKMu8p91vFMlCogmKOpImn/0gDpgs3jkKQk9h6Iw3Yj"
+    ];
+  };
+
+  users.users.yann = {
+    isNormalUser = true;
+    extraGroups = [
+      "users"
+      "docker"
+      "adbusers"
+      "video"
+    ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMp2klUtEik/25L89NqS5aTr3tShn+d8d2v0b7eY2bX3 yann@example.com"
+    ];
   };
 
   system.activationScripts.fixDownloadsOwnership = {
@@ -159,6 +181,8 @@
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
   };
+
+  virtualisation.docker.enable = true;
 
   catppuccin = {
     enable = true;
