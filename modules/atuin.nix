@@ -12,5 +12,8 @@
       update_check = false;
       show_help = false;
     };
+    flags = [
+      "--disable-up-arrow"
+    ];
   };
 }
