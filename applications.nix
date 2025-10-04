@@ -55,5 +55,6 @@
     todoist
     cursor-cli
     radeontop
+    dogdns
   ];
 }
