@@ -4,7 +4,7 @@
   programs.helix = {
     enable = true;
     # package = pkgs.evil-helix;
-    defaultEditor = true;
+    defaultEditor = false;
     settings = {
       theme = lib.mkForce "catppuccin-mocha-transparent";
       editor.cursor-shape.insert = "bar";
