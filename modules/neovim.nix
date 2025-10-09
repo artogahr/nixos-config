@@ -48,6 +48,13 @@ in
       which-key-nvim
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects
+      
+      # Modern UI
+      noice-nvim
+      nui-nvim
+      nvim-notify
+      dressing-nvim
+      lualine-nvim
     ];
     
     extraLuaConfig = ''
@@ -56,7 +63,6 @@ in
       vim.opt.relativenumber = true
       vim.opt.wrap = true
       vim.opt.linebreak = true
-      vim.opt.clipboard = "unnamedplus"
       vim.opt.expandtab = true
       vim.opt.shiftwidth = 2
       vim.opt.tabstop = 2
@@ -77,23 +83,48 @@ in
       vim.g.mapleader = " "
       vim.g.maplocalleader = " "
       
+      -- Disable netrw (default file browser)
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+      
       vim.diagnostic.config({
         virtual_text = true,
-        signs = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "✘",
+            [vim.diagnostic.severity.WARN] = "▲",
+            [vim.diagnostic.severity.HINT] = "⚑",
+            [vim.diagnostic.severity.INFO] = "»",
+          },
+        },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
+        float = { border = "rounded" },
       })
       
-      local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
+      -- Show diagnostic popup on hover
+      vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+          vim.diagnostic.open_float(nil, { focus = false, border = "rounded" })
+        end,
+      })
       
       -- Catppuccin theme
-      require("catppuccin").setup({ flavour = "mocha", transparent_background = true })
+      require("catppuccin").setup({
+        flavour = "mocha",
+        transparent_background = true,
+        integrations = {
+          noice = true,
+          notify = true,
+          which_key = true,
+        },
+      })
       vim.cmd.colorscheme("catppuccin")
+      
+      -- Fix float backgrounds and borders to match theme
+      vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#6c7086" })
       
       -- LSP setup
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -121,6 +152,54 @@ in
       require("nvim-surround").setup({})
       require("trouble").setup({})
       
+      -- Modern UI
+      require("noice").setup({
+        lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+          hover = {
+            enabled = true,
+          },
+          signature = {
+            enabled = true,
+          },
+        },
+        presets = {
+          bottom_search = true,
+          command_palette = true,
+          long_message_to_split = true,
+          inc_rename = false,
+          lsp_doc_border = true,
+        },
+      })
+      
+      require("notify").setup({
+        background_colour = "#000000",
+        timeout = 2000,
+      })
+      
+      require("dressing").setup({})
+      
+      require("lualine").setup({
+        options = {
+          theme = "catppuccin",
+          icons_enabled = true,
+          component_separators = { left = "", right = ""},
+          section_separators = { left = "", right = ""},
+        },
+        sections = {
+          lualine_a = {"mode"},
+          lualine_b = {"branch", "diff", "diagnostics"},
+          lualine_c = {"filename"},
+          lualine_x = {"encoding", "fileformat", "filetype"},
+          lualine_y = {"progress"},
+          lualine_z = {"location"}
+        },
+      })
+      
       -- Diagnostics keybindings
       vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
       vim.keymap.set("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics" })
@@ -136,7 +215,10 @@ in
         snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
         mapping = cmp.mapping.preset.insert({
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<CR>"] = cmp.mapping.confirm({ 
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false 
+          }),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -198,6 +280,8 @@ in
         { "<leader>c", group = "Code" },
         { "<leader>r", group = "Refactor" },
         { "<leader>x", group = "Diagnostics" },
+        { "<leader>y", group = "Yank to clipboard" },
+        { "<leader>p", group = "Paste from clipboard" },
         { "<leader>u", desc = "Undo tree" },
         { "[d", desc = "Previous diagnostic" },
         { "]d", desc = "Next diagnostic" },
@@ -221,9 +305,29 @@ in
       vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Find files" })
       vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "Live grep" })
       vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Find buffers" })
+      
+      -- Open file picker when starting with a directory (like Helix)
+      vim.api.nvim_create_autocmd("VimEnter", {
+        callback = function()
+          local arg = vim.fn.argv(0)
+          if arg and vim.fn.isdirectory(arg) == 1 then
+            vim.cmd("cd " .. arg)
+            vim.cmd("enew")  -- Create empty buffer instead of showing directory
+            vim.schedule(function()
+              telescope.find_files()
+            end)
+          end
+        end,
+      })
       vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
       vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
       vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undo tree" })
+      
+      -- System clipboard (like Helix Space y/p)
+      vim.keymap.set({"n", "v"}, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+      vim.keymap.set({"n", "v"}, "<leader>Y", '"+Y', { desc = "Yank line to system clipboard" })
+      vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+      vim.keymap.set({"n", "v"}, "<leader>P", '"+P', { desc = "Paste before from system clipboard" })
     '';
   };
 }

@@ -10,7 +10,8 @@
 
       config.font = wezterm.font "Cascadia Code"
 
-      config.window_background_opacity = 0.9
+      config.window_background_opacity = 0.8
+      config.kde_window_background_blur = true
       config.window_decorations = "NONE"
 
       config.adjust_window_size_when_changing_font_size = false

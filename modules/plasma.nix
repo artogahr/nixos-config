@@ -12,6 +12,7 @@
       command = "wezterm";
     };
     kwin.effects.dimInactive.enable = true;
+    kwin.effects.blur.enable = true;
     powerdevil.AC = {
       powerButtonAction = "sleep";
       dimDisplay.enable = true;
