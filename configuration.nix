@@ -127,7 +127,14 @@
     };
     ddccontrol.enable = true;
     tailscale.enable = true;
-    geoclue2.enable = true;
+    geoclue2 = {
+      enable = true;
+      enableStatic = true;
+      staticLatitude = 50.000;
+      staticLongitude = 14.500;
+      staticAltitude = 200;
+      staticAccuracy = 10000;
+    };
   };
 
   services.udev.extraRules = ''
