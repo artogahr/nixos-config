@@ -127,6 +127,7 @@
     };
     ddccontrol.enable = true;
     tailscale.enable = true;
+    geoclue2.enable = true;
   };
 
   services.udev.extraRules = ''
