@@ -56,5 +56,7 @@
     cursor-cli
     radeontop
     dogdns
+    sshfs
+    unrar
   ];
 }
