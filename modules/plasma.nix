@@ -20,5 +20,7 @@
       autoSuspend.action = "sleep";
       autoSuspend.idleTimeout = 600;
     };
+    session.sessionRestore.restoreOpenApplicationsOnLogin = "whenSessionWasManuallySaved";
+    windows.allowWindowsToRememberPositions = true;
   };
 }
