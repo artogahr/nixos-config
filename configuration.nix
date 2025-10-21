@@ -17,6 +17,7 @@
         "flakes"
       ];
       auto-optimise-store = true;
+      download-buffer-size = 4194304000;
     };
     gc = {
       automatic = true;
@@ -63,8 +64,6 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [ amdvlk ];
-      extraPackages32 = with pkgs.pkgsi686Linux; [ driversi686Linux.amdvlk ];
     };
     amdgpu = {
       overdrive = {

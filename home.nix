@@ -45,6 +45,8 @@
     "x-scheme-handler/unknown" = [ "firefox.desktop" ];
   };
 
+  xdg.configFile."mimeapps.list".force = true;
+
   xdg.desktopEntries.PrusaSlicerURLProtocol = {
     name = "PrusaSlicer URL Protocol";
     exec = "${pkgs.prusa-slicer}/bin/prusa-slicer --single-instance %u";

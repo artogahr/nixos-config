@@ -58,5 +58,6 @@
     dogdns
     sshfs
     unrar
+    pspp
   ];
 }

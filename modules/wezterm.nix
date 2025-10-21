@@ -24,6 +24,9 @@
         bottom = 10,
       }
 
+      config.initial_rows = 42
+      config.initial_cols = 128
+
       config.color_scheme = "Catppuccin Macchiato"
 
       return config
