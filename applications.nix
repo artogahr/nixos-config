@@ -59,5 +59,8 @@
     sshfs
     unrar
     pspp
+    qbittorrent
+    discord
+    wireguard-tools
   ];
 }

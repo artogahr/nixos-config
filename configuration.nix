@@ -147,32 +147,50 @@
 
   zramSwap.enable = true;
 
-  users.users.arto = {
-    isNormalUser = true;
-    homeMode = "0700";
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "i2c"
-      "docker"
-    ];
-    shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKMu8p91vFMlCogmKOpImn/0gDpgs3jkKQk9h6Iw3Yj"
-    ];
-  };
+  users.users = {
+    arto = {
+      isNormalUser = true;
+      homeMode = "0700";
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "i2c"
+        "docker"
+      ];
+      shell = pkgs.fish;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKMu8p91vFMlCogmKOpImn/0gDpgs3jkKQk9h6Iw3Yj"
+      ];
+    };
 
-  users.users.yann = {
-    isNormalUser = true;
-    extraGroups = [
-      "users"
-      "docker"
-      "adbusers"
-      "video"
-    ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIjbRvb1ruMTx3fzyEPuw/gouvLixN/F/dmiN4FIWcOV openpgp:0x4C086962"
-    ];
+    yann = {
+      isNormalUser = true;
+      extraGroups = [
+        "users"
+        "docker"
+        "adbusers"
+        "video"
+      ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIjbRvb1ruMTx3fzyEPuw/gouvLixN/F/dmiN4FIWcOV openpgp:0x4C086962"
+      ];
+    };
+
+    sudo = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "users"
+        "docker"
+        "adbusers"
+        "video"
+      ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIjbRvb1ruMTx3fzyEPuw/gouvLixN/F/dmiN4FIWcOV openpgp:0x4C086962"
+      ];
+      initialPassword = "sudo";
+    };
   };
 
   system.activationScripts.fixDownloadsOwnership = {
