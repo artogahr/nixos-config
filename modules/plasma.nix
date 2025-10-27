@@ -20,7 +20,8 @@
     powerdevil.AC = {
       powerButtonAction = "sleep";
       dimDisplay.enable = true;
-      dimDisplay.idleTimeout = 300;
+      dimDisplay.idleTimeout = 120;
+      turnOffDisplay.idleTimeout = 300;
       autoSuspend.action = "sleep";
       autoSuspend.idleTimeout = 600;
     };
