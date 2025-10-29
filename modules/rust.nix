@@ -15,6 +15,7 @@
     cargo-edit # Add/remove dependencies: `cargo add`, `cargo rm`
     cargo-udeps # Find unused dependencies: `cargo udeps`
     cargo-machete # Remove unused dependencies: `cargo machete`
+    cargo-generate
 
     # Cross-compilation helpers (useful for eBPF targets)
     cargo-zigbuild # Use Zig as linker for cross-compilation

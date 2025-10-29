@@ -18,12 +18,12 @@
       };
     };
     powerdevil.AC = {
-      powerButtonAction = "sleep";
+      powerButtonAction = "nothing";
       dimDisplay.enable = true;
       dimDisplay.idleTimeout = 120;
       turnOffDisplay.idleTimeout = 300;
-      autoSuspend.action = "sleep";
-      autoSuspend.idleTimeout = 600;
+      autoSuspend.action = "nothing";
+      #autoSuspend.idleTimeout = 600;
     };
     session.sessionRestore.restoreOpenApplicationsOnLogin = "whenSessionWasManuallySaved";
     windows.allowWindowsToRememberPositions = true;

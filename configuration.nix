@@ -47,6 +47,7 @@
   # ];
 
   networking = {
+    firewall.enable = false;
     hostName = "fukurowl-pc";
     networkmanager.enable = true;
     extraHosts = "0.0.0.0 apresolve.spotify.com";
