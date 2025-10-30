@@ -41,6 +41,13 @@
       fenix,
       ...
     }@inputs:
+    let
+      # Helper function to get system-specific nixpkgs
+      pkgsFor = system: import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
     {
       nixosConfigurations.fukurowl-pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -68,6 +75,16 @@
               };
             };
           }
+        ];
+      };
+
+      # Home Manager configuration for macOS (darwin)
+      homeConfigurations."artogahr@fistikcan" = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgsFor "aarch64-darwin";
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ./home-darwin.nix
+          catppuccin.homeModules.catppuccin
         ];
       };
     };

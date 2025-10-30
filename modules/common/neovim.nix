@@ -112,7 +112,7 @@ in
       
       -- Catppuccin theme
       require("catppuccin").setup({
-        flavour = "mocha",
+        flavour = "latte",
         transparent_background = true,
         integrations = {
           noice = true,
@@ -122,9 +122,11 @@ in
       })
       vim.cmd.colorscheme("catppuccin")
       
-      -- Fix float backgrounds and borders to match theme
-      vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#6c7086" })
+      -- Make background transparent
+      vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#6c7086", bg = "NONE", ctermbg = "NONE" })
+      vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", ctermbg = "NONE" })
       
       -- LSP setup
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
