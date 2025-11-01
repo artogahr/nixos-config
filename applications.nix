@@ -16,7 +16,7 @@
     tinymist
     typstyle
     zotero
-    onlyoffice-bin
+    onlyoffice-desktopeditors
     haruna
     # tidal-hifi
     pavucontrol

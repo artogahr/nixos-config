@@ -104,7 +104,7 @@
       cascadia-code
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
     ];
   };
 
@@ -123,7 +123,7 @@
     };
     openssh = {
       enable = true;
-      settings.PasswordAuthentication = false;
+      settings.PasswordAuthentication = true;
     };
     ddccontrol.enable = true;
     tailscale.enable = true;
