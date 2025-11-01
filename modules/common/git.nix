@@ -3,9 +3,9 @@
 {
   programs.git = {
     enable = true;
-    userName = "Arto Gahr";
-    userEmail = "artogahr@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Arto Gahr";
+      user.email = "artogahr@gmail.com";
       init.defaultBranch = "main";
       merge.conflictstyle = "zdiff3";
       push.autoSetupRemote = true;
