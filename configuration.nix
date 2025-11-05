@@ -135,6 +135,10 @@
       staticAltitude = 200;
       staticAccuracy = 10000;
     };
+    hardware.openrgb = {
+      enable = true;
+      package = pkgs.openrgb-with-all-plugins;
+    };
   };
 
   services.udev.extraRules = ''
