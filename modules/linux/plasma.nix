@@ -17,6 +17,15 @@
         blur.enable = true;
       };
     };
+
+    configFile = {
+      kwinrc = {
+        Plugins = {
+          krohnkiteEnabled = true;
+        };
+      };
+    };
+
     powerdevil.AC = {
       powerButtonAction = "nothing";
       dimDisplay.enable = true;
@@ -25,24 +34,13 @@
       autoSuspend.action = "nothing";
       #autoSuspend.idleTimeout = 600;
     };
-    session.sessionRestore.restoreOpenApplicationsOnLogin = "whenSessionWasManuallySaved";
+
+    session.sessionRestore.restoreOpenApplicationsOnLogin = "onLastLogout";
     windows.allowWindowsToRememberPositions = true;
+
     shortcuts = {
       kwin = {
         "Toggle Overview" = "Meta+Tab";
-        "Switch Window Down" = "Meta+J";
-        "Switch Window Left" = "Meta+H";
-        "Switch Window Right" = "Meta+L";
-        "Switch Window Up" = "Meta+K";
-        "Close Window" = "Meta+Q";
-        "Move Window Left" = "Meta+Left";
-        "Quick Tile Window to the Right" = "Meta+Right";
-        "Quick Tile Window to the Left" = "Meta+Left";
-        "Quick Tile Window to the Top" = "Meta+Up";
-        "Quick Tile Window to the Down" = "Meta+Down";
-        "Move Window to the Center" = "Meta+C";
-        "Move Window One Screen Down" = "Meta+Shift+Down";
-        "Move Window One Screen Up" = "Meta+Shift+Up";
         "Switch One Desktop Up" = "Meta+Ctrl+Left";
         "Switch One Desktop Down" = "Meta+Ctrl+Right";
       };

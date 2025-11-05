@@ -37,6 +37,7 @@
     kdePackages.sddm-kcm
     kdePackages.isoimagewriter
     kdePackages.partitionmanager
+    kdePackages.xdg-desktop-portal-kde
     catppuccin-kde
     prusa-slicer
     inputs.fenix.packages.${pkgs.system}.complete.toolchain
@@ -62,5 +63,7 @@
     qbittorrent
     discord
     wireguard-tools
+    ghostty
+    ncdu
   ];
 }

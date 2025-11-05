@@ -23,6 +23,8 @@ in
     htop
     ripgrep
     fd
+    kdePackages.krohnkite
+    openrgb-with-all-plugins
   ];
 
   programs.home-manager.enable = true;
