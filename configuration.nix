@@ -143,12 +143,6 @@
     power-profiles-daemon.enable = false;
   };
 
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-    cpuFreqGovernor = "schedutil";
-  };
-
   services.udev.extraRules = ''
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';

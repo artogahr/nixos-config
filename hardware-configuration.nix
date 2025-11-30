@@ -24,6 +24,7 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
+  boot.kernelParams = [ "amd_pstate=guided" ];
   boot.extraModulePackages = [ ];
 
   swapDevices = [ ];
@@ -35,6 +36,12 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp4s0.useDHCP = lib.mkDefault true;
+
+  # powerManagement = {
+  #   enable = true;
+  #   # powertop.enable = true;
+  #   cpuFreqGovernor = "schedutil";
+  # };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
