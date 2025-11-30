@@ -27,16 +27,16 @@
     };
 
     powerdevil.AC = {
-      powerButtonAction = "nothing";
+      powerButtonAction = "lockScreen";
       dimDisplay.enable = true;
-      dimDisplay.idleTimeout = 120;
-      turnOffDisplay.idleTimeout = 300;
+      dimDisplay.idleTimeout = 300;
+      turnOffDisplay.idleTimeout = 600;
       autoSuspend.action = "nothing";
       #autoSuspend.idleTimeout = 600;
     };
 
     session.sessionRestore.restoreOpenApplicationsOnLogin = "onLastLogout";
-    windows.allowWindowsToRememberPositions = true;
+    windows.allowWindowsToRememberPositions = false;
 
     shortcuts = {
       kwin = {

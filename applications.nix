@@ -18,7 +18,6 @@
     zotero
     onlyoffice-desktopeditors
     haruna
-    # tidal-hifi
     pavucontrol
     pwvucontrol
     vesktop
@@ -40,8 +39,7 @@
     kdePackages.xdg-desktop-portal-kde
     catppuccin-kde
     prusa-slicer
-    inputs.fenix.packages.${pkgs.system}.complete.toolchain
-    inputs.tidaLuna.packages.${pkgs.system}.default
+    inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.toolchain
     oneko
     wayneko
     lm_sensors
@@ -65,5 +63,7 @@
     wireguard-tools
     ghostty
     ncdu
+    docker-compose
+    quickemu
   ];
 }

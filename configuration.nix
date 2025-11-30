@@ -39,6 +39,7 @@
     kernelModules = [
       "i2c-dev"
       "amdgpu"
+      "kvm-amd"
     ];
   };
 
@@ -139,6 +140,13 @@
       enable = true;
       package = pkgs.openrgb-with-all-plugins;
     };
+    power-profiles-daemon.enable = false;
+  };
+
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+    cpuFreqGovernor = "schedutil";
   };
 
   services.udev.extraRules = ''
@@ -213,7 +221,10 @@
     };
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+  };
 
   catppuccin = {
     enable = true;
