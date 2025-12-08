@@ -177,6 +177,8 @@
         "docker"
         "adbusers"
         "video"
+        "libvirtd"
+        "kvm"
       ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIjbRvb1ruMTx3fzyEPuw/gouvLixN/F/dmiN4FIWcOV openpgp:0x4C086962"
@@ -217,7 +219,14 @@
 
   virtualisation = {
     docker.enable = true;
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+      };
+    };
+
+    spiceUSBRedirection.enable = true;
   };
 
   catppuccin = {

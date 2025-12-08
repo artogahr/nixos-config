@@ -65,5 +65,9 @@
     ncdu
     docker-compose
     quickemu
+    gnome-boxes
+    dnsmasq
+    phodav
+    usbutils
   ];
 }
