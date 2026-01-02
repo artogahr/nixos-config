@@ -21,13 +21,12 @@
     pavucontrol
     pwvucontrol
     vesktop
-    rustdesk-flutter
+    # rustdesk-flutter
     hardinfo2
     lact
     wayland-utils
     wl-clipboard-rs
     kdePackages.plasma-browser-integration
-    kdePackages.discover
     kdePackages.kcalc
     kdePackages.kcharselect
     kdePackages.kolourpaint
@@ -40,11 +39,9 @@
     catppuccin-kde
     prusa-slicer
     inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.toolchain
-    oneko
-    wayneko
     lm_sensors
     dmidecode
-    gemini-cli
+    # gemini-cli
     # stremio
     google-chrome
     ffmpeg
@@ -69,5 +66,6 @@
     dnsmasq
     phodav
     usbutils
+    obs-studio
   ];
 }
