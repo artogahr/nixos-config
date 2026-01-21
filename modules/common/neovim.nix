@@ -63,8 +63,7 @@ in
       telescope-nvim
       plenary-nvim
       which-key-nvim
-      nvim-treesitter.withAllGrammars
-      nvim-treesitter-textobjects
+      (nvim-treesitter.withPlugins (p: nvim-treesitter.allGrammars ++ [ nvim-treesitter-textobjects ]))
 
       # Modern UI
       noice-nvim

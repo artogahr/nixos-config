@@ -31,8 +31,8 @@
       dimDisplay.enable = true;
       dimDisplay.idleTimeout = 300;
       turnOffDisplay.idleTimeout = 600;
-      autoSuspend.action = "nothing";
-      #autoSuspend.idleTimeout = 600;
+      autoSuspend.action = "sleep";
+      autoSuspend.idleTimeout = 900;
     };
 
     session.sessionRestore.restoreOpenApplicationsOnLogin = "onLastLogout";

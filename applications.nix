@@ -41,17 +41,19 @@
     inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.toolchain
     lm_sensors
     dmidecode
-    # gemini-cli
     # stremio
     google-chrome
     ffmpeg
-    # jellyfin-media-player
+    jellyfin-media-player
     easyeffects
     code-cursor
     todoist
     cursor-cli
     radeontop
-    dogdns
+    rocmPackages.rocminfo
+    rocmPackages.rocm-smi
+    clinfo
+    doggo
     sshfs
     unrar
     pspp

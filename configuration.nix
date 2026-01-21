@@ -18,6 +18,8 @@
       ];
       auto-optimise-store = true;
       download-buffer-size = 4194304000;
+      max-jobs = 4;        # limit parallel builds
+      cores = 2;           # cores per build job
     };
     gc = {
       automatic = true;
@@ -66,8 +68,15 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [
+        rocmPackages.clr.icd
+        rocmPackages.clr
+        rocmPackages.rocminfo
+        rocmPackages.rocm-runtime
+      ];
     };
     amdgpu = {
+      opencl.enable = true;
       overdrive = {
         enable = true;
         ppfeaturemask = "0xffffffff";
@@ -163,6 +172,8 @@
         "networkmanager"
         "i2c"
         "docker"
+        "video"
+        "render"
       ];
       shell = pkgs.fish;
       openssh.authorizedKeys.keys = [
@@ -239,6 +250,9 @@
 
   environment.variables = {
     AMD_VULKAN_ICD = "RADV";
+    ROC_ENABLE_PRE_VEGA = "1";
+    # Set for RDNA2 (RX 6000 series) compatibility with ROCm/PyTorch
+    HSA_OVERRIDE_GFX_VERSION = "10.3.0";
   };
 
   system.stateVersion = "25.05";
