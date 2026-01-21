@@ -1,5 +1,4 @@
-# /nixos-config/configuration.nix
-#
+# Shared base configuration for all hosts
 {
   config,
   pkgs,
@@ -10,6 +9,7 @@
   imports = [
     ./applications.nix
   ];
+
   nix = {
     settings = {
       experimental-features = [
@@ -18,8 +18,8 @@
       ];
       auto-optimise-store = true;
       download-buffer-size = 4194304000;
-      max-jobs = 4;        # limit parallel builds
-      cores = 2;           # cores per build job
+      max-jobs = 4;
+      cores = 2;
     };
     gc = {
       automatic = true;
@@ -28,61 +28,25 @@
     };
   };
 
-  boot = {
-    loader = {
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-      };
-      efi.canTouchEfiVariables = true;
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
-    kernelModules = [
-      "i2c-dev"
-      "amdgpu"
-      "kvm-amd"
-    ];
+    efi.canTouchEfiVariables = true;
   };
-
-  # nixpkgs.config.permittedInsecurePackages = [
-  #   "qtwebengine-5.15.19"
-  # ];
 
   networking = {
     firewall.enable = false;
-    hostName = "fukurowl-pc";
     networkmanager.enable = true;
     extraHosts = "0.0.0.0 apresolve.spotify.com";
   };
 
-  hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-      settings.General.Experimental = true;
-    };
-
-    i2c.enable = true;
-
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        rocmPackages.clr.icd
-        rocmPackages.clr
-        rocmPackages.rocminfo
-        rocmPackages.rocm-runtime
-      ];
-    };
-    amdgpu = {
-      opencl.enable = true;
-      overdrive = {
-        enable = true;
-        ppfeaturemask = "0xffffffff";
-      };
-      initrd.enable = true;
-    };
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings.General.Experimental = true;
   };
 
   security.rtkit.enable = true;
@@ -135,7 +99,6 @@
       enable = true;
       settings.PasswordAuthentication = true;
     };
-    ddccontrol.enable = true;
     tailscale.enable = true;
     geoclue2 = {
       enable = true;
@@ -145,98 +108,37 @@
       staticAltitude = 200;
       staticAccuracy = 10000;
     };
-    hardware.openrgb = {
-      enable = true;
-      package = pkgs.openrgb-with-all-plugins;
-    };
-    power-profiles-daemon.enable = false;
-  };
-
-  services.udev.extraRules = ''
-    KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
-  '';
-
-  systemd = {
-    packages = with pkgs; [ lact ];
-    services.lactd.wantedBy = [ "multi-user.target" ];
   };
 
   zramSwap.enable = true;
 
-  users.users = {
-    arto = {
-      isNormalUser = true;
-      homeMode = "0700";
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-        "i2c"
-        "docker"
-        "video"
-        "render"
-      ];
-      shell = pkgs.fish;
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKMu8p91vFMlCogmKOpImn/0gDpgs3jkKQk9h6Iw3Yj"
-      ];
-    };
-
-    yann = {
-      isNormalUser = true;
-      extraGroups = [
-        "users"
-        "docker"
-        "adbusers"
-        "video"
-        "libvirtd"
-        "kvm"
-      ];
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIjbRvb1ruMTx3fzyEPuw/gouvLixN/F/dmiN4FIWcOV openpgp:0x4C086962"
-      ];
-    };
-
-    sudo = {
-      isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-        "users"
-        "docker"
-        "adbusers"
-        "video"
-      ];
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIjbRvb1ruMTx3fzyEPuw/gouvLixN/F/dmiN4FIWcOV openpgp:0x4C086962"
-      ];
-      initialPassword = "sudo";
-    };
-  };
-
-  system.activationScripts.fixDownloadsOwnership = {
-    text = ''chown arto:users /home/arto/Downloads'';
-    deps = [ "users" ];
+  users.users.arto = {
+    isNormalUser = true;
+    homeMode = "0700";
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+      "video"
+      "render"
+    ];
+    shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKMu8p91vFMlCogmKOpImn/0gDpgs3jkKQk9h6Iw3Yj"
+    ];
   };
 
   programs = {
     fish.enable = true;
     firefox.enable = true;
-    bcc.enable = true;
-    steam = {
-      enable = true;
-      extraCompatPackages = with pkgs; [ proton-ge-bin ];
-    };
   };
 
   virtualisation = {
     docker.enable = true;
     libvirtd = {
       enable = true;
-      qemu = {
-        swtpm.enable = true;
-      };
+      qemu.swtpm.enable = true;
     };
-
     spiceUSBRedirection.enable = true;
   };
 
@@ -247,13 +149,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  environment.variables = {
-    AMD_VULKAN_ICD = "RADV";
-    ROC_ENABLE_PRE_VEGA = "1";
-    # Set for RDNA2 (RX 6000 series) compatibility with ROCm/PyTorch
-    HSA_OVERRIDE_GFX_VERSION = "10.3.0";
-  };
 
   system.stateVersion = "25.05";
 }

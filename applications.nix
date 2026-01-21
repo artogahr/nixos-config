@@ -1,3 +1,4 @@
+# Shared applications for all hosts
 { pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
@@ -7,11 +8,6 @@
     btrfs-progs
     nixfmt
     nixd
-    bpftools
-    llvm
-    clang
-    linuxPackages.kernel.dev
-    linuxPackages.bpftrace
     typst
     tinymist
     typstyle
@@ -21,9 +17,7 @@
     pavucontrol
     pwvucontrol
     vesktop
-    # rustdesk-flutter
     hardinfo2
-    lact
     wayland-utils
     wl-clipboard-rs
     kdePackages.plasma-browser-integration
@@ -37,11 +31,9 @@
     kdePackages.partitionmanager
     kdePackages.xdg-desktop-portal-kde
     catppuccin-kde
-    prusa-slicer
     inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.toolchain
     lm_sensors
     dmidecode
-    # stremio
     google-chrome
     ffmpeg
     jellyfin-media-player
@@ -49,22 +41,16 @@
     code-cursor
     todoist
     cursor-cli
-    radeontop
-    rocmPackages.rocminfo
-    rocmPackages.rocm-smi
     clinfo
     doggo
     sshfs
     unrar
-    pspp
     qbittorrent
     discord
     wireguard-tools
     ghostty
     ncdu
     docker-compose
-    quickemu
-    gnome-boxes
     dnsmasq
     phodav
     usbutils

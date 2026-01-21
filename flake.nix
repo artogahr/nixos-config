@@ -3,29 +3,23 @@
   description = "System Flake NixOS configuration";
 
   inputs = {
-    # NixOS official package repository, tracking the unstable branch
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Disko for declarative disk partitioning
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     catppuccin.url = "github:catppuccin/nix";
 
-    # Home Manager for declarative user-environment management
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Plasma Manager for declarative KDE Plasma configuration
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
-    # Rust development stuff
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Tidal client
     tidaLuna.url = "github:Inrixia/TidaLuna";
   };
 
@@ -42,49 +36,45 @@
       ...
     }@inputs:
     let
-      # Helper function to get system-specific nixpkgs
-      pkgsFor = system: import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
+      commonModules = [
+        ./configuration.nix
+        disko.nixosModules.default
+        catppuccin.nixosModules.catppuccin
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            backupFileExtension = "hm-backup";
+            extraSpecialArgs = { inherit inputs; };
+            useGlobalPkgs = true;
+            users.arto = {
+              imports = [
+                ./home.nix
+                catppuccin.homeModules.catppuccin
+                plasma-manager.homeModules.plasma-manager
+              ];
+            };
+          };
+        }
+      ];
     in
     {
       nixosConfigurations.fukurowl-pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; }; # Pass flake inputs to our modules
-        modules = [
-          ./disko-config.nix
-          ./configuration.nix
-          ./hardware-configuration.nix
-
-          disko.nixosModules.default
-          catppuccin.nixosModules.catppuccin
-          home-manager.nixosModules.home-manager
-
-          {
-            home-manager = {
-              backupFileExtension = "hm-backup";
-              extraSpecialArgs = { inherit inputs; };
-              useGlobalPkgs = true;
-              users.arto = {
-                imports = [
-                  ./home.nix
-                  catppuccin.homeModules.catppuccin
-                  plasma-manager.homeModules.plasma-manager
-                ];
-              };
-            };
-          }
+        specialArgs = { inherit inputs; };
+        modules = commonModules ++ [
+          ./hosts/desktop/default.nix
+          ./hosts/desktop/disko-config.nix
+          ./hosts/desktop/hardware-configuration.nix
         ];
       };
 
-      # Home Manager configuration for macOS (darwin)
-      homeConfigurations."artogahr@fistikcan" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFor "aarch64-darwin";
-        extraSpecialArgs = { inherit inputs; };
-        modules = [
-          ./home-darwin.nix
-          catppuccin.homeModules.catppuccin
+      nixosConfigurations.fukurowl-thinkpad = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = commonModules ++ [
+          ./hosts/thinkpad/default.nix
+          ./hosts/thinkpad/disko-config.nix
+          ./hosts/thinkpad/hardware-configuration.nix
         ];
       };
     };
