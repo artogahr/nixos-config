@@ -7,8 +7,14 @@
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "intel_pstate=active"
+      "i915.enable_guc=3"  # Enable GuC and HuC for better media performance
     ];
     kernelModules = [ "kvm-intel" ];
+    
+    # WiFi power management (balanced)
+    extraModprobeConfig = ''
+      options iwlwifi power_save=1
+    '';
   };
 
   hardware = {
@@ -27,6 +33,8 @@
   services = {
     thermald.enable = true;
     power-profiles-daemon.enable = true;
+    fwupd.enable = true;  # Firmware updates for BIOS/drivers
+    fstrim.enable = true;  # SSD TRIM for longevity
 
     # Fingerprint reader (T14s Gen 3 has one)
     fprintd.enable = true;
