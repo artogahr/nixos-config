@@ -11,9 +11,9 @@
     ];
     kernelModules = [ "kvm-intel" ];
     
-    # WiFi power management (balanced)
+    # WiFi: disable d0i3 deep sleep to prevent reconnection issues on ThinkPads
     extraModprobeConfig = ''
-      options iwlwifi power_save=1
+      options iwlwifi d0i3_disable=1
     '';
   };
 
@@ -52,6 +52,9 @@
 
   # Laptop power tweaks
   powerManagement.enable = true;
+
+  # Keep WiFi awake to prevent slow reconnection after suspend (~20-30min battery cost)
+  networking.networkmanager.wifi.powersave = false;
 
   # ThinkPad-specific packages
   environment.systemPackages = with pkgs; [
