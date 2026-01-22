@@ -90,10 +90,6 @@
         enable = true;
         wayland.enable = true;
       };
-      autoLogin = {
-        enable = true;
-        user = "arto";
-      };
     };
     openssh = {
       enable = true;
@@ -144,7 +140,7 @@
 
   catppuccin = {
     enable = true;
-    flavor = "frappe";
+    flavor = "mocha";
     accent = "green";
   };
 

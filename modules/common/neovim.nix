@@ -63,7 +63,8 @@ in
       telescope-nvim
       plenary-nvim
       which-key-nvim
-      (nvim-treesitter.withPlugins (p: nvim-treesitter.allGrammars ++ [ nvim-treesitter-textobjects ]))
+      nvim-treesitter
+      nvim-treesitter-textobjects
 
       # Modern UI
       noice-nvim
@@ -268,27 +269,17 @@ in
 
       require("telescope").setup({})
 
-      require("nvim-treesitter.configs").setup({
-        highlight = { enable = true },
-        indent = { enable = true },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
-              ["aa"] = "@parameter.outer",
-              ["ia"] = "@parameter.inner",
-              ["ai"] = "@conditional.outer",
-              ["ii"] = "@conditional.inner",
-              ["al"] = "@loop.outer",
-              ["il"] = "@loop.inner",
-            },
-          },
-        },
+      -- Treesitter configuration (new API)
+      require("nvim-treesitter").setup({
+        install_dir = vim.fn.stdpath('data') .. '/site'
+      })
+      
+      -- Enable treesitter highlighting for all filetypes
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
       })
 
       local wk = require("which-key")

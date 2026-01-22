@@ -44,7 +44,7 @@
       enable = true;
       package = pkgs.openrgb-with-all-plugins;
     };
-    power-profiles-daemon.enable = false;
+    power-profiles-daemon.enable = true;
   };
 
   services.udev.extraRules = ''
