@@ -55,5 +55,6 @@
     phodav
     usbutils
     obs-studio
+    galaxy-buds-client
   ];
 }
