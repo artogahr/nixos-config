@@ -65,6 +65,7 @@ in
       which-key-nvim
       nvim-treesitter
       nvim-treesitter-textobjects
+      markview-nvim
 
       # Modern UI
       noice-nvim
@@ -74,7 +75,7 @@ in
       lualine-nvim
     ];
 
-    extraLuaConfig = ''
+    initLua = ''
       -- Basic settings
       vim.opt.number = true
       vim.opt.relativenumber = true

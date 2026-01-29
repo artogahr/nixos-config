@@ -10,9 +10,10 @@
 
       config.font = wezterm.font "Cascadia Code"
 
-      config.window_background_opacity = 0.8
+      config.window_background_opacity = 0.9
       config.kde_window_background_blur = true
       config.window_decorations = "NONE"
+      config.window_close_confirmation = "NeverPrompt"
 
       config.adjust_window_size_when_changing_font_size = false
       config.hide_tab_bar_if_only_one_tab = true

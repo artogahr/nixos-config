@@ -13,7 +13,7 @@
         size = 14.0;
       };
       window = {
-        opacity = 0.75;
+        opacity = 0.90;
         blur = true;
         padding = {
           x = 10;

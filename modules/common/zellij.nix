@@ -3,7 +3,7 @@
 {
   programs.zellij = {
     enable = true;
-    enableFishIntegration = true;
-    attachExistingSession = true;
+    enableFishIntegration = false;
+    attachExistingSession = false;
   };
 }

@@ -90,6 +90,7 @@
         enable = true;
         wayland.enable = true;
       };
+      sessionPackages = [ pkgs.niri ];
     };
     openssh = {
       enable = true;
@@ -104,6 +105,14 @@
       staticAltitude = 200;
       staticAccuracy = 10000;
     };
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      kdePackages.xdg-desktop-portal-kde
+    ];
+    xdgOpenUsePortal = true;
   };
 
   zramSwap.enable = true;
