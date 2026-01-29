@@ -20,7 +20,15 @@
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    tidaLuna.url = "github:Inrixia/TidaLuna";
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -31,7 +39,6 @@
       disko,
       home-manager,
       plasma-manager,
-      tidaLuna,
       fenix,
       ...
     }@inputs:

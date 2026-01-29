@@ -38,6 +38,26 @@
         "type": "github"
       }
     },
+    "dms-plugin-registry": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769649148,
+        "narHash": "sha256-I93ZSe27qOEqKTqqYROZjnzPwyYvT46EZ+5g6u0vfzU=",
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
+        "rev": "5cb1ef20b2e4281656e2f2cbfd54aea38bc866be",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -111,22 +131,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1768875095,
-        "narHash": "sha256-dYP3DjiL7oIiiq3H65tGIXXIT1Waiadmv93JS0sS+8A=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "ed142ab1b3a092c4d149245d0c4126a5d7ea00b0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "plasma-manager": {
       "inputs": {
         "home-manager": [
@@ -150,15 +154,36 @@
         "type": "github"
       }
     },
+    "quickshell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769593411,
+        "narHash": "sha256-WW00FaBiUmQyxvSbefvgxIjwf/WmRrEGBbwMHvW/7uQ=",
+        "ref": "refs/heads/master",
+        "rev": "1e4d804e7f3fa7465811030e8da2bf10d544426a",
+        "revCount": 732,
+        "type": "git",
+        "url": "https://git.outfoxxed.me/quickshell/quickshell"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.outfoxxed.me/quickshell/quickshell"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
         "disko": "disko",
+        "dms-plugin-registry": "dms-plugin-registry",
         "fenix": "fenix",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "plasma-manager": "plasma-manager",
-        "tidaLuna": "tidaLuna"
+        "quickshell": "quickshell"
       }
     },
     "rust-analyzer-src": {
@@ -175,24 +200,6 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
-        "type": "github"
-      }
-    },
-    "tidaLuna": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "lastModified": 1769366775,
-        "narHash": "sha256-WZ3B6+PaGxmgfq9d5ZsiL9XFU8S91gQf10ZM29sn8A8=",
-        "owner": "Inrixia",
-        "repo": "TidaLuna",
-        "rev": "d44731290fa6a93e90493b1a401e36aa9ccdadd2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Inrixia",
-        "repo": "TidaLuna",
         "type": "github"
       }
     }

@@ -8,6 +8,7 @@
 {
   imports = [
     ./applications.nix
+    inputs.dms-plugin-registry.modules.default
   ];
 
   nix = {
@@ -86,12 +87,18 @@
     xserver.enable = true;
     desktopManager.plasma6.enable = true;
     displayManager = {
-      sddm = {
+      # sddm = {
+      #   enable = true;
+      #   wayland.enable = true;
+      # };
+      # sessionPackages = [ pkgs.niri ];
+      dms-greeter = {
         enable = true;
-        wayland.enable = true;
+        compositor.name = "niri";
+        configHome = "/home/arto";
       };
-      sessionPackages = [ pkgs.niri ];
     };
+
     openssh = {
       enable = true;
       settings.PasswordAuthentication = true;
@@ -136,6 +143,33 @@
   programs = {
     fish.enable = true;
     firefox.enable = true;
+
+    dms-shell = {
+      enable = true;
+
+      systemd = {
+        enable = true; # Systemd service for auto-start
+        restartIfChanged = true; # Auto-restart dms.service when dms-shell changes
+      };
+
+      # Core features
+      enableSystemMonitoring = true; # System monitoring widgets (dgop)
+      # enableVPN = true; # VPN management widget
+      enableDynamicTheming = true; # Wallpaper-based theming (matugen)
+      enableAudioWavelength = true; # Audio visualizer (cava)
+      enableCalendarEvents = true; # Calendar integration (khal)
+
+      quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
+
+      plugins = {
+        dankLauncherKeys.enable = true;
+        # dankClight.enable = true; # Disabled - has version incompatibility
+        easyEffects.enable = true;
+        # dankBatteryAlerts.enable = true;
+      };
+    };
+
+    niri.enable = true;
   };
 
   virtualisation = {

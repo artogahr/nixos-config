@@ -57,5 +57,7 @@
     obs-studio
     galaxy-buds-client
     yazi
+    xev
+    gemini-cli
   ];
 }
