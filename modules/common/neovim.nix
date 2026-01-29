@@ -19,11 +19,18 @@ let
       server = pkgs.tinymist;
       formatter = pkgs.typstyle;
     };
+    javascript = {
+      server = pkgs.nodePackages.typescript-language-server;
+      formatter = pkgs.prettierd;
+    };
+    typescript = {
+      server = pkgs.nodePackages.typescript-language-server;
+      formatter = pkgs.prettierd;
+    };
     # Add more languages here as needed:
     # python = { server = pkgs.pyright; formatter = pkgs.black; };
     # go = { server = pkgs.gopls; formatter = pkgs.gofumpt; };
     # c_sharp = { server = pkgs.omnisharp-roslyn; formatter = null; };
-    # javascript = { server = pkgs.typescript-language-server; formatter = pkgs.prettierd; };
   };
 
   allServers = builtins.attrValues (builtins.mapAttrs (_: v: v.server) lspServers);
@@ -48,26 +55,31 @@ in
 
     plugins = with pkgs.vimPlugins; [
       catppuccin-nvim
+
+      # LSP and completion
+      nvim-lspconfig
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
       luasnip
       cmp_luasnip
+
+      # Editing helpers
       nvim-autopairs
       gitsigns-nvim
       comment-nvim
       nvim-surround
       undotree
       trouble-nvim
+
+      # Navigation & UI
       telescope-nvim
       plenary-nvim
       which-key-nvim
       nvim-treesitter
       nvim-treesitter-textobjects
       markview-nvim
-
-      # Modern UI
       noice-nvim
       nui-nvim
       nvim-notify
@@ -149,10 +161,15 @@ in
       -- LSP setup
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      local lsp_servers = { "nixd", "lua_ls", "rust_analyzer", "tinymist" }
+      local lsp_servers = { "nixd", "lua_ls", "rust_analyzer", "tinymist", "ts_ls" }
 
       for _, server in ipairs(lsp_servers) do
-        if vim.fn.executable(server == "lua_ls" and "lua-language-server" or server:gsub("_", "-")) == 1 then
+        local cmd = ({
+          lua_ls = "lua-language-server",
+          ts_ls = "typescript-language-server",
+        })[server] or server:gsub("_", "-")
+
+        if vim.fn.executable(cmd) == 1 then
           vim.lsp.enable(server)
         end
       end
