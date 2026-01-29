@@ -52,11 +52,11 @@
     //        }
     //    }
     //
-    //    window-rule {
-    //        clip-to-geometry true
-    //        geometry-corner-radius 12
-    //        draw-border-with-background false
-    //    }
+        window-rule {
+            clip-to-geometry true
+            geometry-corner-radius 12
+            draw-border-with-background false
+        }
 
         // spawn-at-startup "swaybg" "-i" "${../../wallpapers/art-institute-of-chicago-18pvW-EQmkQ-unsplash.jpg}" "-m" "fill"
         // spawn-at-startup "waybar"
@@ -74,6 +74,7 @@
             XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
             Mod+A { spawn "pwvucontrol"; }
             Mod+P { spawn "wdisplays"; }
+            Mod+Q { close-window; }
             XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
             XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
             
