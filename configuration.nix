@@ -84,6 +84,7 @@
   };
 
   services = {
+    udisks2.enable = true;
     xserver.enable = true;
     desktopManager.plasma6.enable = true;
     displayManager = {
@@ -133,6 +134,7 @@
       "docker"
       "video"
       "render"
+      "storage" # For udisks2: mount/unmount removable media without sudo
     ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
@@ -140,9 +142,15 @@
     ];
   };
 
+  # niri uses xwayland-satellite (not Xwayland directly) for X11 apps; it must be in PATH so niri can set DISPLAY
+  environment.systemPackages = [ pkgs.xwayland-satellite ];
+
   programs = {
     fish.enable = true;
     firefox.enable = true;
+
+    # Xwayland is used by xwayland-satellite for X11 apps under niri
+    xwayland.enable = true;
 
     dms-shell = {
       enable = true;
