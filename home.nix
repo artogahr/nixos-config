@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, desktopShell ? "dms", ... }:
 
 let
   importModules =
@@ -9,14 +9,14 @@ let
       )
     );
 
-  # Script to lock screen then suspend (with dialog confirmation)
+  # Lock then suspend (used by dms.kdl lid-close and power actions)
   dms-suspend = pkgs.writeShellScript "dms-suspend" ''
     dms ipc call lock lock
     sleep 0.5
     systemctl suspend
   '';
 
-  # Simple confirmation dialog for suspend
+  # Suspend with 5s confirmation (Mod+Shift+Escape in dms.kdl)
   suspend-dialog = pkgs.writeShellScript "dms-suspend-dialog" ''
     if ${pkgs.libnotify}/bin/notify-send -u critical -t 5000 "Suspend?" "System will suspend in 5 seconds. Click to cancel."; then
       sleep 5
@@ -29,7 +29,6 @@ in
 
   home.stateVersion = "25.05";
 
-  # Wallpapers directory reference
   home.file."Wallpapers".source = ./wallpapers;
 
   home.packages = with pkgs; [
@@ -41,11 +40,12 @@ in
     htop
     ripgrep
     fd
-    kdePackages.krohnkite
     openrgb-with-all-plugins
-    easyeffects # For audio effects management
-    libnotify # For suspend dialog notifications
-  ];
+    easyeffects
+    libnotify
+    papirus-icon-theme
+    hicolor-icon-theme
+  ] ++ lib.optionals (desktopShell == "plasma") [ kdePackages.krohnkite ];
 
   programs.home-manager.enable = true;
   catppuccin.enable = true;
@@ -56,6 +56,22 @@ in
 
   qt.style.name = "kvantum";
   qt.platformTheme.name = "kvantum";
+
+  gtk.enable = true;
+  gtk.iconTheme = lib.mkForce {
+    name = "Papirus-Dark";
+    package = pkgs.papirus-icon-theme;
+  };
+  gtk.cursorTheme = {
+    name = "Catppuccin-Mocha-Dark";
+    package = pkgs.catppuccin-cursors.mochaDark;
+    size = 24;
+  };
+
+  home.sessionVariables = {
+    XCURSOR_THEME = "Catppuccin-Mocha-Dark";
+    XCURSOR_SIZE = "24";
+  };
 
   xdg.mimeApps.enable = true;
   xdg.mimeApps.associations.added = {
@@ -72,47 +88,37 @@ in
 
   xdg.configFile."mimeapps.list".force = true;
 
-  # DMS default settings for power/lock configuration
-  # These will be used by DMS if settings.json doesn't exist
-  # You can modify these through the DMS settings UI after first run
-  xdg.configFile."DankMaterialShell/default-settings.json".text = builtins.toJSON {
-    # Power/Lock screen
-    acMonitorTimeout = 300; # Lock after 5 minutes (300 seconds)
-    acLockTimeout = 300; # Lock timeout
-    lockBeforeSuspend = true; # Lock before suspending
-    lockScreenShowPowerActions = true; # Show power actions on lock screen
-    loginctlLockIntegration = true; # Integrate with loginctl lock
-    fadeToLockEnabled = true; # Fade to lock screen
-    fadeToLockGracePeriod = 5; # Grace period before fade (seconds)
-    
-    # Workspaces
-    showWorkspaceIndex = true;
-    showWorkspacePadding = true;
-    showWorkspaceApps = true;
-    showOccupiedWorkspacesOnly = true;
-    
-    # Dock
-    showDock = false;
-    dockAutoHide = true;
-    dockGroupByApp = false;
-    dockOpenOnOverview = true;
-    dockIconsize = 24;
-    
-    # On Screen Display
-    osdPowerProfileEnabled = true;
-    
-    # Animation
-    customAnimationDuration = 100;
-    
-    # Behavior
-    visible = true;
-    autoHide = false;
-    autoHideDelay = 250;
-    openOnOverview = false;
+  # DMS default settings (used if settings.json doesn't exist; editable via DMS settings UI)
+  xdg.configFile."DankMaterialShell/default-settings.json" = lib.mkIf (desktopShell == "dms") {
+    text = builtins.toJSON {
+      acMonitorTimeout = 300;
+      acLockTimeout = 300;
+      lockBeforeSuspend = true;
+      lockScreenShowPowerActions = true;
+      loginctlLockIntegration = true;
+      fadeToLockEnabled = true;
+      fadeToLockGracePeriod = 5;
+      showWorkspaceIndex = true;
+      showWorkspacePadding = true;
+      showWorkspaceApps = true;
+      showOccupiedWorkspacesOnly = true;
+      showDock = false;
+      dockAutoHide = true;
+      dockGroupByApp = false;
+      dockOpenOnOverview = true;
+      dockIconsize = 24;
+      osdPowerProfileEnabled = true;
+      customAnimationDuration = 100;
+      visible = true;
+      autoHide = false;
+      autoHideDelay = 250;
+      openOnOverview = false;
+    };
   };
 
-  # Niri DMS keybindings - separate file for organization
-  xdg.configFile."niri/dms.kdl".text = ''
+  # Niri keybindings for DMS (spotlight, lock, screenshots, audio, lid-close)
+  xdg.configFile."niri/dms.kdl" = lib.mkIf (desktopShell == "dms") {
+    text = ''
     binds {
         // DMS Application Launcher and Notification Center
         Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
@@ -143,11 +149,12 @@ in
         lid-close { spawn "${dms-suspend}"; }
     }
   '';
-  
-  # Include DMS keybindings in main niri config
-  xdg.configFile."niri/config.kdl".text = lib.mkAfter ''
+  };
+
+  # Include DMS keybindings in main niri config when using DMS
+  xdg.configFile."niri/config.kdl".text = lib.mkAfter (lib.optionalString (desktopShell == "dms") ''
     include "dms.kdl"
-  '';
+  '');
 
   xdg.desktopEntries.PrusaSlicerURLProtocol = {
     name = "PrusaSlicer URL Protocol";

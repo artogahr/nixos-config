@@ -51,7 +51,7 @@
         {
           home-manager = {
             backupFileExtension = "hm-backup";
-            extraSpecialArgs = { inherit inputs; };
+            # extraSpecialArgs (inputs + desktopShell) set in desktop-shell.nix
             useGlobalPkgs = true;
             users.arto = {
               imports = [

@@ -8,6 +8,7 @@
 {
   imports = [
     ./applications.nix
+    ./desktop-shell.nix
     inputs.dms-plugin-registry.modules.default
   ];
 
@@ -86,19 +87,7 @@
   services = {
     udisks2.enable = true;
     xserver.enable = true;
-    desktopManager.plasma6.enable = true;
-    displayManager = {
-      # sddm = {
-      #   enable = true;
-      #   wayland.enable = true;
-      # };
-      # sessionPackages = [ pkgs.niri ];
-      dms-greeter = {
-        enable = true;
-        compositor.name = "niri";
-        configHome = "/home/arto";
-      };
-    };
+    # desktopManager and displayManager are driven by desktop.shell (see desktop-shell.nix)
 
     openssh = {
       enable = true;
@@ -135,7 +124,7 @@
       "docker"
       "video"
       "render"
-      "storage" # For udisks2: mount/unmount removable media without sudo
+      "storage" # udisks2: mount/unmount removable media without sudo
     ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
@@ -143,39 +132,32 @@
     ];
   };
 
-  # niri uses xwayland-satellite (not Xwayland directly) for X11 apps; it must be in PATH so niri can set DISPLAY
+  # niri uses xwayland-satellite for X11 apps; must be in PATH so niri can set DISPLAY
   environment.systemPackages = [ pkgs.xwayland-satellite ];
 
   programs = {
     fish.enable = true;
     firefox.enable = true;
 
+    # DMS and niri enabled only when desktop.shell == "dms" (see desktop-shell.nix)
     dms-shell = {
-      enable = true;
-
       systemd = {
-        enable = true; # Systemd service for auto-start
-        restartIfChanged = true; # Auto-restart dms.service when dms-shell changes
+        enable = true;
+        restartIfChanged = true;
       };
 
-      # Core features
-      enableSystemMonitoring = true; # System monitoring widgets (dgop)
-      # enableVPN = true; # VPN management widget
-      enableDynamicTheming = true; # Wallpaper-based theming (matugen)
-      enableAudioWavelength = true; # Audio visualizer (cava)
-      enableCalendarEvents = true; # Calendar integration (khal)
+      enableSystemMonitoring = true;
+      enableDynamicTheming = true;
+      enableAudioWavelength = true;
+      enableCalendarEvents = true;
 
       quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
 
       plugins = {
         dankLauncherKeys.enable = true;
-        # dankClight.enable = true; # Disabled - has version incompatibility
         easyEffects.enable = true;
-        # dankBatteryAlerts.enable = true;
       };
     };
-
-    niri.enable = true;
   };
 
   virtualisation = {
