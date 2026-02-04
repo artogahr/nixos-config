@@ -59,5 +59,6 @@
     yazi
     xev
     gemini-cli
+    xwayland-satellite
   ];
 }

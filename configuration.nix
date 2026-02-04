@@ -113,6 +113,7 @@
       staticAltitude = 200;
       staticAccuracy = 10000;
     };
+    dbus.enable = true;
   };
 
   xdg.portal = {
@@ -178,6 +179,7 @@
     };
 
     niri.enable = true;
+    xwayland.enable = true;
   };
 
   virtualisation = {
