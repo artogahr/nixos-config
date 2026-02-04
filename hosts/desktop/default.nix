@@ -47,7 +47,27 @@
     power-profiles-daemon.enable = true;
   };
 
+  # Log which device woke the system (run: suspend → when it wakes, check /var/log/last-wakeup-sources.txt).
+  # The line with non-zero "active_since" (or high event_count) is the culprit; first column is the name for udev.
+  environment.etc."systemd/system-sleep/capture-wakeup-sources" = {
+    source = pkgs.writeShellScript "capture-wakeup-sources" ''
+      case "$1" in
+        post)
+          if [ "$2" = "suspend" ] || [ "$2" = "hibernate" ]; then
+            mkdir -p /var/log
+            mount -t debugfs none /sys/kernel/debug 2>/dev/null || true
+            cat /sys/kernel/debug/wakeup_sources 2>/dev/null > /var/log/last-wakeup-sources.txt || true
+            echo "--- captured at $(date) ---" >> /var/log/last-wakeup-sources.txt
+          fi
+          ;;
+      esac
+    '';
+    mode = "0755";
+  };
+
+  # Disable wake from the specific PCI device that was triggering immediate wake (0000:00:01.1)
   services.udev.extraRules = ''
+    SUBSYSTEM=="pci", KERNEL=="0000:00:01.1", ATTR{power/wakeup}="disabled"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
 

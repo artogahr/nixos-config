@@ -150,9 +150,6 @@
     fish.enable = true;
     firefox.enable = true;
 
-    # Xwayland is used by xwayland-satellite for X11 apps under niri
-    xwayland.enable = true;
-
     dms-shell = {
       enable = true;
 
@@ -179,7 +176,6 @@
     };
 
     niri.enable = true;
-    xwayland.enable = true;
   };
 
   virtualisation = {
