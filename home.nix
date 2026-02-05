@@ -63,14 +63,9 @@ in
     package = pkgs.papirus-icon-theme;
   };
   gtk.cursorTheme = {
-    name = "Catppuccin-Mocha-Dark";
+    name = "catppuccin-mocha-dark-cursors";
     package = pkgs.catppuccin-cursors.mochaDark;
     size = 24;
-  };
-
-  home.sessionVariables = {
-    XCURSOR_THEME = "Catppuccin-Mocha-Dark";
-    XCURSOR_SIZE = "24";
   };
 
   xdg.mimeApps.enable = true;

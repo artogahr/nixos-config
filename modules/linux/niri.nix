@@ -67,6 +67,11 @@
 
         screenshot-path "~/Pictures/Screenshots/Screenshot-%Y-%m-%d-%H-%M-%S.png"
 
+        cursor {
+            xcursor-theme "${config.gtk.cursorTheme.name}"
+            xcursor-size ${toString config.gtk.cursorTheme.size}
+        }
+
         binds {
             Mod+Return { spawn "wezterm"; }
             

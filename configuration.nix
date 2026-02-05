@@ -133,7 +133,10 @@
   };
 
   # niri uses xwayland-satellite for X11 apps; must be in PATH so niri can set DISPLAY
-  environment.systemPackages = [ pkgs.xwayland-satellite ];
+  environment.systemPackages = [
+    pkgs.xwayland-satellite
+    pkgs.catppuccin-cursors.mochaDark
+  ];
 
   programs = {
     fish.enable = true;
@@ -173,6 +176,7 @@
     enable = true;
     flavor = "mocha";
     accent = "green";
+    cursors.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
