@@ -79,6 +79,7 @@ in
     "x-scheme-handler/https" = [ "firefox.desktop" ];
     "x-scheme-handler/about" = [ "firefox.desktop" ];
     "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+    "inode/directory" = [ "org.kde.dolphin.desktop" ];
   };
 
   xdg.configFile."mimeapps.list".force = true;
