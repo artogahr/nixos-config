@@ -93,7 +93,9 @@
       enable = true;
       settings.PasswordAuthentication = true;
     };
+
     tailscale.enable = true;
+
     geoclue2 = {
       enable = true;
       enableStatic = true;
@@ -102,7 +104,14 @@
       staticAltitude = 200;
       staticAccuracy = 10000;
     };
+
     dbus.enable = true;
+
+    logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+      HandlePowerKey = "lock";
+      HandlePowerKeyLongPress = "suspend";
+    };
   };
 
   xdg.portal = {

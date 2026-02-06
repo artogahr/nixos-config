@@ -30,7 +30,7 @@
             };
           }
         ]
-      else if (config.networking.hostName == "fukurowl-thinkpad") then
+      else if (osConfig.networking.hostName == "fukurowl-thinkpad") then
         [
           # Example profiles for the laptop ("fukurowl-thinkpad").
           #
