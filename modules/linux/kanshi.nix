@@ -32,6 +32,33 @@
         ]
       else if (osConfig.networking.hostName == "fukurowl-thinkpad") then
         [
+          {
+            profile = {
+              name = "undocked";
+              outputs = [
+                {
+                  criteria = "eDP-1";
+                  status = "enable";
+                }
+              ];
+            };
+          }
+          {
+            profile = {
+              name = "docked";
+              outputs = [
+                {
+                  criteria = "*";
+                  status = "enable";
+                  adaptiveSync = false;
+                }
+                {
+                  criteria = "eDP-1";
+                  status = "disable";
+                }
+              ];
+            };
+          }
           # Example profiles for the laptop ("fukurowl-thinkpad").
           #
           # Common setups:
