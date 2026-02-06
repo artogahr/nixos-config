@@ -60,5 +60,7 @@
     xev
     gemini-cli
     xwayland-satellite
+    spotify
+    spotify-tray
   ];
 }

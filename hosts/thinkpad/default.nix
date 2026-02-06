@@ -40,6 +40,7 @@
     fwupd.enable = true;
     fstrim.enable = true;
     fprintd.enable = true;
+    upower.enable = true;
 
     power-profiles-daemon.enable = false; # conflicts with TLP
 
