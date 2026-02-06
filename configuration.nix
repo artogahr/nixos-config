@@ -170,6 +170,7 @@
         easyEffects.enable = true;
       };
     };
+    dconf.enable = true;
   };
 
   virtualisation = {

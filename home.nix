@@ -31,6 +31,9 @@ in
 
   home.file."Wallpapers".source = ./wallpapers;
 
+  # EasyEffects output presets (see modules/linux/easyeffects.nix)
+  xdg.configFile."easyeffects/output".source = ./presets/easyeffects;
+
   home.packages = with pkgs; [
     tree
     anydesk
