@@ -64,6 +64,7 @@
         // spawn-at-startup "swaync"
         // spawn-at-startup "nm-applet" "--indicator"
         // spawn-at-startup "blueman-applet"
+        spawn-at-startup "sway-audio-idle-inhibit"
 
         screenshot-path "~/Pictures/Screenshots/Screenshot-%Y-%m-%d-%H-%M-%S.png"
 
@@ -80,6 +81,7 @@
             Mod+A { spawn "pwvucontrol"; }
             Mod+P { spawn "wdisplays"; }
             Mod+Q { close-window; }
+            Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
             XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
             XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
             
@@ -483,6 +485,7 @@
     wl-gammactl # Gamma control for Wayland
     wlr-randr # Control outputs (brightness, gamma, etc)
     swaybg # Wallpaper setter
+    sway-audio-idle-inhibit
 
     # KDE apps (work great in Niri)
     kdePackages.dolphin
