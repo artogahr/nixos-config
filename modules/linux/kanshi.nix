@@ -22,7 +22,7 @@
                 {
                   criteria = "*34M2C3500L*";
                   scale = 1.0;
-                  mode = "3440x1440@165.001007";
+                  # mode = "3440x1440@165.001007";
                   status = "enable";
                   adaptiveSync = false;
                 }
