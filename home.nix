@@ -25,7 +25,7 @@ let
   '';
 in
 {
-  imports = (importModules ./modules/common) ++ (importModules ./modules/linux);
+  imports = (importModules ./modules/common) ++ (importModules ./modules/linux) ++ [ ./mime-associations.nix ];
 
   home.stateVersion = "25.05";
 
@@ -74,15 +74,6 @@ in
   xdg.mimeApps.enable = true;
   xdg.mimeApps.associations.added = {
     "x-scheme-handler/prusaslicer" = [ "PrusaSlicerURLProtocol.desktop" ];
-  };
-  xdg.mimeApps.defaultApplications = {
-    "x-scheme-handler/prusaslicer" = [ "PrusaSlicerURLProtocol.desktop" ];
-    "text/html" = [ "firefox.desktop" ];
-    "x-scheme-handler/http" = [ "firefox.desktop" ];
-    "x-scheme-handler/https" = [ "firefox.desktop" ];
-    "x-scheme-handler/about" = [ "firefox.desktop" ];
-    "x-scheme-handler/unknown" = [ "firefox.desktop" ];
-    "inode/directory" = [ "org.kde.dolphin.desktop" ];
   };
 
   xdg.configFile."mimeapps.list".force = true;
