@@ -29,7 +29,6 @@
     kdePackages.sddm-kcm
     kdePackages.isoimagewriter
     kdePackages.partitionmanager
-    kdePackages.xdg-desktop-portal-kde
     catppuccin-kde
     inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.toolchain
     lm_sensors

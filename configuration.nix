@@ -2,6 +2,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   ...
 }:
@@ -119,7 +120,13 @@
     extraPortals = with pkgs; [
       kdePackages.xdg-desktop-portal-kde
     ];
-    xdgOpenUsePortal = true;
+    # xdgOpenUsePortal = true;
+    # config.common.default = [ "kde" ];
+  };
+
+  systemd.user.services.plasma-xdg-desktop-portal-kde = {
+    enable = true;
+    wantedBy = [ "graphical-session.target" ];
   };
 
   zramSwap.enable = true;
@@ -146,6 +153,18 @@
     pkgs.xwayland-satellite
     pkgs.catppuccin-cursors.mochaDark
   ];
+
+  environment.etc."xdg/menus/applications.menu".source = lib.mkIf (
+    config.desktop.shell != "plasma"
+  ) "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+
+  environment.sessionVariables = lib.mkIf (config.desktop.shell != "plasma") {
+    XDG_MENU_PREFIX = "plasma-";
+  };
+
+  system.activationScripts.updateKdeCache = lib.mkIf (config.desktop.shell != "plasma") ''
+    runuser -l arto -c "kbuildsycoca6" 2>/dev/null || true
+  '';
 
   programs = {
     fish.enable = true;

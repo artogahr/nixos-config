@@ -470,10 +470,9 @@
   #   };
   # };
 
-  # Packages
   home.packages = with pkgs; [
     niri
-    nirius # Utility commands for niri
+    nirius
     waybar
     swaynotificationcenter
     brightnessctl
@@ -481,16 +480,19 @@
     blueman
     wl-clipboard
     cliphist
-    wdisplays # GUI for display management (like monitor settings)
-    wl-gammactl # Gamma control for Wayland
-    wlr-randr # Control outputs (brightness, gamma, etc)
-    swaybg # Wallpaper setter
+    wdisplays
+    wl-gammactl
+    wlr-randr
+    swaybg
     sway-audio-idle-inhibit
 
-    # KDE apps (work great in Niri)
+    shared-mime-info
+    desktop-file-utils
+
     kdePackages.dolphin
     kdePackages.gwenview
     kdePackages.okular
     kdePackages.kate
+    kdePackages.kservice
   ];
 }
