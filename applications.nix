@@ -1,5 +1,5 @@
 # Shared applications for all hosts
-{ pkgs, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
     wget
@@ -14,22 +14,18 @@
     zotero
     onlyoffice-desktopeditors
     haruna
-    pavucontrol
     pwvucontrol
     vesktop
     hardinfo2
     wayland-utils
     wl-clipboard-rs
-    kdePackages.plasma-browser-integration
     kdePackages.kcalc
     kdePackages.kcharselect
     kdePackages.kolourpaint
     kdePackages.ksystemlog
     kdePackages.kjournald
-    kdePackages.sddm-kcm
     kdePackages.isoimagewriter
     kdePackages.partitionmanager
-    catppuccin-kde
     inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.toolchain
     lm_sensors
     dmidecode
@@ -45,9 +41,7 @@
     sshfs
     unrar
     qbittorrent
-    discord
     wireguard-tools
-    ghostty
     ncdu
     docker-compose
     dnsmasq
@@ -58,8 +52,11 @@
     yazi
     xev
     gemini-cli
-    xwayland-satellite
     spotify
     spotify-tray
+  ] ++ lib.optionals (config.desktop.shell == "plasma") [
+    kdePackages.plasma-browser-integration
+    kdePackages.sddm-kcm
+    catppuccin-kde
   ];
 }

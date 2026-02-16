@@ -1,25 +1,15 @@
 {
   pkgs,
+  desktopShell ? "noctalia",
   ...
 }:
-let
-  lockCommand = "${pkgs.systemd}/bin/systemctl --user start dms-lock.service";
-in
 {
-  systemd.user.services.dms-lock = {
-    Unit.Description = "DMS lock screen";
-    Service = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.dms-shell}/bin/dms ipc call lock lock";
-    };
-  };
-
   services.swayidle = {
-    enable = true;
+    enable = desktopShell == "noctalia";
     timeouts = [
       {
         timeout = 300;
-        command = lockCommand;
+        command = "noctalia-shell ipc call lockScreen lock";
       }
       {
         timeout = 420;
@@ -32,8 +22,8 @@ in
       }
     ];
     events = {
-      before-sleep = lockCommand;
-      lock = lockCommand;
+      before-sleep = "noctalia-shell ipc call lockScreen lock";
+      lock = "noctalia-shell ipc call lockScreen lock";
     };
   };
 }

@@ -10,7 +10,6 @@
   imports = [
     ./applications.nix
     ./desktop-shell.nix
-    inputs.dms-plugin-registry.modules.default
   ];
 
   nix = {
@@ -88,7 +87,7 @@
   services = {
     udisks2.enable = true;
     xserver.enable = true;
-    # desktopManager and displayManager are driven by desktop.shell (see desktop-shell.nix)
+    # Display manager, compositor, and desktop shell driven by desktop.shell (see desktop-shell.nix)
 
     openssh = {
       enable = true;
@@ -117,14 +116,16 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      kdePackages.xdg-desktop-portal-kde
-    ];
-    # xdgOpenUsePortal = true;
-    # config.common.default = [ "kde" ];
+    extraPortals =
+      if config.desktop.shell == "plasma"
+      then [ pkgs.kdePackages.xdg-desktop-portal-kde ]
+      else [
+        pkgs.xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-gtk
+      ];
   };
 
-  systemd.user.services.plasma-xdg-desktop-portal-kde = {
+  systemd.user.services.plasma-xdg-desktop-portal-kde = lib.mkIf (config.desktop.shell == "plasma") {
     enable = true;
     wantedBy = [ "graphical-session.target" ];
   };
@@ -154,41 +155,10 @@
     pkgs.catppuccin-cursors.mochaDark
   ];
 
-  environment.etc."xdg/menus/applications.menu".source = lib.mkIf (
-    config.desktop.shell != "plasma"
-  ) "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
-
-  environment.sessionVariables = lib.mkIf (config.desktop.shell != "plasma") {
-    XDG_MENU_PREFIX = "plasma-";
-  };
-
-  system.activationScripts.updateKdeCache = lib.mkIf (config.desktop.shell != "plasma") ''
-    runuser -l arto -c "kbuildsycoca6" 2>/dev/null || true
-  '';
 
   programs = {
     fish.enable = true;
     firefox.enable = true;
-
-    # DMS and niri enabled only when desktop.shell == "dms" (see desktop-shell.nix)
-    dms-shell = {
-      systemd = {
-        enable = true;
-        restartIfChanged = true;
-      };
-
-      enableSystemMonitoring = true;
-      enableDynamicTheming = true;
-      enableAudioWavelength = true;
-      enableCalendarEvents = true;
-
-      quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-
-      plugins = {
-        dankLauncherKeys.enable = true;
-        easyEffects.enable = true;
-      };
-    };
     dconf.enable = true;
   };
 

@@ -11,11 +11,10 @@ let
 in
 {
   options.desktop.shell = lib.mkOption {
-    type = lib.types.enum [ "dms" "plasma" ];
-    default = "dms";
+    type = lib.types.enum [ "noctalia" "plasma" ];
+    default = "noctalia";
     description = ''
       Which desktop shell to use. Drives display manager, compositor, and related modules.
-      Add more enum values in this file when you try other shells (e.g. hyprland).
     '';
   };
 
@@ -25,21 +24,12 @@ in
     services = {
       desktopManager.plasma6.enable = shell == "plasma";
 
-      displayManager.sddm = mkIf (shell == "plasma") {
+      displayManager.sddm = {
         enable = true;
         wayland.enable = true;
       };
-
-      displayManager.dms-greeter = mkIf (shell == "dms") {
-        enable = true;
-        compositor.name = "niri";
-        configHome = "/home/arto";
-      };
     };
 
-    programs = {
-      dms-shell.enable = shell == "dms";
-      niri.enable = shell == "dms";
-    };
+    programs.niri.enable = shell == "noctalia";
   };
 }
