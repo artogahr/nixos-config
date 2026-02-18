@@ -2,12 +2,12 @@
   config,
   osConfig,
   lib,
-  desktopShell ? "noctalia",
+  desktopShell ? "dms",
   ...
 }:
 {
   services.kanshi = {
-    enable = desktopShell == "noctalia";
+    enable = desktopShell == "dms";
     # systemdTarget = "hyprland-session.target";
 
     # Per-host kanshi profiles. Home Manager sees the system hostName, so we

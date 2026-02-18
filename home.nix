@@ -1,4 +1,4 @@
-{ pkgs, lib, config, desktopShell ? "noctalia", ... }:
+{ pkgs, lib, config, desktopShell ? "dms", ... }:
 
 let
   importModules =
@@ -8,6 +8,21 @@ let
         lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".nix" name) (builtins.readDir dir)
       )
     );
+
+  # Lock then suspend (used by dms.kdl lid-close and power actions)
+  dms-suspend = pkgs.writeShellScript "dms-suspend" ''
+    dms ipc call lock lock
+    sleep 0.5
+    systemctl suspend
+  '';
+
+  # Suspend with 5s confirmation (Mod+Shift+Escape in dms.kdl)
+  suspend-dialog = pkgs.writeShellScript "dms-suspend-dialog" ''
+    if ${pkgs.libnotify}/bin/notify-send -u critical -t 5000 "Suspend?" "System will suspend in 5 seconds. Click to cancel."; then
+      sleep 5
+      ${dms-suspend}
+    fi
+  '';
 in
 {
   imports = (importModules ./modules/common) ++ (importModules ./modules/linux) ++ [ ./mime-associations.nix ];
@@ -29,12 +44,11 @@ in
     ripgrep
     fd
     openrgb-with-all-plugins
+    easyeffects
     libnotify
     papirus-icon-theme
     hicolor-icon-theme
-  ] ++ lib.optionals (desktopShell == "plasma") [
-    kdePackages.krohnkite
-  ];
+  ] ++ lib.optionals (desktopShell == "plasma") [ kdePackages.krohnkite ];
 
   programs.home-manager.enable = true;
   catppuccin.enable = true;
@@ -64,79 +78,72 @@ in
 
   xdg.configFile."mimeapps.list".force = true;
 
-  # Noctalia desktop shell (bar, launcher, notifications, lock screen, etc.)
-  programs.noctalia-shell = lib.mkIf (desktopShell == "noctalia") {
-    enable = true;
-    settings.templates.activeTemplates = [
-      { id = "niri"; enabled = true; }
-      { id = "wezterm"; enabled = true; }
-      { id = "ghostty"; enabled = true; }
-      { id = "alacritty"; enabled = true; }
-      { id = "helix"; enabled = true; }
-      { id = "btop"; enabled = true; }
-      { id = "yazi"; enabled = true; }
-      { id = "discord"; enabled = true; }
-      { id = "telegram"; enabled = true; }
-    ];
+  # DMS default settings (used if settings.json doesn't exist; editable via DMS settings UI)
+  xdg.configFile."DankMaterialShell/default-settings.json" = lib.mkIf (desktopShell == "dms") {
+    text = builtins.toJSON {
+      acMonitorTimeout = 300;
+      acLockTimeout = 300;
+      lockBeforeSuspend = true;
+      lockScreenShowPowerActions = true;
+      loginctlLockIntegration = true;
+      fadeToLockEnabled = true;
+      fadeToLockGracePeriod = 5;
+      showWorkspaceIndex = true;
+      showWorkspacePadding = true;
+      showWorkspaceApps = true;
+      showOccupiedWorkspacesOnly = true;
+      showDock = false;
+      dockAutoHide = true;
+      dockGroupByApp = false;
+      dockOpenOnOverview = true;
+      dockIconsize = 24;
+      osdPowerProfileEnabled = true;
+      customAnimationDuration = 100;
+      visible = true;
+      autoHide = false;
+      autoHideDelay = 250;
+      openOnOverview = false;
+    };
   };
 
-  # Niri keybindings for Noctalia shell integration
-  xdg.configFile."niri/noctalia-keybinds.kdl" = lib.mkIf (desktopShell == "noctalia") {
+  # Niri keybindings for DMS (spotlight, lock, screenshots, audio, lid-close)
+  xdg.configFile."niri/dms.kdl" = lib.mkIf (desktopShell == "dms") {
     text = ''
     binds {
-        // Application Launcher and Control Center
-        Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-        Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
-        Mod+N { spawn "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
-        Mod+V { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+        // DMS Application Launcher and Notification Center
+        Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+        Mod+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
 
-        // Screenshots (niri native)
-        Print { screenshot; }
-        Ctrl+Print { screenshot-screen; }
-        Alt+Print { screenshot-window; }
+        // Screenshots - use DMS screenshot (opens in editor for annotation)
+        Print { spawn "dms" "ipc" "call" "niri" "screenshot"; }
+        Ctrl+Print { spawn "dms" "ipc" "call" "niri" "screenshotScreen"; }
+        Alt+Print { spawn "dms" "ipc" "call" "niri" "screenshotWindow"; }
+        Shift+Print { spawn "dms" "ipc" "call" "niri" "screenshotWindow"; }
 
-        // Lock screen
-        Mod+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+        // Lock - use DMS lock
+        Mod+Alt+L { spawn "dms" "ipc" "call" "lock" "lock"; }
 
-        // Session menu (logout, reboot, shutdown, suspend)
-        Mod+Shift+Escape { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+        // Power actions - Suspend with confirmation
+        Mod+Shift+Escape { spawn "${suspend-dialog}"; }
 
-        // Quit niri
+        // Quit niri (shows confirmation)
         Ctrl+Alt+Delete { quit; }
 
-        // Volume controls via Noctalia (provides OSD)
-        XF86AudioRaiseVolume { spawn "noctalia-shell" "ipc" "call" "volume" "increase"; }
-        XF86AudioLowerVolume { spawn "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-        XF86AudioMute { spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-        XF86AudioMicMute { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
-
-        // Brightness controls via Noctalia (provides OSD)
-        XF86MonBrightnessUp { spawn "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-        XF86MonBrightnessDown { spawn "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+        // Audio controls via DMS IPC
+        XF86AudioMute { spawn "dms" "ipc" "call" "audio" "mute"; }
+        XF86AudioMicMute { spawn "dms" "ipc" "call" "audio" "micmute"; }
     }
 
     switch-events {
-        // Lid close - lock and suspend via Noctalia
-        lid-close { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "lockAndSuspend"; }
+        // Lid close - lock then suspend
+        lid-close { spawn "${dms-suspend}"; }
     }
   '';
   };
 
-  # Ensure noctalia.kdl exists before niri parses its config (noctalia overwrites it at runtime)
-  home.activation.ensureNoctaliaNiriTheme = lib.mkIf (desktopShell == "noctalia") (
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      if [ ! -f "$HOME/.config/niri/noctalia.kdl" ]; then
-        $DRY_RUN_CMD mkdir -p "$HOME/.config/niri"
-        $DRY_RUN_CMD touch "$HOME/.config/niri/noctalia.kdl"
-      fi
-    ''
-  );
-
-  # Include Noctalia keybindings and generated theme colors in niri config
-  xdg.configFile."niri/config.kdl".text = lib.mkAfter (lib.optionalString (desktopShell == "noctalia") ''
-    spawn-at-startup "noctalia-shell"
-    include "noctalia-keybinds.kdl"
-    include "noctalia.kdl"
+  # Include DMS keybindings in main niri config when using DMS
+  xdg.configFile."niri/config.kdl".text = lib.mkAfter (lib.optionalString (desktopShell == "dms") ''
+    include "dms.kdl"
   '');
 
   xdg.desktopEntries.PrusaSlicerURLProtocol = {

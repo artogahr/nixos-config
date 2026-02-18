@@ -28,6 +28,8 @@
       config.initial_rows = 42
       config.initial_cols = 128
 
+      config.color_scheme = "Catppuccin Mocha"
+
       return config
     '';
   };
