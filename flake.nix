@@ -50,7 +50,7 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            backupFileExtension = "hm-backup";
+            backupFileExtension = "hm-old-backup";
             # extraSpecialArgs (inputs + desktopShell) set in desktop-shell.nix
             useGlobalPkgs = true;
             users.arto = {
