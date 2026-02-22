@@ -119,9 +119,12 @@
     enable = true;
     extraPortals = with pkgs; [
       kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal-gtk
     ];
-    # xdgOpenUsePortal = true;
-    # config.common.default = [ "kde" ];
+    config.common = {
+      default = [ "kde" ];
+      "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
+    };
   };
 
   systemd.user.services.plasma-xdg-desktop-portal-kde = {
