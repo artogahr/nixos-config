@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 let
-  # Add/remove languages here - servers and formatters are auto-installed
   lspServers = {
     nix = {
       server = pkgs.nixd;
@@ -27,10 +26,6 @@ let
       server = pkgs.nodePackages.typescript-language-server;
       formatter = pkgs.prettierd;
     };
-    # Add more languages here as needed:
-    # python = { server = pkgs.pyright; formatter = pkgs.black; };
-    # go = { server = pkgs.gopls; formatter = pkgs.gofumpt; };
-    # c_sharp = { server = pkgs.omnisharp-roslyn; formatter = null; };
   };
 
   allServers = builtins.attrValues (builtins.mapAttrs (_: v: v.server) lspServers);
@@ -51,12 +46,12 @@ in
       ++ (with pkgs; [
         ripgrep
         fd
+        wl-clipboard
+        xclip
       ]);
 
     plugins = with pkgs.vimPlugins; [
       catppuccin-nvim
-
-      # LSP and completion
       nvim-lspconfig
       nvim-cmp
       cmp-nvim-lsp
@@ -64,16 +59,12 @@ in
       cmp-path
       luasnip
       cmp_luasnip
-
-      # Editing helpers
       nvim-autopairs
       gitsigns-nvim
       comment-nvim
       nvim-surround
       undotree
       trouble-nvim
-
-      # Navigation & UI
       telescope-nvim
       plenary-nvim
       which-key-nvim
@@ -88,7 +79,6 @@ in
     ];
 
     initLua = ''
-      -- Basic settings
       vim.opt.number = true
       vim.opt.relativenumber = true
       vim.opt.wrap = true
@@ -105,15 +95,11 @@ in
       vim.opt.scrolloff = 8
       vim.opt.updatetime = 250
       vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
-
-      -- Persistent undo
       vim.opt.undofile = true
       vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
 
       vim.g.mapleader = " "
       vim.g.maplocalleader = " "
-
-      -- Disable netrw (default file browser)
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
 
@@ -132,15 +118,11 @@ in
         severity_sort = true,
         float = { border = "rounded" },
       })
-
-      -- Show diagnostic popup on hover
       vim.api.nvim_create_autocmd("CursorHold", {
         callback = function()
-          vim.diagnostic.open_float(nil, { focus = false, border = "rounded" })
+          vim.diagnostic.open_float(nil, { focus = false, border = "rounded", scope = "cursor" })
         end,
       })
-
-      -- Catppuccin theme
       require("catppuccin").setup({
         flavour = "mocha",
         transparent_background = true,
@@ -151,15 +133,10 @@ in
         },
       })
       vim.cmd.colorscheme("catppuccin")
-
-      -- Make background transparent
       vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
       vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#6c7086", bg = "NONE", ctermbg = "NONE" })
       vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", ctermbg = "NONE" })
-
-      -- LSP setup
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local lsp_servers = { "nixd", "lua_ls", "rust_analyzer", "tinymist", "ts_ls" }
 
@@ -181,15 +158,11 @@ in
           end
         end,
       })
-
-      -- Plugins
       require("nvim-autopairs").setup({ check_ts = true })
       require("gitsigns").setup({})
       require("Comment").setup({})
       require("nvim-surround").setup({})
       require("trouble").setup({})
-
-      -- Modern UI
       require("noice").setup({
         lsp = {
           override = {
@@ -236,8 +209,6 @@ in
           lualine_z = {"location"}
         },
       })
-
-      -- Diagnostics keybindings
       vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
       vim.keymap.set("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics" })
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
@@ -286,18 +257,9 @@ in
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
       require("telescope").setup({})
-
-      -- Treesitter configuration (new API)
       require("nvim-treesitter").setup({
-        install_dir = vim.fn.stdpath('data') .. '/site'
-      })
-      
-      -- Enable treesitter highlighting for all filetypes
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = '*',
-        callback = function()
-          pcall(vim.treesitter.start)
-        end,
+        install_dir = vim.fn.stdpath('data') .. '/site',
+        highlight = { disable = { "markdown", "markdown_inline" } },
       })
 
       local wk = require("which-key")
@@ -332,14 +294,12 @@ in
       vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Find files" })
       vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "Live grep" })
       vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Find buffers" })
-
-      -- Open file picker when starting with a directory (like Helix)
       vim.api.nvim_create_autocmd("VimEnter", {
         callback = function()
           local arg = vim.fn.argv(0)
           if arg and vim.fn.isdirectory(arg) == 1 then
             vim.cmd("cd " .. arg)
-            vim.cmd("enew")  -- Create empty buffer instead of showing directory
+            vim.cmd("enew")
             vim.schedule(function()
               telescope.find_files()
             end)
@@ -349,8 +309,6 @@ in
       vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
       vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
       vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undo tree" })
-
-      -- System clipboard (like Helix Space y/p)
       vim.keymap.set({"n", "v"}, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
       vim.keymap.set({"n", "v"}, "<leader>Y", '"+Y', { desc = "Yank line to system clipboard" })
       vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
