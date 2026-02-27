@@ -23,6 +23,11 @@
       download-buffer-size = 4194304000;
       max-jobs = 4;
       cores = 2;
+      trusted-users = [
+        "root"
+        "arto"
+        "@wheel"
+      ];
     };
     gc = {
       automatic = true;
@@ -202,6 +207,7 @@
       qemu.swtpm.enable = true;
     };
     spiceUSBRedirection.enable = true;
+    podman.enable = true;
   };
 
   catppuccin = {
