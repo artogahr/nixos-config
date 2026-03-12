@@ -21,8 +21,8 @@
       ];
       auto-optimise-store = true;
       download-buffer-size = 4194304000;
-      max-jobs = 4;
-      cores = 2;
+      max-jobs = "auto";
+      cores = 0;
       trusted-users = [
         "root"
         "arto"

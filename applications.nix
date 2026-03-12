@@ -61,5 +61,6 @@
     xwayland-satellite
     spotify
     spotify-tray
+    signal-desktop
   ];
 }
