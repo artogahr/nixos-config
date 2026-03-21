@@ -3,6 +3,12 @@
 {
   networking.hostName = "fukurowl-pc";
 
+  fileSystems."/mnt/tera" = {
+    device = "/dev/disk/by-uuid/f977821d-d184-484e-94a1-de3873e35525";
+    fsType = "ext4";
+    options = [ "defaults" "nofail" ];
+  };
+
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = [

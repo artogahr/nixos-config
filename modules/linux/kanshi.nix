@@ -28,7 +28,7 @@
                 {
                   criteria = "*DENON-AVR*";
                   status = "enable";
-                  mode = "3840x2160@60.000000";
+                  mode = "3840x2160@59.939999";
                   scale = 2.0;
                 }
               ];
