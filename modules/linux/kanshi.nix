@@ -17,6 +17,24 @@
         [
           {
             profile = {
+              name = "Philips_Ultrawide_plus_Denon_AVR";
+              outputs = [
+                {
+                  criteria = "*34M2C3500L*";
+                  scale = 1.0;
+                  status = "enable";
+                  adaptiveSync = false;
+                }
+                {
+                  criteria = "*DENON-AVR*";
+                  status = "enable";
+                  mode = "1920x1080@60.000000";
+                }
+              ];
+            };
+          }
+          {
+            profile = {
               name = "Default_Philips_Ultrawide";
               outputs = [
                 {
@@ -45,11 +63,12 @@
           }
           {
             profile = {
-              name = "docked";
+              name = "docked-denon";
               outputs = [
                 {
-                  criteria = "*";
+                  criteria = "*DENON-AVR*";
                   status = "enable";
+                  mode = "1920x1080@60.000000";
                   adaptiveSync = false;
                 }
                 {

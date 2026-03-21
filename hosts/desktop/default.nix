@@ -71,6 +71,24 @@
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
 
+  # Denon HDMI 5.1 channel order quirk on this desktop host.
+  environment.etc."wireplumber/wireplumber.conf.d/90-hdmi-5.1-channel-order.conf".text = ''
+    monitor.alsa.rules = [
+      {
+        matches = [
+          {
+            node.name = "~alsa_output.*hdmi-surround-extra3"
+          }
+        ]
+        actions = {
+          update-props = {
+            audio.position = "FL,FR,SL,SR,FC,LFE"
+          }
+        }
+      }
+    ]
+  '';
+
   # LACT for AMD GPU control
   systemd = {
     packages = with pkgs; [ lact ];
