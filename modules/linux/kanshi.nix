@@ -28,7 +28,8 @@
                 {
                   criteria = "*DENON-AVR*";
                   status = "enable";
-                  mode = "1920x1080@60.000000";
+                  mode = "3840x2160@60.000000";
+                  scale = 2.0;
                 }
               ];
             };
@@ -66,14 +67,35 @@
               name = "docked-denon";
               outputs = [
                 {
-                  criteria = "*DENON-AVR*";
+                  criteria = "eDP-1";
                   status = "enable";
-                  mode = "1920x1080@60.000000";
-                  adaptiveSync = false;
+                  position = "0,0";
                 }
                 {
+                  criteria = "*DENON-AVR*";
+                  status = "enable";
+                  mode = "3840x2160@60.000000";
+                  scale = 2.0;
+                  position = "1920,0";
+                  adaptiveSync = false;
+                }
+              ];
+            };
+          }
+          {
+            profile = {
+              name = "docked-extend-default";
+              outputs = [
+                {
                   criteria = "eDP-1";
-                  status = "disable";
+                  status = "enable";
+                  position = "0,0";
+                }
+                {
+                  criteria = "HDMI-A-1";
+                  status = "enable";
+                  position = "1920,0";
+                  adaptiveSync = false;
                 }
               ];
             };
