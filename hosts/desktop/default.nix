@@ -3,6 +3,12 @@
 {
   networking.hostName = "fukurowl-pc";
 
+  fileSystems."/mnt/tera" = {
+    device = "/dev/disk/by-uuid/f977821d-d184-484e-94a1-de3873e35525";
+    fsType = "ext4";
+    options = [ "defaults" "nofail" ];
+  };
+
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = [
@@ -69,6 +75,24 @@
   services.udev.extraRules = ''
     SUBSYSTEM=="pci", KERNEL=="0000:00:01.1", ATTR{power/wakeup}="disabled"
     KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+  '';
+
+  # Denon HDMI 5.1 channel order quirk on this desktop host.
+  environment.etc."wireplumber/wireplumber.conf.d/90-hdmi-5.1-channel-order.conf".text = ''
+    monitor.alsa.rules = [
+      {
+        matches = [
+          {
+            node.name = "~alsa_output.*hdmi-surround-extra3"
+          }
+        ]
+        actions = {
+          update-props = {
+            audio.position = "FL,FR,SL,SR,FC,LFE"
+          }
+        }
+      }
+    ]
   '';
 
   # LACT for AMD GPU control

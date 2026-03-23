@@ -17,6 +17,25 @@
         [
           {
             profile = {
+              name = "Philips_Ultrawide_plus_Denon_AVR";
+              outputs = [
+                {
+                  criteria = "*34M2C3500L*";
+                  scale = 1.0;
+                  status = "enable";
+                  adaptiveSync = false;
+                }
+                {
+                  criteria = "*DENON-AVR*";
+                  status = "enable";
+                  mode = "3840x2160@59.939999";
+                  scale = 2.0;
+                }
+              ];
+            };
+          }
+          {
+            profile = {
               name = "Default_Philips_Ultrawide";
               outputs = [
                 {
@@ -45,16 +64,38 @@
           }
           {
             profile = {
-              name = "docked";
+              name = "docked-denon";
               outputs = [
                 {
-                  criteria = "*";
+                  criteria = "eDP-1";
                   status = "enable";
-                  adaptiveSync = false;
+                  position = "0,0";
                 }
                 {
+                  criteria = "*DENON-AVR*";
+                  status = "enable";
+                  mode = "3840x2160@60.000000";
+                  scale = 2.0;
+                  position = "1920,0";
+                  adaptiveSync = false;
+                }
+              ];
+            };
+          }
+          {
+            profile = {
+              name = "docked-extend-default";
+              outputs = [
+                {
                   criteria = "eDP-1";
-                  status = "disable";
+                  status = "enable";
+                  position = "0,0";
+                }
+                {
+                  criteria = "HDMI-A-1";
+                  status = "enable";
+                  position = "1920,0";
+                  adaptiveSync = false;
                 }
               ];
             };
