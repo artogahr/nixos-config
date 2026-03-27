@@ -6,7 +6,10 @@
   fileSystems."/mnt/tera" = {
     device = "/dev/disk/by-uuid/f977821d-d184-484e-94a1-de3873e35525";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ];
+    options = [
+      "defaults"
+      "nofail"
+    ];
   };
 
   boot = {
@@ -102,14 +105,6 @@
   };
 
   users.users.arto.extraGroups = [ "i2c" ];
-
-  programs = {
-    bcc.enable = true;
-    steam = {
-      enable = true;
-      extraCompatPackages = with pkgs; [ proton-ge-bin ];
-    };
-  };
 
   environment.variables = {
     AMD_VULKAN_ICD = "RADV";

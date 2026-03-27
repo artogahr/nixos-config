@@ -25,7 +25,6 @@
       cores = 0;
       trusted-users = [
         "root"
-        "arto"
         "@wheel"
       ];
     };
@@ -92,6 +91,7 @@
 
   services = {
     udisks2.enable = true;
+    gvfs.enable = true;
     xserver.enable = true;
     # desktopManager and displayManager are driven by desktop.shell (see desktop-shell.nix)
 
@@ -122,19 +122,12 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      kdePackages.xdg-desktop-portal-kde
-      xdg-desktop-portal-gtk
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     config.common = {
-      default = [ "kde" ];
+      default = [ "gtk" ];
+      "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
     };
-  };
-
-  systemd.user.services.plasma-xdg-desktop-portal-kde = {
-    enable = true;
-    wantedBy = [ "graphical-session.target" ];
   };
 
   zramSwap.enable = true;
@@ -190,14 +183,17 @@
       enableAudioWavelength = true;
       enableCalendarEvents = true;
 
-      quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-
       plugins = {
         dankLauncherKeys.enable = true;
         easyEffects.enable = true;
       };
     };
     dconf.enable = true;
+    bcc.enable = true;
+    steam = {
+      enable = true;
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    };
   };
 
   virtualisation = {

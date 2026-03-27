@@ -70,11 +70,17 @@
         RUNTIME_PM_ON_BAT = "auto";
 
         PCIE_ASPM_ON_BAT = "powersupersave";
-
-        START_CHARGE_THRESH_BAT0 = 75;
-        STOP_CHARGE_THRESH_BAT0 = 80;
       };
     };
+  };
+
+  # Don't offer fingerprint in the greeter — it ends up prompting for both
+  # password and fingerprint sequentially. Fingerprint still works for sudo/unlock.
+  security.pam.services.greetd.fprintAuth = false;
+
+  # Lower quantum than desktop default (256 vs 1024) — ~5ms latency, fine for laptop use
+  services.pipewire.extraConfig.pipewire."99-thinkpad-settings" = {
+    context.properties."default.clock.quantum" = 256;
   };
 
   powerManagement.enable = true;

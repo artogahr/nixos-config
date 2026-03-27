@@ -65,6 +65,7 @@ in
     package = pkgs.catppuccin-cursors.mochaDark;
     size = 24;
   };
+  gtk.gtk4.theme = null;
 
   xdg.mimeApps.enable = true;
   xdg.mimeApps.associations.added = {
