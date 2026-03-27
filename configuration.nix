@@ -52,7 +52,6 @@
 
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = true;
     settings.General.Experimental = true;
   };
 
@@ -110,8 +109,6 @@
       staticAltitude = 200;
       staticAccuracy = 10000;
     };
-
-    dbus.enable = true;
 
     logind.settings.Login = {
       HandleLidSwitch = "ignore";
