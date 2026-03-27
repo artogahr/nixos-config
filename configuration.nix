@@ -28,11 +28,7 @@
         "@wheel"
       ];
     };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
+
   };
 
   boot.loader = {
@@ -183,6 +179,14 @@
       plugins = {
         dankLauncherKeys.enable = true;
         easyEffects.enable = true;
+      };
+    };
+    nh = {
+      enable = true;
+      flake = "/home/arto/workplace/nixos-config";
+      clean = {
+        enable = true;
+        extraArgs = "--keep-since 7d --keep 5";
       };
     };
     dconf.enable = true;

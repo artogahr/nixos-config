@@ -7,6 +7,7 @@
       ".." = "cd ..";
       ll = "ls -alh";
       nrs = "sudo nixos-rebuild switch --flake $HOME/workplace/nixos-config";
+      nos = "nh os switch";
     };
     interactiveShellInit = ''
       set -g fish_greeting
