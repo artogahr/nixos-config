@@ -61,14 +61,14 @@ in
       cmp_luasnip
       nvim-autopairs
       gitsigns-nvim
-      comment-nvim
       nvim-surround
       undotree
       trouble-nvim
       telescope-nvim
+      telescope-fzf-native-nvim
       plenary-nvim
       which-key-nvim
-      nvim-treesitter
+      (nvim-treesitter.withPlugins (p: nvim-treesitter.allGrammars))
       nvim-treesitter-textobjects
       markview-nvim
       noice-nvim
@@ -160,7 +160,6 @@ in
       })
       require("nvim-autopairs").setup({ check_ts = true })
       require("gitsigns").setup({})
-      require("Comment").setup({})
       require("nvim-surround").setup({})
       require("trouble").setup({})
       require("noice").setup({
@@ -168,7 +167,6 @@ in
           override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
           },
           hover = {
             enabled = true,
@@ -195,7 +193,6 @@ in
 
       require("lualine").setup({
         options = {
-          theme = "catppuccin",
           icons_enabled = true,
           component_separators = { left = "", right = ""},
           section_separators = { left = "", right = ""},
@@ -213,8 +210,6 @@ in
       vim.keymap.set("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics" })
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-      vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, { desc = "Hover documentation" })
-
       local luasnip = require("luasnip")
       local cmp = require("cmp")
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -256,11 +251,18 @@ in
 
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-      require("telescope").setup({})
-      require("nvim-treesitter").setup({
-        install_dir = vim.fn.stdpath('data') .. '/site',
-        highlight = { disable = { "markdown", "markdown_inline" } },
-      })
+      require("telescope").setup({ extensions = { fzf = {} } })
+      require("telescope").load_extension("fzf")
+      require("nvim-treesitter").setup({})
+      require("nvim-treesitter-textobjects").setup({ select = { lookahead = true } })
+      local ts_sel = require("nvim-treesitter-textobjects.select")
+      local function sel(q) return function() ts_sel.select_textobject(q, "textobjects") end end
+      vim.keymap.set({"x", "o"}, "af", sel("@function.outer"), { desc = "Around function" })
+      vim.keymap.set({"x", "o"}, "if", sel("@function.inner"), { desc = "Inside function" })
+      vim.keymap.set({"x", "o"}, "ac", sel("@class.outer"), { desc = "Around class" })
+      vim.keymap.set({"x", "o"}, "ic", sel("@class.inner"), { desc = "Inside class" })
+      vim.keymap.set({"x", "o"}, "aa", sel("@parameter.outer"), { desc = "Around argument" })
+      vim.keymap.set({"x", "o"}, "ia", sel("@parameter.inner"), { desc = "Inside argument" })
 
       local wk = require("which-key")
       wk.setup({})
