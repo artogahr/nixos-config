@@ -107,7 +107,6 @@
     };
 
     logind.settings.Login = {
-      HandleLidSwitch = "ignore";
       HandlePowerKey = "lock";
       HandlePowerKeyLongPress = "suspend";
     };
