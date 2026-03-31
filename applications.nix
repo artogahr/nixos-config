@@ -63,5 +63,6 @@
     spotify-tray
     signal-desktop
     claude-code
+    caffeine-ng
   ];
 }
