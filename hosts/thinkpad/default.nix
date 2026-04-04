@@ -13,7 +13,10 @@
       "quiet"
       "splash"
     ];
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [
+      "kvm-intel"
+      "ntsync"
+    ];
 
     initrd.systemd.enable = true;
 

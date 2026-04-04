@@ -18,6 +18,7 @@
       "i2c-dev"
       "amdgpu"
       "kvm-amd"
+      "ntsync"
     ];
   };
 
