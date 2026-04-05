@@ -19,11 +19,11 @@ let
       formatter = pkgs.typstyle;
     };
     javascript = {
-      server = pkgs.nodePackages.typescript-language-server;
+      server = pkgs.typescript-language-server;
       formatter = pkgs.prettierd;
     };
     typescript = {
-      server = pkgs.nodePackages.typescript-language-server;
+      server = pkgs.typescript-language-server;
       formatter = pkgs.prettierd;
     };
   };
