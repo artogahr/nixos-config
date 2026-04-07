@@ -9,8 +9,6 @@
 {
   imports = [
     ./applications.nix
-    ./desktop-shell.nix
-    inputs.dms-plugin-registry.modules.default
   ];
 
   nix = {
@@ -88,7 +86,12 @@
     udisks2.enable = true;
     gvfs.enable = true;
     xserver.enable = true;
-    # desktopManager and displayManager are driven by desktop.shell (see desktop-shell.nix)
+
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
 
     openssh = {
       enable = true;
@@ -112,16 +115,6 @@
     };
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common = {
-      default = [ "gtk" ];
-      "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-      "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
-    };
-  };
-
   zramSwap.enable = true;
 
   users.users.arto = {
@@ -141,45 +134,9 @@
     ];
   };
 
-  # niri uses xwayland-satellite for X11 apps; must be in PATH so niri can set DISPLAY
-  environment.systemPackages = [
-    pkgs.xwayland-satellite
-    pkgs.catppuccin-cursors.mochaDark
-  ];
-
-  environment.etc."xdg/menus/applications.menu".source = lib.mkIf (
-    config.desktop.shell != "plasma"
-  ) "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
-
-  environment.sessionVariables = lib.mkIf (config.desktop.shell != "plasma") {
-    XDG_MENU_PREFIX = "plasma-";
-  };
-
-  system.activationScripts.updateKdeCache = lib.mkIf (config.desktop.shell != "plasma") ''
-    runuser -l arto -c "kbuildsycoca6" 2>/dev/null || true
-  '';
-
   programs = {
     fish.enable = true;
     firefox.enable = true;
-
-    # DMS and niri enabled only when desktop.shell == "dms" (see desktop-shell.nix)
-    dms-shell = {
-      systemd = {
-        enable = true;
-        restartIfChanged = true;
-      };
-
-      enableSystemMonitoring = true;
-      enableDynamicTheming = true;
-      enableAudioWavelength = true;
-      enableCalendarEvents = true;
-
-      plugins = {
-        dankLauncherKeys.enable = true;
-        easyEffects.enable = true;
-      };
-    };
     nh = {
       enable = true;
       flake = "/home/arto/workplace/nixos-config";
@@ -194,6 +151,7 @@
       enable = true;
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
+    kdeconnect.enable = true;
   };
 
   virtualisation = {

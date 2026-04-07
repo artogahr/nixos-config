@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  desktopShell ? "dms",
   ...
 }:
 
@@ -42,8 +41,8 @@ in
       libnotify
       papirus-icon-theme
       hicolor-icon-theme
-    ]
-    ++ lib.optionals (desktopShell == "plasma") [ kdePackages.krohnkite ];
+      kdePackages.krohnkite
+    ];
 
   programs.home-manager.enable = true;
   catppuccin.enable = true;
@@ -51,9 +50,6 @@ in
 
   catppuccin.kvantum.enable = true;
   catppuccin.kvantum.apply = true;
-
-  qt.style.name = "kvantum";
-  qt.platformTheme.name = "kvantum";
 
   gtk.enable = true;
   gtk.iconTheme = lib.mkForce {
@@ -73,34 +69,6 @@ in
   };
 
   xdg.configFile."mimeapps.list".force = true;
-
-  # DMS default settings (used if settings.json doesn't exist; editable via DMS settings UI)
-  xdg.configFile."DankMaterialShell/default-settings.json" = lib.mkIf (desktopShell == "dms") {
-    text = builtins.toJSON {
-      acMonitorTimeout = 300;
-      acLockTimeout = 300;
-      lockBeforeSuspend = true;
-      lockScreenShowPowerActions = true;
-      loginctlLockIntegration = true;
-      fadeToLockEnabled = true;
-      fadeToLockGracePeriod = 5;
-      showWorkspaceIndex = true;
-      showWorkspacePadding = true;
-      showWorkspaceApps = true;
-      showOccupiedWorkspacesOnly = true;
-      showDock = false;
-      dockAutoHide = true;
-      dockGroupByApp = false;
-      dockOpenOnOverview = true;
-      dockIconsize = 24;
-      osdPowerProfileEnabled = true;
-      customAnimationDuration = 100;
-      visible = true;
-      autoHide = false;
-      autoHideDelay = 250;
-      openOnOverview = false;
-    };
-  };
 
   xdg.desktopEntries.PrusaSlicerURLProtocol = {
     name = "PrusaSlicer URL Protocol";

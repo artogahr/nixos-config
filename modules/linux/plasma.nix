@@ -1,6 +1,5 @@
-# Only active when desktop.shell == "plasma" (see desktop-shell.nix).
-{ desktopShell, lib, ... }:
-lib.mkIf (desktopShell == "plasma") {
+{ ... }:
+{
   programs.plasma = {
     enable = true;
 
