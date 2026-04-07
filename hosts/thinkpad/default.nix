@@ -69,10 +69,6 @@
     };
   };
 
-  # Don't offer fingerprint in the greeter — it ends up prompting for both
-  # password and fingerprint sequentially. Fingerprint still works for sudo/unlock.
-  security.pam.services.greetd.fprintAuth = false;
-
   # Lower quantum than desktop default (256 vs 1024) — ~5ms latency, fine for laptop use
   services.pipewire.extraConfig.pipewire."99-thinkpad-settings" = {
     context.properties."default.clock.quantum" = 256;

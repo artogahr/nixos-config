@@ -19,11 +19,6 @@
 
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
-
-    dms-plugin-registry = {
-      url = "github:AvengeMedia/dms-plugin-registry";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -46,7 +41,7 @@
         {
           home-manager = {
             backupFileExtension = "hm-old-backup";
-            extraSpecialArgs = { inherit inputs; desktopShell = "plasma"; };
+            extraSpecialArgs = { inherit inputs; };
             useGlobalPkgs = true;
             users.arto = {
               imports = [

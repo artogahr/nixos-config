@@ -19,7 +19,6 @@
     vesktop
     hardinfo2
     wayland-utils
-    wl-clipboard-rs
     kdePackages.plasma-browser-integration
     kdePackages.kcalc
     kdePackages.kcharselect
@@ -58,10 +57,9 @@
     yazi
     xev
     gemini-cli
-    xwayland-satellite
     spotify
     spotify-tray
     signal-desktop
-    caffeine-ng
+    claude-code-bin
   ];
 }

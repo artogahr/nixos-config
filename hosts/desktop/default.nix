@@ -23,6 +23,7 @@
   };
 
   hardware = {
+    enableRedistributableFirmware = true;
     i2c.enable = true;
 
     graphics = {
@@ -55,6 +56,7 @@
       package = pkgs.openrgb-with-all-plugins;
     };
     power-profiles-daemon.enable = true;
+    fwupd.enable = true;
   };
 
   # Log which device woke the system (run: suspend → when it wakes, check /var/log/last-wakeup-sources.txt).

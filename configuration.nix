@@ -29,13 +29,16 @@
 
   };
 
-  boot.loader = {
+  boot = {
+    loader = {
     grub = {
       enable = true;
       device = "nodev";
       efiSupport = true;
     };
-    efi.canTouchEfiVariables = true;
+      efi.canTouchEfiVariables = true;
+    };
+    kernel.sysctl."vm.max_map_count" = 2147483642;
   };
 
   networking = {
@@ -99,6 +102,19 @@
     };
 
     tailscale.enable = true;
+    flatpak.enable = true;
+
+    printing.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true; # network printer discovery
+    };
+
+    syncthing = {
+      enable = true;
+      user = "arto";
+      dataDir = "/home/arto";
+    };
 
     geoclue2 = {
       enable = true;
@@ -134,8 +150,11 @@
     ];
   };
 
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   programs = {
     fish.enable = true;
+    nix-ld.enable = true;
     firefox.enable = true;
     nh = {
       enable = true;
@@ -151,8 +170,11 @@
       enable = true;
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
+    gamemode.enable = true;
     kdeconnect.enable = true;
   };
+
+  hardware.steam-hardware.enable = true;
 
   virtualisation = {
     docker.enable = true;

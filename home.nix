@@ -36,7 +36,6 @@ in
       htop
       ripgrep
       fd
-      openrgb-with-all-plugins
       easyeffects
       libnotify
       papirus-icon-theme
@@ -45,6 +44,7 @@ in
     ];
 
   programs.home-manager.enable = true;
+  programs.mangohud.enable = true;
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
 

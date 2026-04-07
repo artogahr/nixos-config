@@ -1,7 +1,0 @@
-{ ... }:
-
-{
-  services.caffeine = {
-    enable = true;
-  };
-}
