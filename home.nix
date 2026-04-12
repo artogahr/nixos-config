@@ -44,6 +44,12 @@ in
     ];
 
   programs.home-manager.enable = true;
+
+  # KDE's gtkconfig kded module writes .gtkrc-2.0 as a plain file on every session start,
+  # conflicting with home-manager's symlink. Remove it before HM checks link targets.
+  home.activation.removeKdeGtkrc = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+    rm -f "$HOME/.gtkrc-2.0"
+  '';
   programs.mangohud.enable = true;
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
