@@ -40,7 +40,6 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            backupFileExtension = "hm-old-backup";
             extraSpecialArgs = { inherit inputs; };
             useGlobalPkgs = true;
             users.arto = {

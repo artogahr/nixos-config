@@ -40,7 +40,7 @@ in
       libnotify
       papirus-icon-theme
       hicolor-icon-theme
-      kdePackages.krohnkite
+      kdePackages.karousel
     ];
 
   programs.home-manager.enable = true;
