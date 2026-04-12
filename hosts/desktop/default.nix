@@ -3,8 +3,8 @@
 {
   networking.hostName = "fukurowl-pc";
 
-  fileSystems."/mnt/tera" = {
-    device = "/dev/disk/by-uuid/f977821d-d184-484e-94a1-de3873e35525";
+  fileSystems."/mnt/skhynix" = {
+    device = "/dev/disk/by-uuid/976767c1-fb41-49d0-9417-eeef4a4b8f2d";
     fsType = "ext4";
     options = [
       "defaults"
