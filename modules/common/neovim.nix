@@ -50,6 +50,8 @@ in
         xclip
       ]);
 
+    withRuby = false;
+    withPython3 = false;
     plugins = with pkgs.vimPlugins; [
       catppuccin-nvim
       nvim-lspconfig

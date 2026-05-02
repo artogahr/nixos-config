@@ -2,7 +2,7 @@
 
 {
   programs.lutris = {
-    enable = true;
+    enable = false;
     extraPackages = with pkgs; [
       mangohud
       wine-wayland
