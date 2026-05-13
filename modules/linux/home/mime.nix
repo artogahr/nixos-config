@@ -1,6 +1,22 @@
-# File type associations based on installed applications
+# File type associations and Linux-only xdg desktop entries.
 { pkgs, lib, ... }:
 {
+  xdg.mimeApps.enable = true;
+  xdg.configFile."mimeapps.list".force = true;
+
+  xdg.mimeApps.associations.added = {
+    "x-scheme-handler/prusaslicer" = [ "PrusaSlicerURLProtocol.desktop" ];
+  };
+
+  xdg.desktopEntries.PrusaSlicerURLProtocol = {
+    name = "PrusaSlicer URL Protocol";
+    exec = "${pkgs.prusa-slicer}/bin/prusa-slicer --single-instance %u";
+    terminal = false;
+    type = "Application";
+    mimeType = [ "x-scheme-handler/prusaslicer" ];
+    noDisplay = true;
+  };
+
   xdg.mimeApps.defaultApplications = {
     # Images
     "image/png" = [ "org.kde.gwenview.desktop" ];

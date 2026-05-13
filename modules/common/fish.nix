@@ -3,11 +3,11 @@
 {
   programs.fish = {
     enable = true;
+    # Cross-platform aliases only. OS-specific rebuild aliases (`nrs`, `nos`) live in
+    # modules/linux/home/fish-aliases.nix and modules/darwin/home/fish-aliases.nix.
     shellAliases = {
       ".." = "cd ..";
       ll = "ls -alh";
-      nrs = "sudo nixos-rebuild switch --flake $HOME/workplace/nixos-config";
-      nos = "nh os switch $HOME/workplace/nixos-config";
     };
     interactiveShellInit = ''
       set -g fish_greeting

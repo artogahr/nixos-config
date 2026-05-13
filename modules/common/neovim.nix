@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   lspServers = {
@@ -46,6 +46,8 @@ in
       ++ (with pkgs; [
         ripgrep
         fd
+      ])
+      ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [
         wl-clipboard
         xclip
       ]);

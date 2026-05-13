@@ -5,7 +5,7 @@
     enable = true;
   };
 
-  # Output presets are deployed from home.nix (xdg.configFile."easyeffects/output".source = ./presets/easyeffects).
+  # Output presets are deployed from ./desktop-extras.nix (xdg.configFile."easyeffects/output").
   # Automatic preset per output device:
   # EasyEffects remembers "last used preset" per output in ~/.config/easyeffects/db/easyeffectsrc
   # ([StreamOutputs] usedPresets=...). After deploying these presets, open EasyEffects, switch to

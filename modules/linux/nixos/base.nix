@@ -1,4 +1,5 @@
-# Shared base configuration for all hosts
+# NixOS-wide base configuration shared by all Linux hosts.
+# packages.nix and other NixOS modules in this directory are auto-imported by flake.nix.
 {
   config,
   pkgs,
@@ -7,10 +8,6 @@
   ...
 }:
 {
-  imports = [
-    ./applications.nix
-  ];
-
   nix = {
     settings = {
       experimental-features = [
