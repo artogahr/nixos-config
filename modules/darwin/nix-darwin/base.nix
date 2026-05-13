@@ -27,6 +27,17 @@
 
   programs.fish.enable = true;
 
+  environment.etc.shells.text = ''
+    /bin/bash
+    /bin/csh
+    /bin/dash
+    /bin/ksh
+    /bin/sh
+    /bin/tcsh
+    /bin/zsh
+    /run/current-system/sw/bin/fish
+  '';
+
   # nh doesn't have a nix-darwin module (NixOS and home-manager only), so we install
   # the binary directly. The `nos` fish alias passes the flake path explicitly, and
   # nh pulls in nix-output-monitor + nvd via its own runtime deps.

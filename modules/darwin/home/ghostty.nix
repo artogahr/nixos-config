@@ -11,5 +11,6 @@
     font-family = Cascadia Code
     font-size = 14
     theme = catppuccin-mocha
+    command = /run/current-system/sw/bin/fish
   '';
 }
