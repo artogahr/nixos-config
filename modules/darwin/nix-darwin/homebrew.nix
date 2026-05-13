@@ -15,6 +15,8 @@
     casks = [
       "ghostty"
       "middledrag"
+      "claude"
+      "claude-code"
     ];
   };
 }
