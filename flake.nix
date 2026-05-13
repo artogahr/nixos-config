@@ -86,6 +86,9 @@
             enable = true;
             enableRosetta = true;
             user = "artogahr";
+            # Take over an existing /opt/homebrew install instead of refusing to proceed.
+            # One-time switch — once we've migrated, nix-homebrew owns the prefix.
+            autoMigrate = true;
           };
           home-manager = {
             extraSpecialArgs = { inherit inputs; };
