@@ -17,6 +17,8 @@
       "middledrag"
       "claude"
       "claude-code"
+      "betterdisplay"
+      "maccy"
     ];
   };
 }

@@ -10,7 +10,7 @@
     bell-features = system
     font-family = Cascadia Code
     font-size = 14
-    theme = catppuccin-mocha
+    theme = Catppuccin Mocha
     command = /run/current-system/sw/bin/fish
   '';
 }
