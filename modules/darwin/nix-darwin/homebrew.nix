@@ -19,6 +19,9 @@
       "claude-code"
       "betterdisplay"
       "maccy"
+      "whatsapp"
+      "tidal"
+      "steam"
     ];
   };
 }

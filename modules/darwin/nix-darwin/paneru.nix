@@ -1,7 +1,7 @@
 { ... }:
 {
   services.paneru = {
-    enable = true;
+    enable = false;
     settings = {
       options = {
         focus_follows_mouse = true;
