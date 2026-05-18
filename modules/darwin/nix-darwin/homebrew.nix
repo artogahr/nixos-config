@@ -10,8 +10,11 @@
       upgrade = true;
       cleanup = "zap";
     };
-    taps = [ ];
-    brews = [ ];
+    taps = [
+      "FelixKratz/formulae"
+      "nikitabobko/tap"
+    ];
+    brews = [ "borders" ];
     casks = [
       "ghostty"
       "middledrag"
@@ -22,6 +25,16 @@
       "whatsapp"
       "tidal"
       "steam"
+      "stats"
+      "spotify"
+      "whatsapp"
+      "bitwarden"
+      "lastpass"
+      "stremio"
+      "onlyoffice"
+      "raycast"
+      "karabiner-elements"
+      "aerospace"
     ];
   };
 }

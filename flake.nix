@@ -25,10 +25,6 @@
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
-    paneru = {
-      url = "github:karinushka/paneru";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -79,7 +75,6 @@
 
       # Modules shared by every nix-darwin host.
       darwinCommonModules = (importDir ./modules/darwin/nix-darwin) ++ [
-        inputs.paneru.darwinModules.paneru
         home-manager.darwinModules.home-manager
         nix-homebrew.darwinModules.nix-homebrew
         {

@@ -15,6 +15,10 @@
     delta
   ];
 
+  xdg.configFile."nixpkgs/config.nix".text = ''
+    { allowUnfree = true; }
+  '';
+
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
 }
