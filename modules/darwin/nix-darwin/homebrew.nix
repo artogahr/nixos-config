@@ -38,6 +38,7 @@
       "raycast"
       "karabiner-elements"
       "alt-tab"
+      "logi-options+"
     ];
   };
 }
