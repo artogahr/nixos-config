@@ -14,7 +14,10 @@
       "FelixKratz/formulae"
       "nikitabobko/tap"
     ];
-    brews = [ "borders" ];
+    brews = [
+      "borders"
+      "apify-cli"
+    ];
     casks = [
       "ghostty"
       "middledrag"
@@ -34,7 +37,7 @@
       "onlyoffice"
       "raycast"
       "karabiner-elements"
-      "aerospace"
+      "alt-tab"
     ];
   };
 }
