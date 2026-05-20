@@ -21,4 +21,6 @@
 
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
+  catppuccin.fish.enable = false;
+  catppuccin.nvim.enable = false;
 }

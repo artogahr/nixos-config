@@ -55,8 +55,7 @@ in
     withRuby = false;
     withPython3 = false;
     plugins = with pkgs.vimPlugins; [
-      catppuccin-nvim
-      nvim-lspconfig
+nvim-lspconfig
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer
@@ -102,6 +101,18 @@ in
       vim.opt.undofile = true
       vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
 
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+          vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
+          vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE", ctermbg = "NONE" })
+          vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
+          vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", ctermbg = "NONE" })
+          vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE", ctermbg = "NONE" })
+        end,
+      })
+      vim.cmd.colorscheme("catppuccin")
+
       vim.g.mapleader = " "
       vim.g.maplocalleader = " "
       vim.g.loaded_netrw = 1
@@ -127,20 +138,6 @@ in
           vim.diagnostic.open_float(nil, { focus = false, border = "rounded", scope = "cursor" })
         end,
       })
-      require("catppuccin").setup({
-        flavour = "mocha",
-        transparent_background = true,
-        integrations = {
-          noice = true,
-          notify = true,
-          which_key = true,
-        },
-      })
-      vim.cmd.colorscheme("catppuccin")
-      vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
-      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#6c7086", bg = "NONE", ctermbg = "NONE" })
-      vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", ctermbg = "NONE" })
 
       local lsp_servers = { "nixd", "lua_ls", "rust_analyzer", "tinymist", "ts_ls" }
 
