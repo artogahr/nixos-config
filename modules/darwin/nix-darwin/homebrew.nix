@@ -39,6 +39,8 @@
       "karabiner-elements"
       "alt-tab"
       "logi-options+"
+      "steam"
+      "localsend"
     ];
   };
 }

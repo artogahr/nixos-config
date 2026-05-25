@@ -26,6 +26,18 @@ let
       server = pkgs.typescript-language-server;
       formatter = pkgs.prettierd;
     };
+    python = {
+      server = pkgs.basedpyright;
+      formatter = pkgs.ruff;
+    };
+    docker = {
+      server = pkgs.dockerfile-language-server-nodejs;
+      formatter = null;
+    };
+    yaml = {
+      server = pkgs.yaml-language-server;
+      formatter = null;
+    };
   };
 
   allServers = builtins.attrValues (builtins.mapAttrs (_: v: v.server) lspServers);
@@ -55,7 +67,8 @@ in
     withRuby = false;
     withPython3 = false;
     plugins = with pkgs.vimPlugins; [
-nvim-lspconfig
+      catppuccin-nvim
+      nvim-lspconfig
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer
@@ -79,6 +92,9 @@ nvim-lspconfig
       nvim-notify
       dressing-nvim
       lualine-nvim
+      nvim-tree-lua
+      nvim-web-devicons
+      diffview-nvim
     ];
 
     initLua = ''
@@ -139,12 +155,14 @@ nvim-lspconfig
         end,
       })
 
-      local lsp_servers = { "nixd", "lua_ls", "rust_analyzer", "tinymist", "ts_ls" }
+      local lsp_servers = { "nixd", "lua_ls", "rust_analyzer", "tinymist", "ts_ls", "basedpyright", "dockerls", "yamlls" }
 
       for _, server in ipairs(lsp_servers) do
         local cmd = ({
           lua_ls = "lua-language-server",
           ts_ls = "typescript-language-server",
+          dockerls = "docker-langserver",
+          yamlls = "yaml-language-server",
         })[server] or server:gsub("_", "-")
 
         if vim.fn.executable(cmd) == 1 then
@@ -272,8 +290,10 @@ nvim-lspconfig
         { "<leader>c", group = "Code" },
         { "<leader>r", group = "Refactor" },
         { "<leader>x", group = "Diagnostics" },
+        { "<leader>g", group = "Git" },
         { "<leader>y", group = "Yank to clipboard" },
         { "<leader>p", group = "Paste from clipboard" },
+        { "<leader>e", desc = "File explorer" },
         { "<leader>u", desc = "Undo tree" },
         { "[d", desc = "Previous diagnostic" },
         { "]d", desc = "Next diagnostic" },
@@ -316,6 +336,17 @@ nvim-lspconfig
       vim.keymap.set({"n", "v"}, "<leader>Y", '"+Y', { desc = "Yank line to system clipboard" })
       vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
       vim.keymap.set({"n", "v"}, "<leader>P", '"+P', { desc = "Paste before from system clipboard" })
+
+      require("nvim-tree").setup({
+        view = { width = 30 },
+        renderer = { group_empty = true },
+        filters = { dotfiles = false },
+      })
+      vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "File explorer" })
+
+      require("diffview").setup({})
+      vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Diff view" })
+      vim.keymap.set("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File history" })
     '';
   };
 }
