@@ -41,6 +41,8 @@
       "logi-options+"
       "steam"
       "localsend"
+      "discord"
+      "utm"
     ];
   };
 }

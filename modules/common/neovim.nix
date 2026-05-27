@@ -31,7 +31,7 @@ let
       formatter = pkgs.ruff;
     };
     docker = {
-      server = pkgs.dockerfile-language-server-nodejs;
+      server = pkgs.dockerfile-language-server;
       formatter = null;
     };
     yaml = {
@@ -59,10 +59,13 @@ in
         ripgrep
         fd
       ])
-      ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [
-        wl-clipboard
-        xclip
-      ]);
+      ++ lib.optionals pkgs.stdenv.isLinux (
+        with pkgs;
+        [
+          wl-clipboard
+          xclip
+        ]
+      );
 
     withRuby = false;
     withPython3 = false;
