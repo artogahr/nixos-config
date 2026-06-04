@@ -18,6 +18,7 @@
     extraPackages = with pkgs; [
       nixd
       nixfmt
+      prettierd
       tinymist
       typstyle
       rust-analyzer
@@ -31,7 +32,7 @@
       theme = {
         mode = "system";
         light = "Catppuccin Latte";
-        dark = "Catppuccin Frappe";
+        dark = "Catppuccin Frappé";
       };
 
       vim_mode = true;
@@ -56,6 +57,15 @@
       };
 
       languages = {
+        TypeScript.formatter.external = {
+          command = "${pkgs.prettierd}/bin/prettierd";
+          arguments = [ "{buffer_path}" ];
+        };
+        JavaScript.formatter.external = {
+          command = "${pkgs.prettierd}/bin/prettierd";
+          arguments = [ "{buffer_path}" ];
+        };
+
         # The nix extension defaults to `nil`; opt into nixd + nixfmt instead.
         Nix = {
           language_servers = [ "nixd" ];
