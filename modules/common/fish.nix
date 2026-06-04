@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   programs.fish = {
@@ -11,6 +11,8 @@
     };
     interactiveShellInit = ''
       set -g fish_greeting
+      set -gx NIXPKGS_ALLOW_UNFREE 1
+      set -gx NIXPKGS_ALLOW_INSECURE 1
     '';
   };
 
