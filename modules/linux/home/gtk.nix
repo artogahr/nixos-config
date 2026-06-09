@@ -7,8 +7,8 @@
     package = pkgs.papirus-icon-theme;
   };
   gtk.cursorTheme = {
-    name = "catppuccin-mocha-dark-cursors";
-    package = pkgs.catppuccin-cursors.mochaDark;
+    name = "catppuccin-frappe-dark-cursors";
+    package = pkgs.catppuccin-cursors.frappeDark;
     size = 24;
   };
   gtk.gtk4.theme = null;

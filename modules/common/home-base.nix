@@ -5,6 +5,7 @@
   home.stateVersion = "25.05";
 
   programs.home-manager.enable = true;
+  programs.uv.enable = true;
 
   home.packages = with pkgs; [
     tree
@@ -20,7 +21,7 @@
   '';
 
   catppuccin.enable = true;
-  catppuccin.flavor = "mocha";
+  catppuccin.flavor = "frappe";
   catppuccin.fish.enable = false;
   catppuccin.nvim.enable = false;
 }

@@ -130,7 +130,7 @@ in
           vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE", ctermbg = "NONE" })
         end,
       })
-      vim.cmd.colorscheme("catppuccin")
+      vim.cmd.colorscheme("catppuccin-frappe")
 
       vim.g.mapleader = " "
       vim.g.maplocalleader = " "

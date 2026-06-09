@@ -28,7 +28,7 @@
       config.initial_rows = 42
       config.initial_cols = 128
 
-      config.color_scheme = "Catppuccin Mocha"
+      config.color_scheme = (wezterm.gui.get_appearance():find("Dark")) and "Catppuccin Frappé" or "Catppuccin Latte"
 
       return config
     '';

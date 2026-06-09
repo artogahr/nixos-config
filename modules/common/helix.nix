@@ -6,15 +6,14 @@
     # package = pkgs.evil-helix;
     defaultEditor = false;
     settings = {
-      theme = lib.mkForce "catppuccin-mocha-transparent";
+      theme = lib.mkForce "catppuccin-frappe-transparent";
       editor.cursor-shape.insert = "bar";
       editor.line-number = "relative";
       editor.soft-wrap.enable = true;
     };
     themes = {
-      "catppuccin-mocha-transparent" = {
-        # Inherit all other styles from the original catppuccin-mocha theme
-        inherits = "catppuccin-mocha";
+      "catppuccin-frappe-transparent" = {
+        inherits = "catppuccin_frappe";
         # Set the UI background to be transparent by leaving it empty
         "ui.background" = { };
       };

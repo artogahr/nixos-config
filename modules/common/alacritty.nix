@@ -4,7 +4,7 @@
 {
   programs.alacritty = {
     enable = true;
-    theme = "catppuccin_mocha";
+    theme = "catppuccin_frappe";
     settings = {
       font = {
         normal = {

@@ -10,6 +10,7 @@
       background-opacity = 0.7;
       background-blur = true;
       bell-features = "system";
+      theme = "dark:Catppuccin Frappe,light:Catppuccin Latte";
     };
   };
 }
