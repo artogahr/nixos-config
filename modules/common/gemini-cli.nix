@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  programs.gemini-cli = {
+  programs.antigravity-cli = {
     enable = false;
     settings = {
     };

@@ -21,6 +21,7 @@
   '';
 
   catppuccin.enable = true;
+  catppuccin.autoEnable = true;
   catppuccin.flavor = "frappe";
   catppuccin.fish.enable = false;
   catppuccin.nvim.enable = false;
