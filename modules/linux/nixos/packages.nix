@@ -60,6 +60,5 @@
     spotify
     spotify-tray
     signal-desktop
-    claude-code-bin
   ];
 }
