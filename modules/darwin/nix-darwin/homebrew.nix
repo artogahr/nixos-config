@@ -43,6 +43,14 @@
       "localsend"
       "discord"
       "utm"
+      "signal"
+      "orion"
+      "balenaetcher"
+      "macfuse"
+      "mos"
+      "prusaslicer"
+      "domzilla-caffeine"
+      "ollama"
     ];
   };
 }
