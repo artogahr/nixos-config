@@ -2,15 +2,8 @@
 { pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    wget
     git
-    unzip
     btrfs-progs
-    nixfmt
-    nixd
-    typst
-    tinymist
-    typstyle
     zotero
     onlyoffice-desktopeditors
     haruna
@@ -33,32 +26,20 @@
     lm_sensors
     dmidecode
     google-chrome
-    ffmpeg
-    jellyfin-media-player
     easyeffects
     code-cursor
     todoist
-    cursor-cli
     clinfo
-    doggo
     sshfs
-    unrar
     qbittorrent
     discord
-    wireguard-tools
     ghostty
-    ncdu
-    docker-compose
     dnsmasq
     phodav
     usbutils
     obs-studio
     galaxy-buds-client
-    yazi
     xev
-    gemini-cli
-    spotify
     spotify-tray
-    signal-desktop
   ];
 }

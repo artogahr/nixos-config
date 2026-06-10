@@ -7,15 +7,6 @@
   programs.home-manager.enable = true;
   programs.uv.enable = true;
 
-  home.packages = with pkgs; [
-    tree
-    gh
-    htop
-    ripgrep
-    fd
-    delta
-  ];
-
   xdg.configFile."nixpkgs/config.nix".text = ''
     { allowUnfree = true; }
   '';

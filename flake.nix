@@ -54,7 +54,7 @@
         );
 
       # Modules shared by every NixOS host.
-      nixosCommonModules = (importDir ./modules/linux/nixos) ++ [
+      nixosCommonModules = (importDir ./modules/linux/nixos) ++ (importDir ./modules/common-system) ++ [
         disko.nixosModules.default
         catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
@@ -74,7 +74,7 @@
       ];
 
       # Modules shared by every nix-darwin host.
-      darwinCommonModules = (importDir ./modules/darwin/nix-darwin) ++ [
+      darwinCommonModules = (importDir ./modules/darwin/nix-darwin) ++ (importDir ./modules/common-system) ++ [
         home-manager.darwinModules.home-manager
         nix-homebrew.darwinModules.nix-homebrew
         {

@@ -9,8 +9,6 @@
     alt-tab-macos
     localsend
     utm
-    signal-desktop
-    spotify
     whatsapp-for-mac
   ];
 }
