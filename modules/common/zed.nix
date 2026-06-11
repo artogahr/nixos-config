@@ -46,7 +46,7 @@
       # Keep Vim yanks out of the OS clipboard; use cmd+c / cmd+v for that.
       vim.use_system_clipboard = "never";
 
-      inlay_hints.enabled = true;
+      # inlay_hints.enabled = true;
       git.inline_blame.enabled = true;
 
       terminal.shell.program = "fish";
