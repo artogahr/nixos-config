@@ -9,9 +9,15 @@
     enable = true;
 
     extensions = [
-      "catppuccin"
+      "zed-catppuccin-blur"
       "nix"
       "typst"
+      "toml"
+      "html"
+      "git_firefly"
+      "zed-icons"
+      "zed-xml"
+      "zed-log"
     ];
 
     # Pin every language server to a Nix binary so nothing is downloaded at runtime.
@@ -31,8 +37,8 @@
     userSettings = {
       theme = {
         mode = "system";
-        light = "Catppuccin Latte";
-        dark = "Catppuccin Frappé";
+        light = "Catppuccin Latte (Blur) [Heavy]";
+        dark = "Catppuccin Frappé (Blur) [Heavy]";
       };
 
       vim_mode = true;
@@ -46,7 +52,7 @@
       # Keep Vim yanks out of the OS clipboard; use cmd+c / cmd+v for that.
       vim.use_system_clipboard = "never";
 
-      # inlay_hints.enabled = true;
+      inlay_hints.enabled = false;
       git.inline_blame.enabled = true;
 
       terminal.shell.program = "fish";
