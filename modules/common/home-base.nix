@@ -16,4 +16,17 @@
   catppuccin.flavor = "frappe";
   catppuccin.fish.enable = false;
   catppuccin.nvim.enable = false;
+
+  home.packages = with pkgs; [
+    bat
+    btop
+    claude-code
+    direnv
+    zellij
+  ];
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 }
