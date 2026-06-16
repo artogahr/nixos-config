@@ -50,6 +50,11 @@
   };
 
   services = {
+    # Radeon GPU acceleration for the local Ollama backend; pull the default model on activation.
+    ollama = {
+      acceleration = "rocm";
+      loadModels = [ "gemma4:31b" ];
+    };
     ddccontrol.enable = true;
     hardware.openrgb = {
       enable = true;

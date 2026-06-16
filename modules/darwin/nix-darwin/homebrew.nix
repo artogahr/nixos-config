@@ -9,9 +9,14 @@
     };
     taps = [
       "nikitabobko/tap"
+      {
+        name = "jundot/omlx";
+        clone_target = "https://github.com/jundot/omlx";
+      }
     ];
     brews = [
       "apify-cli"
+      "omlx"
     ];
     casks = [
       "ghostty"
@@ -30,8 +35,11 @@
       "macfuse"
       "karabiner-elements"
       "domzilla-caffeine"
-      "ollama"
+      "ollama-app"
       "discord"
+      "zen"
+      "rawtherapee"
+      "codexbar"
     ];
   };
 }
