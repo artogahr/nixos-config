@@ -9,10 +9,7 @@
     };
     taps = [
       "nikitabobko/tap"
-      {
-        name = "jundot/omlx";
-        clone_target = "https://github.com/jundot/omlx";
-      }
+      "vorssaint/tap"
     ];
     brews = [
       "apify-cli"
@@ -40,6 +37,7 @@
       "zen"
       "rawtherapee"
       "codexbar"
+      "vorssaint"
     ];
   };
 }
