@@ -53,16 +53,16 @@
           )
         );
 
-      # Modules shared by every NixOS host.
+       # Modules shared by every NixOS host.
       nixosCommonModules = (importDir ./modules/linux/nixos) ++ (importDir ./modules/common-system) ++ [
         disko.nixosModules.default
         catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = { inherit inputs importDir; };
             useGlobalPkgs = true;
-            users.arto = {
+            users.artogahr = {
               imports = [
                 ./home-linux.nix
                 catppuccin.homeModules.catppuccin
@@ -82,12 +82,10 @@
             enable = true;
             enableRosetta = true;
             user = "artogahr";
-            # Take over an existing /opt/homebrew install instead of refusing to proceed.
-            # One-time switch — once we've migrated, nix-homebrew owns the prefix.
             autoMigrate = true;
           };
           home-manager = {
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = { inherit inputs importDir; };
             useGlobalPkgs = true;
             users.artogahr = {
               imports = [
