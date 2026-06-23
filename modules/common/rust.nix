@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }:
 let
-  rust = inputs.fenix.packages.${pkgs.system}.stable;
+  rust = inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.stable;
 in
 {
   home.packages =
