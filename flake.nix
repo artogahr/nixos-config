@@ -131,9 +131,9 @@
     in
     {
       nixosConfigurations.fukurowl-pc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = nixosCommonModules ++ [
+          { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./hosts/fukurowl-pc/default.nix
           ./hosts/fukurowl-pc/disko-config.nix
           ./hosts/fukurowl-pc/hardware-configuration.nix
@@ -141,9 +141,9 @@
       };
 
       nixosConfigurations.fukurowl-thinkpad = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = nixosCommonModules ++ [
+          { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./hosts/fukurowl-thinkpad/default.nix
           ./hosts/fukurowl-thinkpad/disko-config.nix
           ./hosts/fukurowl-thinkpad/hardware-configuration.nix
@@ -151,9 +151,9 @@
       };
 
       darwinConfigurations.fukurowl-macbook = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
         specialArgs = { inherit inputs; };
         modules = darwinCommonModules ++ [
+          { nixpkgs.hostPlatform = "aarch64-darwin"; }
           ./hosts/fukurowl-macbook/default.nix
         ];
       };
