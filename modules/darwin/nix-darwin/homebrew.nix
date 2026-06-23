@@ -14,8 +14,10 @@
     brews = [
       "apify-cli"
       "omlx"
+      "omp"
     ];
     casks = [
+      "monitorcontrol"
       "ghostty"
       "middledrag"
       "claude"
