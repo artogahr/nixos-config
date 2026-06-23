@@ -25,6 +25,26 @@
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
+    homebrew-core = {
+      url = "github:Homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:Homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-omlx = {
+      url = "github:jundot/omlx";
+      flake = false;
+    };
+    homebrew-can1357 = {
+      url = "github:can1357/homebrew-tap";
+      flake = false;
+    };
+    homebrew-vorssaint = {
+      url = "github:vorssaint/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =
@@ -83,6 +103,18 @@
             enableRosetta = true;
             user = "artogahr";
             autoMigrate = true;
+            mutableTaps = false;
+            taps = {
+              "homebrew/homebrew-core" = inputs.homebrew-core;
+              "homebrew/homebrew-cask" = inputs.homebrew-cask;
+              "jundot/homebrew-omlx" = inputs.homebrew-omlx;
+              "can1357/homebrew-tap" = inputs.homebrew-can1357;
+              "vorssaint/homebrew-tap" = inputs.homebrew-vorssaint;
+            };
+            trust.taps = [
+              "can1357/tap"
+              "jundot/omlx"
+            ];
           };
           home-manager = {
             extraSpecialArgs = { inherit inputs importDir; };

@@ -96,6 +96,86 @@
         "type": "github"
       }
     },
+    "homebrew-can1357": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782146048,
+        "narHash": "sha256-467IaZDEcMAxNmWCzcTTU5ys53vSOyaFK60gecBEY38=",
+        "owner": "can1357",
+        "repo": "homebrew-tap",
+        "rev": "b4f928c38dae66c7a66590c97998f2571ef3bcd7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "can1357",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
+    "homebrew-cask": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782200532,
+        "narHash": "sha256-01Ttijdel2koB1EBNvS0mVW0mrAJWQ8y2x1g0+yIh58=",
+        "owner": "Homebrew",
+        "repo": "homebrew-cask",
+        "rev": "b1735c974853e47253cae584582f15b6404baa3e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Homebrew",
+        "repo": "homebrew-cask",
+        "type": "github"
+      }
+    },
+    "homebrew-core": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782198678,
+        "narHash": "sha256-uaWrVyQEQqa1nm8p/Dxd7wdJkhZn7LZEJS/PnnSq/zA=",
+        "owner": "Homebrew",
+        "repo": "homebrew-core",
+        "rev": "cbcbe8dc1a21e04f94b3e81d818774f3dc997552",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Homebrew",
+        "repo": "homebrew-core",
+        "type": "github"
+      }
+    },
+    "homebrew-omlx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782105353,
+        "narHash": "sha256-2qclW0+mq1TaLERiEmYGM39nuuarOJ264iIRnwVqgiE=",
+        "owner": "jundot",
+        "repo": "omlx",
+        "rev": "161890956769b56eb974350578dc641928f257b2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jundot",
+        "repo": "omlx",
+        "type": "github"
+      }
+    },
+    "homebrew-vorssaint": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782192461,
+        "narHash": "sha256-t4GXzWhV8dIFFG+lg93fY2yo34nW5IiF2RQBSyYvGwc=",
+        "owner": "vorssaint",
+        "repo": "homebrew-tap",
+        "rev": "7fdcb6e4ea257f8763c02546ceb68a49a2159c8d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vorssaint",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -192,6 +272,11 @@
         "disko": "disko",
         "fenix": "fenix",
         "home-manager": "home-manager",
+        "homebrew-can1357": "homebrew-can1357",
+        "homebrew-cask": "homebrew-cask",
+        "homebrew-core": "homebrew-core",
+        "homebrew-omlx": "homebrew-omlx",
+        "homebrew-vorssaint": "homebrew-vorssaint",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_2",
