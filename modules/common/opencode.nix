@@ -38,6 +38,7 @@
       npm = "@ai-sdk/openai-compatible";
       name = "omlx (MLX)";
       options.baseURL = "http://localhost:8000/v1";
+      options.apiKey = "omlx-9qe8mz1liuovqqhz";
       models = {
         "gemma-4-E4B-it-MLX-4bit" = {
           name = "Gemma 4 E4B (MLX, vision + tools)";
