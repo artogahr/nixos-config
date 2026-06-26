@@ -29,7 +29,7 @@
           docker-compose
           wireguard-tools
           cursor-cli
-          gemini-cli
+          antigravity-cli
           nixfmt
           nixd
           typst
