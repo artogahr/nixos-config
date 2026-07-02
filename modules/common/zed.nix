@@ -1,12 +1,20 @@
 # Zed editor, shared across all hosts.
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  zedPackage = inputs.zed.packages.${pkgs.system}.default.overrideAttrs (old: {
+    postInstall = (old.postInstall or "") + ''
+      ln -sf $out/bin/zed $out/bin/zeditor
+    '';
+  });
+in
 
 {
   # The catppuccin module pins one flavor; we follow the system theme instead.
   catppuccin.zed.enable = false;
 
   programs.zed-editor = {
-    enable = true;
+    enable = false;
+    package = zedPackage;
 
     extensions = [
       "zed-catppuccin-blur"

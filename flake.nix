@@ -2,6 +2,15 @@
 {
   description = "System Flake — NixOS + nix-darwin configurations for Arto's hosts";
 
+  nixConfig = {
+    # extra-substituters = [
+    #   "https://zed.cachix.org"
+    # ];
+    # extra-trusted-public-keys = [
+    #   "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU="
+    # ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -20,10 +29,18 @@
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
 
+    zed.url = "github:zed-industries/zed";
+    zed.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-darwin.url = "github:nix-darwin/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    mattpocock-skills = {
+      url = "github:mattpocock/skills";
+      flake = false;
+    };
 
     homebrew-core = {
       url = "github:Homebrew/homebrew-core";
@@ -73,61 +90,67 @@
           )
         );
 
-       # Modules shared by every NixOS host.
-      nixosCommonModules = (importDir ./modules/linux/nixos) ++ (importDir ./modules/common-system) ++ [
-        disko.nixosModules.default
-        catppuccin.nixosModules.catppuccin
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            extraSpecialArgs = { inherit inputs importDir; };
-            useGlobalPkgs = true;
-            users.artogahr = {
-              imports = [
-                ./home-linux.nix
-                catppuccin.homeModules.catppuccin
-                plasma-manager.homeModules.plasma-manager
-              ];
+      # Modules shared by every NixOS host.
+      nixosCommonModules =
+        (importDir ./modules/linux/nixos)
+        ++ (importDir ./modules/common-system)
+        ++ [
+          disko.nixosModules.default
+          catppuccin.nixosModules.catppuccin
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = { inherit inputs importDir; };
+              useGlobalPkgs = true;
+              users.artogahr = {
+                imports = [
+                  ./home-linux.nix
+                  catppuccin.homeModules.catppuccin
+                  plasma-manager.homeModules.plasma-manager
+                ];
+              };
             };
-          };
-        }
-      ];
+          }
+        ];
 
       # Modules shared by every nix-darwin host.
-      darwinCommonModules = (importDir ./modules/darwin/nix-darwin) ++ (importDir ./modules/common-system) ++ [
-        home-manager.darwinModules.home-manager
-        nix-homebrew.darwinModules.nix-homebrew
-        {
-          nix-homebrew = {
-            enable = true;
-            enableRosetta = true;
-            user = "artogahr";
-            autoMigrate = true;
-            mutableTaps = false;
-            taps = {
-              "homebrew/homebrew-core" = inputs.homebrew-core;
-              "homebrew/homebrew-cask" = inputs.homebrew-cask;
-              "jundot/homebrew-omlx" = inputs.homebrew-omlx;
-              "can1357/homebrew-tap" = inputs.homebrew-can1357;
-              "vorssaint/homebrew-tap" = inputs.homebrew-vorssaint;
-            };
-            trust.taps = [
-              "can1357/tap"
-              "jundot/omlx"
-            ];
-          };
-          home-manager = {
-            extraSpecialArgs = { inherit inputs importDir; };
-            useGlobalPkgs = true;
-            users.artogahr = {
-              imports = [
-                ./home-darwin.nix
-                catppuccin.homeModules.catppuccin
+      darwinCommonModules =
+        (importDir ./modules/darwin/nix-darwin)
+        ++ (importDir ./modules/common-system)
+        ++ [
+          home-manager.darwinModules.home-manager
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              user = "artogahr";
+              autoMigrate = true;
+              mutableTaps = false;
+              taps = {
+                "homebrew/homebrew-core" = inputs.homebrew-core;
+                "homebrew/homebrew-cask" = inputs.homebrew-cask;
+                "jundot/homebrew-omlx" = inputs.homebrew-omlx;
+                "can1357/homebrew-tap" = inputs.homebrew-can1357;
+                "vorssaint/homebrew-tap" = inputs.homebrew-vorssaint;
+              };
+              trust.taps = [
+                "can1357/tap"
+                "jundot/omlx"
               ];
             };
-          };
-        }
-      ];
+            home-manager = {
+              extraSpecialArgs = { inherit inputs importDir; };
+              useGlobalPkgs = true;
+              users.artogahr = {
+                imports = [
+                  ./home-darwin.nix
+                  catppuccin.homeModules.catppuccin
+                ];
+              };
+            };
+          }
+        ];
     in
     {
       nixosConfigurations.fukurowl-pc = nixpkgs.lib.nixosSystem {

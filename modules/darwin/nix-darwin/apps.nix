@@ -4,7 +4,6 @@
     raycast
     maccy
     stats
-    betterdisplay
     mos
     alt-tab-macos
     localsend

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.fish = {
@@ -9,6 +9,12 @@
       ".." = "cd ..";
       ll = "ls -alh";
     };
+    plugins = [
+      {
+        name = "pure";
+        src = pkgs.fishPlugins.pure.src;
+      }
+    ];
     interactiveShellInit = ''
       set -g fish_greeting
       set -gx NIXPKGS_ALLOW_UNFREE 1
