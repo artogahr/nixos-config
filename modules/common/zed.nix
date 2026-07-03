@@ -1,20 +1,44 @@
-# Zed editor, shared across all hosts.
-{ pkgs, inputs, ... }:
+# Zed editor, shared across all hosts. On Linux the binary comes from
+# nixpkgs; the nix-built Zed on macOS can't install extensions, so there
+# the Homebrew cask ships the binary and this module only manages config.
+{ pkgs, lib, ... }:
 let
-  zedPackage = inputs.zed.packages.${pkgs.system}.default.overrideAttrs (old: {
-    postInstall = (old.postInstall or "") + ''
-      ln -sf $out/bin/zed $out/bin/zeditor
-    '';
-  });
+  inherit (pkgs.stdenv) isDarwin;
+
+  # Pin every language server to a Nix binary so nothing is downloaded at runtime.
+  lspPackages = with pkgs; [
+    nixd
+    nixfmt
+    prettierd
+    tinymist
+    typstyle
+    rust-analyzer
+    rustfmt
+    vtsls
+    basedpyright
+    ruff
+  ];
 in
 
 {
   # The catppuccin module pins one flavor; we follow the system theme instead.
   catppuccin.zed.enable = false;
 
+  # extraPackages requires a non-null package, so on darwin go through PATH.
+  # The fenix toolchain in rust.nix already ships rustfmt + rust-analyzer.
+  home.packages = lib.optionals isDarwin (
+    lib.subtractLists [
+      pkgs.rust-analyzer
+      pkgs.rustfmt
+    ] lspPackages
+  );
+
+  home.shellAliases = if isDarwin then { zeditor = "zed"; } else { zed = "zeditor"; };
+
   programs.zed-editor = {
-    enable = false;
-    package = zedPackage;
+    enable = true;
+    package = if isDarwin then null else pkgs.zed-editor;
+    extraPackages = lib.optionals (!isDarwin) lspPackages;
 
     extensions = [
       "zed-catppuccin-blur"
@@ -26,20 +50,6 @@ in
       "zed-icons"
       "zed-xml"
       "zed-log"
-    ];
-
-    # Pin every language server to a Nix binary so nothing is downloaded at runtime.
-    extraPackages = with pkgs; [
-      nixd
-      nixfmt
-      prettierd
-      tinymist
-      typstyle
-      rust-analyzer
-      rustfmt
-      vtsls
-      basedpyright
-      ruff
     ];
 
     userSettings = {
@@ -84,12 +94,12 @@ in
         Nix = {
           language_servers = [ "nixd" ];
           formatter.external = {
-            command = "nixfmt";
+            command = lib.getExe pkgs.nixfmt;
             arguments = [ ];
           };
         };
         Typst.formatter.external = {
-          command = "typstyle";
+          command = lib.getExe pkgs.typstyle;
           arguments = [ ];
         };
       };

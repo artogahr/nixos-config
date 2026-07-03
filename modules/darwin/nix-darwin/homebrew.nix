@@ -35,6 +35,7 @@
       "domzilla-caffeine"
       "ollama-app"
       "discord"
+      "zed"
       "zen"
       "rawtherapee"
       "codexbar"

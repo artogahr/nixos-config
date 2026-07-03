@@ -2,15 +2,6 @@
 {
   description = "System Flake — NixOS + nix-darwin configurations for Arto's hosts";
 
-  nixConfig = {
-    # extra-substituters = [
-    #   "https://zed.cachix.org"
-    # ];
-    # extra-trusted-public-keys = [
-    #   "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU="
-    # ];
-  };
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -28,9 +19,6 @@
 
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
-
-    zed.url = "github:zed-industries/zed";
-    zed.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-darwin.url = "github:nix-darwin/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -102,7 +90,7 @@
             home-manager = {
               extraSpecialArgs = { inherit inputs importDir; };
               useGlobalPkgs = true;
-              users.artogahr = {
+              users.arto = {
                 imports = [
                   ./home-linux.nix
                   catppuccin.homeModules.catppuccin
