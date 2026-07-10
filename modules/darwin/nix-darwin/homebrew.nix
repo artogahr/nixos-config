@@ -13,7 +13,6 @@
       "omp"
     ];
     taps = [
-      "denzam/systemeq"
     ];
     casks = [
       "monitorcontrol"
@@ -40,8 +39,6 @@
       "rawtherapee"
       "codexbar"
       "vorssaint"
-      "systemeq"
-      "blackhole-2ch"
     ];
   };
 }

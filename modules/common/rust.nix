@@ -15,7 +15,6 @@ in
       ])
     ]
     ++ (with pkgs; [
-      cargo-watch
       cargo-expand
       cargo-audit
       cargo-outdated
