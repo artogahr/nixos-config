@@ -1,6 +1,9 @@
 # Cross-platform home-manager baseline.
 # Shared by every host (NixOS and nix-darwin).
 { pkgs, ... }:
+let
+  aiGuidelines = ./ai-guidelines.md;
+in
 {
   home.stateVersion = "25.05";
 
@@ -22,6 +25,7 @@
     btop
     claude-code
     direnv
+    rtk
     zellij
   ];
 
@@ -29,4 +33,7 @@
     enable = true;
     nix-direnv.enable = true;
   };
+
+  home.file.".claude/ai-guidelines.md".source = aiGuidelines;
+  home.file.".claude/CLAUDE.md".text = "@RTK.md\n@ai-guidelines.md\n";
 }

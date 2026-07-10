@@ -2,11 +2,12 @@
 #   - Ollama on :11434 (macOS: ollama-app cask; Linux: services.ollama, see modules/linux/nixos/ollama.nix).
 #   - omlx on :8000 (macOS only), an Apple Silicon MLX inference server (`omlx start`).
 # Pull/load a model before first use, e.g. `ollama pull gemma4:31b` or fetch it via omlx.
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   home.packages = [ pkgs.opencode ];
 
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
+    instructions = [ "${config.home.homeDirectory}/.claude/ai-guidelines.md" ];
     "$schema" = "https://opencode.ai/config.json";
     provider.ollama = {
       npm = "@ai-sdk/openai-compatible";
@@ -59,5 +60,16 @@
       };
     };
     model = "omlx/Qwen3.6-35B-A3B-MLX-4bit";
+    mcp.notion = {
+      type = "remote";
+      url = "https://mcp.notion.com/mcp";
+      enabled = true;
+    };
+    mcp.apify = {
+      type = "remote";
+      url = "https://mcp.apify.com";
+      enabled = true;
+    };
+    
   };
 }
