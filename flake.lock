@@ -297,8 +297,7 @@
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_2",
-        "plasma-manager": "plasma-manager",
-        "understand-anything": "understand-anything"
+        "plasma-manager": "plasma-manager"
       }
     },
     "rust-analyzer-src": {
@@ -315,22 +314,6 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
-        "type": "github"
-      }
-    },
-    "understand-anything": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1783687886,
-        "narHash": "sha256-u42y962dzjUM5eCbM64Q1VMHNHCcD54YSgcAkfyYCBI=",
-        "owner": "Egonex-AI",
-        "repo": "Understand-Anything",
-        "rev": "6da0fbd255ee0e55789f41c047b767ad01519d14",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Egonex-AI",
-        "repo": "Understand-Anything",
         "type": "github"
       }
     }

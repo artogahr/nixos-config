@@ -6,6 +6,5 @@ Avoid em dashes, emojis, short dramatic sentences, and LLM-isms ("certainly!", "
 - `rg`, `fd`, `bat`, `tree`
 - `uv`, `cargo` / `rustc`
 - `docker-compose`
-- `rtk` — token-optimized proxy for common commands
 
 If a tool isn't available, use `nix shell nixpkgs#<package>` or suggest adding it to the nix config.

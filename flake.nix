@@ -30,11 +30,6 @@
       flake = false;
     };
 
-    understand-anything = {
-      url = "github:Egonex-AI/Understand-Anything";
-      flake = false;
-    };
-
     homebrew-core = {
       url = "github:Homebrew/homebrew-core";
       flake = false;

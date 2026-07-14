@@ -25,7 +25,6 @@ in
     btop
     claude-code
     direnv
-    rtk
     zellij
   ];
 
@@ -35,5 +34,5 @@ in
   };
 
   home.file.".claude/ai-guidelines.md".source = aiGuidelines;
-  home.file.".claude/CLAUDE.md".text = "@RTK.md\n@ai-guidelines.md\n";
+  home.file.".claude/CLAUDE.md".text = "@ai-guidelines.md\n";
 }
