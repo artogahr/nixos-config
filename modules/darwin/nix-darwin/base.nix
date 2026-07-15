@@ -57,6 +57,10 @@
   # macOS username (≠ the NixOS username on the other hosts, which is `arto`).
   system.primaryUser = "artogahr";
 
+  # Disable nix-darwin's built-in docs generation (produces a noisy
+  # "builtins.derivation" warning about store path context on every build).
+  documentation.enable = false;
+
   # Pin nix-darwin's state version; bump this only when nix-darwin release notes tell you to.
   system.stateVersion = 6;
 }

@@ -7,6 +7,8 @@ in
 {
   home.stateVersion = "25.05";
 
+  manual.manpages.enable = false;
+
   programs.home-manager.enable = true;
   programs.uv.enable = true;
 
