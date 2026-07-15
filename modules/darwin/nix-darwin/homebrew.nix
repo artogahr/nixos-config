@@ -10,9 +10,11 @@
     brews = [
       "apify-cli"
       "omlx"
-      "omp"
+      "oh-my-posh"
     ];
     taps = [
+      "homebrew/cask"
+      "darrylmorley/whatcable"
     ];
     casks = [
       "monitorcontrol"
@@ -29,7 +31,7 @@
       "orion"
       "prusaslicer"
       "balenaetcher"
-      "macfuse"
+      # "macfuse"
       "karabiner-elements"
       "domzilla-caffeine"
       "ollama-app"
@@ -39,6 +41,7 @@
       "rawtherapee"
       "codexbar"
       "vorssaint"
+      "whatcable"
     ];
   };
 }

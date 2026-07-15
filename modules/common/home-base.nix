@@ -33,6 +33,12 @@ in
     nix-direnv.enable = true;
   };
 
-  home.file.".claude/ai-guidelines.md".source = aiGuidelines;
-  home.file.".claude/CLAUDE.md".text = "@ai-guidelines.md\n";
+  home.file.".claude/ai-guidelines.md" = {
+    source = aiGuidelines;
+    force = true;
+  };
+  home.file.".claude/CLAUDE.md" = {
+    text = "@ai-guidelines.md\n";
+    force = true;
+  };
 }

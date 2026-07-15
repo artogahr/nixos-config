@@ -42,12 +42,9 @@
       url = "github:jundot/omlx";
       flake = false;
     };
-    homebrew-can1357 = {
-      url = "github:can1357/homebrew-tap";
-      flake = false;
-    };
-    homebrew-vorssaint = {
-      url = "github:vorssaint/homebrew-tap";
+
+    homebrew-whatcable = {
+      url = "github:darrylmorley/homebrew-whatcable";
       flake = false;
     };
   };
@@ -90,6 +87,7 @@
             home-manager = {
               extraSpecialArgs = { inherit inputs importDir; };
               useGlobalPkgs = true;
+              useUserPackages = true;
               users.arto = {
                 imports = [
                   ./home-linux.nix
@@ -119,17 +117,18 @@
                 "homebrew/homebrew-core" = inputs.homebrew-core;
                 "homebrew/homebrew-cask" = inputs.homebrew-cask;
                 "jundot/homebrew-omlx" = inputs.homebrew-omlx;
-                "can1357/homebrew-tap" = inputs.homebrew-can1357;
-                "vorssaint/homebrew-tap" = inputs.homebrew-vorssaint;
+
+                "darrylmorley/homebrew-whatcable" = inputs.homebrew-whatcable;
               };
               trust.taps = [
-                "can1357/tap"
                 "jundot/omlx"
+                "darrylmorley/whatcable"
               ];
             };
             home-manager = {
               extraSpecialArgs = { inherit inputs importDir; };
               useGlobalPkgs = true;
+              useUserPackages = true;
               users.artogahr = {
                 imports = [
                   ./home-darwin.nix
