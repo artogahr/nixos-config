@@ -87,7 +87,6 @@
             home-manager = {
               extraSpecialArgs = { inherit inputs importDir; };
               useGlobalPkgs = true;
-              useUserPackages = true;
               users.arto = {
                 imports = [
                   ./home-linux.nix
@@ -128,7 +127,6 @@
             home-manager = {
               extraSpecialArgs = { inherit inputs importDir; };
               useGlobalPkgs = true;
-              useUserPackages = true;
               users.artogahr = {
                 imports = [
                   ./home-darwin.nix
