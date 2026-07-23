@@ -11,6 +11,7 @@
       "apify-cli"
       "omlx"
       "oh-my-posh"
+      "kimi-code"
     ];
     taps = [
       "homebrew/cask"

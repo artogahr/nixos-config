@@ -15,6 +15,7 @@
         home.packages = with pkgs; [
           tree
           gh
+          github-copilot-cli
           htop
           ripgrep
           fd

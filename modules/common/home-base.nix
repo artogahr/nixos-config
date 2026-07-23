@@ -1,6 +1,6 @@
 # Cross-platform home-manager baseline.
 # Shared by every host (NixOS and nix-darwin).
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 let
   aiGuidelines = ./ai-guidelines.md;
 in
@@ -25,7 +25,6 @@ in
   home.packages = with pkgs; [
     bat
     btop
-    claude-code
     direnv
     zellij
   ];
@@ -42,5 +41,41 @@ in
   home.file.".claude/CLAUDE.md" = {
     text = "@ai-guidelines.md\n";
     force = true;
+  };
+
+  home.file."${config.home.homeDirectory}/.claude/settings.json".force = true;
+  programs.claude-code = {
+    enable = true;
+    settings = {
+      model = "claude-fable-5[1m]";
+      enabledPlugins = {
+        "superpowers@claude-plugins-official" = true;
+        "rust-analyzer-lsp@claude-plugins-official" = true;
+        "initialize-typescript-repo@apify-agent-skills-internal" = false;
+        "principal-review@apify-agent-skills-internal" = true;
+        "staff-review@apify-agent-skills-internal" = true;
+        "apify-prophet@apify-agent-skills-internal" = true;
+      };
+      extraKnownMarketplaces = {
+        apify-agent-skills-internal = {
+          source = {
+            source = "git";
+            url = "git@github.com:apify/agent-skills-internal.git";
+          };
+          autoUpdate = true;
+        };
+      };
+      attribution = {
+        commit = "";
+        pr = "";
+      };
+      effortLevel = "high";
+      skipDangerousModePermissionPrompt = true;
+      skipWorkflowUsageWarning = true;
+      theme = "auto";
+      inputNeededNotifEnabled = true;
+      agentPushNotifEnabled = true;
+      skipAutoPermissionPrompt = true;
+    };
   };
 }
