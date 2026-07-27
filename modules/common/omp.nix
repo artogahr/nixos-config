@@ -48,7 +48,6 @@
       slow: omlx/Qwen3.6-35B-A3B-MLX-4bit
     modelProviderOrder:
       - omlx
-      - ollama
     defaultThinkingLevel: high
   '';
 }
