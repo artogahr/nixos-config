@@ -12,7 +12,6 @@
     libnotify
     papirus-icon-theme
     hicolor-icon-theme
-    kdePackages.karousel
     telegram-desktop
   ];
 
