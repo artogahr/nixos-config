@@ -24,6 +24,13 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # nix-homebrew pins an older brew than current homebrew-core formulae require
+    # (symlink `overwrite:` / `bootstrap_cpython` in the InstallSteps DSL need >= 6.0.15).
+    nix-homebrew.inputs.brew-src.follows = "brew-src";
+    brew-src = {
+      url = "github:Homebrew/brew";
+      flake = false;
+    };
 
     mattpocock-skills = {
       url = "github:mattpocock/skills";
