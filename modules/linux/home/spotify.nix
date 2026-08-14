@@ -1,14 +1,18 @@
-{ lib, ... }:
+{ ... }:
 
 {
   services.spotifyd = {
     enable = true;
   };
 
+  # The catppuccin theme is imported from a derivation, which breaks evaluating this
+  # host from a non-Linux machine. We use the built-in default theme anyway.
+  catppuccin.spotify-player.enable = false;
+
   programs.spotify-player = {
     enable = true;
     settings = {
-      theme = lib.mkForce "default";
+      theme = "default";
       # cover_img_scale = 2.0;
       border_type = "Rounded";
       layout = {
