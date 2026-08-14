@@ -28,12 +28,9 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [
-        rocmPackages.clr.icd
-        rocmPackages.clr
-        rocmPackages.rocminfo
-        rocmPackages.rocm-runtime
-      ];
+      # rocmPackages.clr(.icd) come from hardware.amdgpu.opencl.enable below; only the
+      # runtime lib needs adding explicitly here.
+      extraPackages = with pkgs; [ rocmPackages.rocm-runtime ];
     };
 
     amdgpu = {
@@ -110,7 +107,6 @@
 
   environment.variables = {
     AMD_VULKAN_ICD = "RADV";
-    ROC_ENABLE_PRE_VEGA = "1";
     HSA_OVERRIDE_GFX_VERSION = "10.3.0";
   };
 
