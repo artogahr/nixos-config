@@ -15,7 +15,6 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = [
-      "i2c-dev"
       "amdgpu"
       "kvm-amd"
       "ntsync"
@@ -121,7 +120,6 @@
     radeontop
     rocmPackages.rocminfo
     rocmPackages.rocm-smi
-    openrgb-with-all-plugins
     prusa-slicer
     quickemu
     gnome-boxes
