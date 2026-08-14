@@ -8,7 +8,6 @@
 
   home.packages = with pkgs; [
     anydesk
-    easyeffects
     libnotify
     papirus-icon-theme
     hicolor-icon-theme

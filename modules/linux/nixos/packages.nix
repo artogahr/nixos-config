@@ -26,14 +26,12 @@
     lm_sensors
     dmidecode
     google-chrome
-    easyeffects
     code-cursor
     todoist
     clinfo
     sshfs
     qbittorrent
     discord
-    ghostty
     dnsmasq
     phodav
     usbutils
