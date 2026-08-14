@@ -23,7 +23,6 @@
         "@wheel"
       ];
     };
-
   };
 
   boot = {
@@ -44,28 +43,17 @@
     extraHosts = "0.0.0.0 apresolve.spotify.com";
   };
 
-  hardware.enableRedistributableFirmware = true;
+  hardware = {
+    enableRedistributableFirmware = true;
+    steam-hardware.enable = true;
 
-  hardware.bluetooth = {
-    enable = true;
-    settings.General.Experimental = true;
+    bluetooth = {
+      enable = true;
+      settings.General.Experimental = true;
+    };
   };
 
   security.rtkit.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-
-    extraConfig.pipewire."99-sensible-settings" = {
-      context.properties = {
-        resample.quality = 10;
-        default.clock.quantum = 1024;
-      };
-    };
-  };
 
   time.timeZone = "Europe/Prague";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -85,6 +73,20 @@
   };
 
   services = {
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+
+      extraConfig.pipewire."99-sensible-settings" = {
+        context.properties = {
+          resample.quality = 10;
+          default.clock.quantum = 1024;
+        };
+      };
+    };
+
     udisks2.enable = true;
     gvfs.enable = true;
     xserver.enable = true;
@@ -173,8 +175,6 @@
     gamemode.enable = true;
     kdeconnect.enable = true;
   };
-
-  hardware.steam-hardware.enable = true;
 
   virtualisation = {
     docker.enable = true;
