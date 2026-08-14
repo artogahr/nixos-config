@@ -28,11 +28,11 @@
 
   boot = {
     loader = {
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport = true;
-    };
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+      };
       efi.canTouchEfiVariables = true;
     };
     kernel.sysctl."vm.max_map_count" = 2147483642;

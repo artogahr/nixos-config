@@ -44,6 +44,6 @@
       url = "https://mcp.apify.com";
       enabled = true;
     };
-    
+
   };
 }

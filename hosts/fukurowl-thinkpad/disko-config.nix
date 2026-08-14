@@ -6,7 +6,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/nvme0n1";  # <-- VERIFY THIS with lsblk
+        device = "/dev/nvme0n1"; # <-- VERIFY THIS with lsblk
         content = {
           type = "gpt";
           partitions = {
