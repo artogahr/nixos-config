@@ -79,10 +79,7 @@
   environment.systemPackages = with pkgs; [
     powertop
     intel-gpu-tools
-    tlp
-    tlp-pd
     acpi
     nvme-cli
-    lm_sensors
   ];
 }

@@ -76,7 +76,6 @@
   # Disable wake from the specific PCI device that was triggering immediate wake (0000:00:01.1)
   services.udev.extraRules = ''
     SUBSYSTEM=="pci", KERNEL=="0000:00:01.1", ATTR{power/wakeup}="disabled"
-    KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
 
   # Denon HDMI 5.1 channel order quirk on this desktop host.
