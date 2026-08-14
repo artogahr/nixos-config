@@ -44,6 +44,8 @@
     extraHosts = "0.0.0.0 apresolve.spotify.com";
   };
 
+  hardware.enableRedistributableFirmware = true;
+
   hardware.bluetooth = {
     enable = true;
     settings.General.Experimental = true;
@@ -100,6 +102,7 @@
 
     tailscale.enable = true;
     flatpak.enable = true;
+    fwupd.enable = true;
 
     printing.enable = true;
     avahi = {

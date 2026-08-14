@@ -27,7 +27,6 @@
 
   hardware = {
     cpu.intel.updateMicrocode = true;
-    enableRedistributableFirmware = true;
 
     graphics = {
       enable = true;
@@ -40,7 +39,6 @@
 
   services = {
     thermald.enable = true;
-    fwupd.enable = true;
     fstrim.enable = true;
     fprintd.enable = true;
     upower.enable = true;
