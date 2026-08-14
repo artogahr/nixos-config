@@ -55,11 +55,28 @@ in
       # model = "claude-fable-5[1m]";
       enabledPlugins = {
         # "superpowers@claude-plugins-official" = true;
-        "rust-analyzer-lsp@claude-plugins-official" = true;
+        "rust-analyzer-lsp@claude-plugins-official" = false;
         "initialize-typescript-repo@apify-agent-skills-internal" = false;
         # "principal-review@apify-agent-skills-internal" = true;
         # "staff-review@apify-agent-skills-internal" = true;
         # "apify-prophet@apify-agent-skills-internal" = true;
+      };
+      # Unused in the last 9 days / 50 sessions across all projects (2026-08-12 doctor run).
+      # Remove an entry (or delete the whole block) to re-enable that skill.
+      skillOverrides = {
+        "code-review" = "off";
+        "diagnosing-bugs" = "off";
+        "grilling" = "off";
+        "resolving-merge-conflicts" = "off";
+        "tdd" = "off";
+      };
+      permissions = {
+        defaultMode = "auto";
+        deny = [ "AskUserQuestion" ];
+        ask = [
+          "Bash(git push *)"
+          "Bash(gh pr create *)"
+        ];
       };
       extraKnownMarketplaces = {
         apify-agent-skills-internal = {
