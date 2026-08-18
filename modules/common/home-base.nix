@@ -91,6 +91,21 @@ in
         commit = "";
         pr = "";
       };
+      # herdr agent-state integration. The script is installed and version-bumped
+      # imperatively by `herdr integration install claude`; only this invocation
+      # lives in nix because settings.json is a read-only store symlink.
+      hooks.SessionStart = [
+        {
+          matcher = "*";
+          hooks = [
+            {
+              type = "command";
+              command = "bash '${config.home.homeDirectory}/.claude/hooks/herdr-agent-state.sh' session";
+              timeout = 10;
+            }
+          ];
+        }
+      ];
       effortLevel = "high";
       skipDangerousModePermissionPrompt = true;
       skipWorkflowUsageWarning = true;
