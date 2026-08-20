@@ -43,6 +43,7 @@
       "vorssaint"
       "whatcable"
       "1password-cli"
+      "meetingbar"
     ];
   };
 }
