@@ -51,6 +51,18 @@ in
   home.file."${config.home.homeDirectory}/.claude/settings.json".force = true;
   programs.claude-code = {
     enable = true;
+    mcpServers.redash = {
+      type = "stdio";
+      command = lib.getExe' pkgs.nodejs "npx";
+      args = [
+        "-y"
+        "@suthio/redash-mcp"
+      ];
+      env = {
+        REDASH_URL = "https://charts.apify.com";
+        REDASH_API_KEY = "\${REDASH_API_KEY}";
+      };
+    };
     settings = {
       # model = "claude-fable-5[1m]";
       enabledPlugins = {
