@@ -167,6 +167,7 @@
       };
     };
     dconf.enable = true;
+    mosh.enable = true;
     bcc.enable = true;
     steam = {
       enable = true;

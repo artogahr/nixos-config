@@ -44,6 +44,7 @@
       "whatcable"
       "1password-cli"
       "meetingbar"
+      "vlc"
     ];
   };
 }
