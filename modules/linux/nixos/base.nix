@@ -102,7 +102,6 @@
       settings.PasswordAuthentication = true;
     };
 
-    tailscale.enable = true;
     flatpak.enable = true;
     fwupd.enable = true;
 
