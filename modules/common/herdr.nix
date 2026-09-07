@@ -2,8 +2,9 @@
 
 {
   # The herdr package ships the agent skill (pane/prompt/wait coordination);
-  # expose it where Claude Code (+ opencode) and Kimi auto-discover skills.
+  # expose it where Claude Code, Codex/opencode and Kimi auto-discover skills.
   home.file.".claude/skills/herdr".source = "${pkgs.herdr}/share/herdr/skills/herdr";
+  home.file.".agents/skills/herdr".source = "${pkgs.herdr}/share/herdr/skills/herdr";
   home.file.".kimi-code/skills/herdr".source = "${pkgs.herdr}/share/herdr/skills/herdr";
 
   programs.herdr = {

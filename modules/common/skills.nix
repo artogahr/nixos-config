@@ -1,13 +1,17 @@
 # Declaratively install AI agent skills from multiple sources.
-# Both ~/.claude/skills and ~/.agents/skills are auto-loaded by opencode;
-# ~/.claude/skills is also read by Claude Code.
+# The same set is linked into ~/.claude/skills (Claude Code) and ~/.agents/skills
+# (Codex, opencode).
 # Bump any source with `nix flake update <input-name>`.
 { inputs, lib, ... }:
 let
-  # --- Matt Pocock's skills → ~/.claude/skills/<name>/ ---
+  skillDirs = [
+    ".claude/skills"
+    ".agents/skills"
+  ];
+
+  # --- Matt Pocock's skills ---
   # Source: github:mattpocock/skills
-  # Each skill lives at skills/<category>/<name>/SKILL.md upstream; flatten to
-  # ~/.claude/skills/<name>/ so Claude Code and opencode discover them.
+  # Each skill lives at skills/<category>/<name>/SKILL.md upstream; flatten to <name>/.
   # Skip deprecated/, in-progress/, personal/ — only ship the stable sets.
   mpSrc = inputs.mattpocock-skills;
   mpCategories = [
@@ -19,15 +23,20 @@ let
     cat:
     let
       dir = "${mpSrc}/skills/${cat}";
-      skillDirs = lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir);
     in
-    lib.mapAttrs' (
-      name: _:
-      lib.nameValuePair ".claude/skills/${name}" {
-        source = "${dir}/${name}";
-      }
-    ) skillDirs;
+    lib.mapAttrs (name: _: "${dir}/${name}") (
+      lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir)
+    );
+
+  skillSources = lib.foldl' (acc: cat: acc // mpSkillsFor cat) { } mpCategories;
 in
 {
-  home.file = lib.mkMerge (map mpSkillsFor mpCategories);
+  home.file = lib.listToAttrs (
+    lib.concatMap (
+      dir:
+      lib.mapAttrsToList (
+        name: source: lib.nameValuePair "${dir}/${name}" { inherit source; }
+      ) skillSources
+    ) skillDirs
+  );
 }
