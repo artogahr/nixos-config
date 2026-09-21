@@ -32,11 +32,6 @@
       flake = false;
     };
 
-    mattpocock-skills = {
-      url = "github:mattpocock/skills";
-      flake = false;
-    };
-
     homebrew-core = {
       url = "github:Homebrew/homebrew-core";
       flake = false;
