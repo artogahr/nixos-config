@@ -3,7 +3,7 @@
 # the Homebrew cask ships the binary and this module only manages config.
 { pkgs, lib, ... }:
 let
-  inherit (pkgs.stdenv) isDarwin;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
 
   # Pin every language server to a Nix binary so nothing is downloaded at runtime.
   lspPackages = with pkgs; [
