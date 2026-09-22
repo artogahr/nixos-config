@@ -8,6 +8,7 @@
 }:
 let
   aiGuidelines = ./ai-guidelines.md;
+  writingGuide = ./writing.md;
 in
 {
   home.stateVersion = "25.05";
@@ -43,8 +44,12 @@ in
     source = aiGuidelines;
     force = true;
   };
+  home.file.".claude/writing.md" = {
+    source = writingGuide;
+    force = true;
+  };
   home.file.".claude/CLAUDE.md" = {
-    text = "@ai-guidelines.md\n";
+    text = "@ai-guidelines.md\n@writing.md\n";
     force = true;
   };
 

@@ -1,5 +1,3 @@
-Avoid em dashes, emojis, short dramatic sentences, and LLM-isms ("certainly!", "great question", "I'd be happy to", "absolutely", "of course", "let's dive in", "fascinating"). Write simply and directly. No filler, no theatre.
-
 ## Available tools
 
 - `git` (diffs via `delta`), `gh`

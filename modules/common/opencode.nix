@@ -5,7 +5,10 @@
   home.packages = [ pkgs.opencode ];
 
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
-    instructions = [ "${config.home.homeDirectory}/.claude/ai-guidelines.md" ];
+    instructions = [
+      "${config.home.homeDirectory}/.claude/ai-guidelines.md"
+      "${config.home.homeDirectory}/.claude/writing.md"
+    ];
     "$schema" = "https://opencode.ai/config.json";
     # omlx serves these MLX models on Apple Silicon. Model keys are omlx's directory
     # names (or aliases) — confirm with `curl http://localhost:8000/v1/models`.

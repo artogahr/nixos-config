@@ -49,10 +49,13 @@ in
 {
   programs.codex = {
     enable = true;
-    context = builtins.readFile ./ai-guidelines.md + ''
+    context =
+      builtins.readFile ./ai-guidelines.md
+      + builtins.readFile ./writing.md
+      + ''
 
-      For Apify-related access, use the Apify CLI; before using it, run `apify help --skill` and read its output.
-    '';
+        For Apify-related access, use the Apify CLI; before using it, run `apify help --skill` and read its output.
+      '';
     settings = {
       model_reasoning_effort = "high";
       approval_policy = "on-request";
