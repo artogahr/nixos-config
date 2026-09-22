@@ -18,6 +18,7 @@
           htop
           ripgrep
           fd
+          jq
           delta
           wget
           unzip
