@@ -38,6 +38,7 @@
       "1password-cli"
       "meetingbar"
       "vlc"
+      "coderabbit"
     ];
   };
 }
