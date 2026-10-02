@@ -24,7 +24,6 @@ in
     cargo-edit
     cargo-udeps
     cargo-machete
-    cargo-generate
     cargo-zigbuild
   ]);
 
