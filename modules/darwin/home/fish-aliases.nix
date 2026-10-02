@@ -2,7 +2,7 @@
 { ... }:
 {
   programs.fish.shellAliases = {
-    nrs = "sudo darwin-rebuild switch --flake $HOME/workplace/nixos-config";
-    nos = "nh darwin switch $HOME/workplace/nixos-config";
+    nrs = "bash $HOME/workplace/nixos-config/scripts/switch";
+    nos = "bash $HOME/workplace/nixos-config/scripts/switch nh";
   };
 }

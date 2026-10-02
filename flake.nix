@@ -13,6 +13,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
@@ -94,6 +97,7 @@
                   ./home-linux.nix
                   catppuccin.homeModules.catppuccin
                   plasma-manager.homeModules.plasma-manager
+                  inputs.sops-nix.homeManagerModules.sops
                 ];
               };
             };
@@ -132,6 +136,7 @@
                 imports = [
                   ./home-darwin.nix
                   catppuccin.homeModules.catppuccin
+                  inputs.sops-nix.homeManagerModules.sops
                 ];
               };
             };

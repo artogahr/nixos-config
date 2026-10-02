@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+key_file="$HOME/.config/sops/age/keys.txt"
+
+if [[ ! -s "$key_file" ]]; then
+  echo "Unlock the Apify secret key for this host once."
+  nix shell nixpkgs#age --command bash "$repo_root/scripts/bootstrap-apify-key"
+fi
+
+case "$(uname -s):${1:-rebuild}" in
+  Linux:rebuild) exec sudo nixos-rebuild switch --flake "$repo_root" ;;
+  Linux:nh) exec nh os switch "$repo_root" ;;
+  Darwin:rebuild) exec sudo darwin-rebuild switch --flake "$repo_root" ;;
+  Darwin:nh) exec nh darwin switch "$repo_root" ;;
+  *) echo "Unsupported platform or switch mode." >&2; exit 1 ;;
+esac
