@@ -58,7 +58,7 @@ bash scripts/switch
 
 If the age key is missing, the switch asks for the bootstrap passphrase before rebuilding. It installs the key at `~/.config/sops/age/keys.txt` with mode `600`. Later switches decrypt the token automatically without a password prompt. Keep the bootstrap passphrase in your password manager. Anyone with the public repo can try to guess it offline, so use a long random passphrase when rotating it.
 
-Rebuild the host, then select any available `openrouter` model in OpenCode's `/models` picker or Pi's `/model` picker. On NixOS, OpenCode starts with `openrouter/openrouter/auto`; on macOS, it keeps the local omlx default. Pi keeps its built-in OpenRouter model catalog. If Pi has an OpenRouter key saved through `/login`, run `/logout` for OpenRouter so its stored key does not override the relay token.
+Rebuild the host, then select any available `openrouter` model in OpenCode's `/models` picker or Pi's `/model` picker. OpenCode remembers the most recently selected model. In Pi, press `Ctrl+S` in the `/model` picker to save the selected model as the default for new sessions. Pi keeps its built-in OpenRouter model catalog. If Pi has an OpenRouter key saved through `/login`, run `/logout` for OpenRouter so its stored key does not override the relay token.
 
 The relay currently inherits the upstream Actor's 2,048-token output limit for Chat and Responses requests. Long agent turns may stop at that limit.
 

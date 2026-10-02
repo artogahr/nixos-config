@@ -47,11 +47,6 @@
         };
       };
     };
-    model =
-      if pkgs.stdenv.hostPlatform.isDarwin then
-        "omlx/Qwen3.6-35B-A3B-MLX-4bit"
-      else
-        "openrouter/openrouter/auto";
     mcp.notion = {
       type = "remote";
       url = "https://mcp.notion.com/mcp";
