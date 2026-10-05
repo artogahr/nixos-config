@@ -48,7 +48,7 @@ directory and rebuild — no flake edits required.
 
 ## Secrets
 
-Secrets live sops-encrypted in the private [`artogahr/nix-secrets`](https://github.com/artogahr/nix-secrets) repo, pulled in as the `nix-secrets` flake input. Nothing secret is in this public repo. `modules/common/secrets.nix` decrypts them with sops-nix and exports the MCP credentials (`REDASH_API_KEY`, `HOMEASSISTANT_TOKEN`, `MEZMO_API_KEY`, `LANGFUSE_AUTH`) to interactive fish shells.
+Secrets live sops-encrypted in the private [`artogahr/nix-secrets`](https://github.com/artogahr/nix-secrets) repo, pulled in as the `nix-secrets` flake input. Nothing secret is in this public repo. `modules/common/secrets.nix` decrypts them with sops-nix and exports the MCP credentials (`REDASH_API_KEY`, `HOMEASSISTANT_TOKEN`, `MEZMO_API_KEY`, `LANGFUSE_AUTH`) to every fish shell.
 
 Each host has its own age key at `~/.config/sops/age/keys.txt`, kept in no repo. To add a host:
 
