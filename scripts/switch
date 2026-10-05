@@ -5,9 +5,14 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 key_file="$HOME/.config/sops/age/keys.txt"
 
 if [[ ! -s "$key_file" ]]; then
-  echo "Unlock the Apify secret key for this host once."
-  nix shell nixpkgs#age --command bash "$repo_root/scripts/bootstrap-apify-key"
+  echo "No age key at $key_file; secrets will not decrypt on this host." >&2
+  echo "See \"Secrets\" in $repo_root/README.md for adding a host." >&2
+  exit 1
 fi
+
+# Fetch every input, including the private nix-secrets repo, as this user. The sudo rebuilds below
+# run as root, which has no GitHub credentials, and reuse the locked inputs already in the store.
+nix flake archive "$repo_root" >/dev/null
 
 case "$(uname -s):${1:-rebuild}" in
   Linux:rebuild) exec sudo nixos-rebuild switch --flake "$repo_root" ;;

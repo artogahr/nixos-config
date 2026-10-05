@@ -16,6 +16,12 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Private repo with the sops-encrypted secrets; see modules/common/secrets.nix.
+    nix-secrets = {
+      url = "git+ssh://git@github.com/artogahr/nix-secrets.git";
+      flake = false;
+    };
+
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";

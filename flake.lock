@@ -199,6 +199,22 @@
         "type": "github"
       }
     },
+    "nix-secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791234659,
+        "narHash": "sha256-Ftj2S7T9vtMcbtbKhJy0JqtVBrcOylwIeUfd/Dv6id4=",
+        "ref": "refs/heads/main",
+        "rev": "537ad01aaf88cbb7fef4a6a7fbcfca04e689bcfa",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@github.com/artogahr/nix-secrets.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/artogahr/nix-secrets.git"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1789044656,
@@ -264,6 +280,7 @@
         "homebrew-whatcable": "homebrew-whatcable",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
+        "nix-secrets": "nix-secrets",
         "nixpkgs": "nixpkgs_2",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix"

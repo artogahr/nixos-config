@@ -46,17 +46,22 @@ system module. The `home-linux.nix` / `home-darwin.nix` entry files do the same 
 `modules/common/` plus the appropriate `modules/<os>/home/`. Drop a new module into the right
 directory and rebuild — no flake edits required.
 
+## Secrets
+
+Secrets live sops-encrypted in the private [`artogahr/nix-secrets`](https://github.com/artogahr/nix-secrets) repo, pulled in as the `nix-secrets` flake input. Nothing secret is in this public repo. `modules/common/secrets.nix` decrypts them with sops-nix and exports the MCP credentials (`REDASH_API_KEY`, `HOMEASSISTANT_TOKEN`, `MEZMO_API_KEY`, `LANGFUSE_AUTH`) to interactive fish shells.
+
+Each host has its own age key at `~/.config/sops/age/keys.txt`, kept in no repo. To add a host:
+
+1. On the host: `nix shell nixpkgs#age -c age-keygen -o ~/.config/sops/age/keys.txt` (mode `600`).
+2. In `nix-secrets`: add the printed public key to `.sops.yaml`, run `sops updatekeys secrets.yaml`, push.
+3. Give the host read access to `nix-secrets` (a read-only deploy key on Linux hosts).
+4. Here: `nix flake update nix-secrets`, commit the lock, pull on the host, `nrs`.
+
+After editing a secret (`sops secrets.yaml` in `nix-secrets`, push), run `nix flake update nix-secrets` here and commit the lock. `scripts/switch` fetches the inputs as your user before the sudo rebuild, because root has no GitHub credentials.
+
 ## OpenRouter relay in OpenCode and Pi
 
-Both agents use the [OpenRouter relay Actor](https://apify.com/artogahr/openrouter-relay) with your Apify API token. The token is encrypted in `secrets/apify-token.enc` with sops-nix. The repo also contains a password-encrypted copy of the age key at `secrets/apify-age-key.age`.
-
-On each new host, pull this config and run the switch as your normal user:
-
-```sh
-bash scripts/switch
-```
-
-If the age key is missing, the switch asks for the bootstrap passphrase before rebuilding. It installs the key at `~/.config/sops/age/keys.txt` with mode `600`. Later switches decrypt the token automatically without a password prompt. Keep the bootstrap passphrase in your password manager. Anyone with the public repo can try to guess it offline, so use a long random passphrase when rotating it.
+Both agents use the [OpenRouter relay Actor](https://apify.com/artogahr/openrouter-relay) with your Apify API token (`apify-token` in `nix-secrets`).
 
 Rebuild the host, then select any available `openrouter` model in OpenCode's `/models` picker or Pi's `/model` picker. OpenCode remembers the most recently selected model. In Pi, press `Ctrl+S` in the `/model` picker to save the selected model as the default for new sessions. Pi keeps its built-in OpenRouter model catalog. If Pi has an OpenRouter key saved through `/login`, run `/logout` for OpenRouter so its stored key does not override the relay token.
 
