@@ -12,6 +12,18 @@
   # agent-sandbox.nix's allowNix refuses to run for a trusted Nix user, so only root is trusted here.
   nix.settings.trusted-users = lib.mkForce [ "root" ];
 
+  # Static 10.0.0.23 (homelab convention: 10.0.0.<VMID - 100>, VMID 123), matched by the
+  # Proxmox NIC's MAC so the interface name doesn't matter. Update the MAC if the VM is recreated.
+  networking.networkmanager.enable = lib.mkForce false;
+  networking.useDHCP = false;
+  networking.useNetworkd = true;
+  networking.nameservers = [ "10.0.0.3" ]; # AdGuard
+  systemd.network.networks."10-lan" = {
+    matchConfig.MACAddress = "bc:24:11:b1:39:11";
+    address = [ "10.0.0.23/24" ];
+    gateway = [ "10.0.0.1" ];
+  };
+
   networking.firewall.enable = lib.mkForce true;
   services.tailscale.openFirewall = true;
 
