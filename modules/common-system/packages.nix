@@ -1,12 +1,7 @@
-# Shared packages for all hosts (NixOS + nix-darwin). System module, auto-imported by flake.nix.
+# Shared CLI packages for all hosts (NixOS + nix-darwin). System module, auto-imported by flake.nix.
+# GUI apps for the graphical hosts live in ./desktop.
 { pkgs, ... }:
 {
-  # GUI/system apps go here, not in home.packages, so darwin indexes them in Spotlight.
-  environment.systemPackages = with pkgs; [
-    signal-desktop
-    spotify
-  ];
-
   # CLI tools, installed per-user. sharedModules applies regardless of the differing usernames.
   home-manager.sharedModules = [
     (

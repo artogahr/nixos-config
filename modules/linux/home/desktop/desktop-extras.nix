@@ -1,10 +1,10 @@
 # Linux desktop extras: wallpapers, easyeffects presets, Linux-only home packages, KDE quirks.
 { pkgs, lib, ... }:
 {
-  home.file."Wallpapers".source = ../../../wallpapers;
+  home.file."Wallpapers".source = ../../../../wallpapers;
 
   # EasyEffects output presets (see ./easyeffects.nix)
-  xdg.configFile."easyeffects/output".source = ../../../presets/easyeffects;
+  xdg.configFile."easyeffects/output".source = ../../../../presets/easyeffects;
 
   home.packages = with pkgs; [
     anydesk

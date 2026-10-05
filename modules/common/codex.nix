@@ -74,6 +74,21 @@ in
           env_vars = [ "REDASH_API_KEY" ];
         };
         notion.url = "https://mcp.notion.com/mcp";
+        # Credentials come from env vars exported by secrets.nix (private nix-secrets repo).
+        home-assistant = {
+          command = lib.getExe' pkgs.uv "uvx";
+          args = [ "ha-mcp" ];
+          env.HOMEASSISTANT_URL = "http://10.0.0.5:8123";
+          env_vars = [ "HOMEASSISTANT_TOKEN" ];
+        };
+        mezmo = {
+          url = "https://mcp.mezmo.com/mcp";
+          bearer_token_env_var = "MEZMO_API_KEY";
+        };
+        langfuse = {
+          url = "https://langfuse.apify.dev/api/public/mcp";
+          env_http_headers.Authorization = "LANGFUSE_AUTH";
+        };
       };
     };
     # Install the hook script with `herdr integration install codex`.

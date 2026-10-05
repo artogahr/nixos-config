@@ -57,6 +57,31 @@
       url = "https://mcp.apify.com";
       enabled = true;
     };
+    # Credentials come from env vars exported by secrets.nix (private nix-secrets repo).
+    mcp.home-assistant = {
+      type = "local";
+      command = [
+        (lib.getExe' pkgs.uv "uvx")
+        "ha-mcp"
+      ];
+      environment = {
+        HOMEASSISTANT_URL = "http://10.0.0.5:8123";
+        HOMEASSISTANT_TOKEN = "{env:HOMEASSISTANT_TOKEN}";
+      };
+      enabled = true;
+    };
+    mcp.mezmo = {
+      type = "remote";
+      url = "https://mcp.mezmo.com/mcp";
+      headers.Authorization = "Bearer {env:MEZMO_API_KEY}";
+      enabled = true;
+    };
+    mcp.langfuse = {
+      type = "remote";
+      url = "https://langfuse.apify.dev/api/public/mcp";
+      headers.Authorization = "{env:LANGFUSE_AUTH}";
+      enabled = true;
+    };
 
   };
 }

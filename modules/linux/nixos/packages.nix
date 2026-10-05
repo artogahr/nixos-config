@@ -1,43 +1,13 @@
-# Shared applications for all hosts
+# Command-line tools for every NixOS host, desktop or headless.
 { pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
     git
     btrfs-progs
-    zotero
-    onlyoffice-desktopeditors
-    haruna
-    pavucontrol
-    pwvucontrol
-    vesktop
-    hardinfo2
-    wayland-utils
-    kdePackages.plasma-browser-integration
-    kdePackages.kcalc
-    kdePackages.kcharselect
-    kdePackages.kolourpaint
-    kdePackages.ksystemlog
-    kdePackages.kjournald
-    kdePackages.sddm-kcm
-    kdePackages.isoimagewriter
-    kdePackages.partitionmanager
-    catppuccin-kde
     inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.toolchain
     lm_sensors
     dmidecode
-    google-chrome
-    code-cursor
-    todoist
-    clinfo
     sshfs
-    qbittorrent
-    discord
-    dnsmasq
-    phodav
     usbutils
-    obs-studio
-    galaxy-buds-client
-    xev
-    spotify-tray
   ];
 }

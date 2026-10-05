@@ -9,6 +9,7 @@ MacBook. Home-manager handles everything user-level on both.
 | ------------------- | ---------- | --------------------- |
 | `fukurowl-pc`       | NixOS      | `bash scripts/switch` |
 | `fukurowl-thinkpad` | NixOS      | `bash scripts/switch` |
+| `fukurowl-devbox`   | NixOS (headless VM on proxmox2) | `bash scripts/switch` |
 | `fukurowl-macbook`  | nix-darwin | `bash scripts/switch` |
 
 Run the switch from this repository. The `nrs` alias uses the same script after the first switch.
@@ -27,11 +28,16 @@ hosts/
   fukurowl-pc/         # NixOS host
   fukurowl-thinkpad/   # NixOS host
   fukurowl-macbook/    # nix-darwin host
+  fukurowl-devbox/     # headless NixOS VM (dev agent box)
 modules/
   common/              # cross-platform home-manager (fish, git, neovim, atuin, …)
+  common-system/       # system modules for every host (auto-imported)
+    desktop/           # GUI apps for graphical hosts (desktop NixOS + darwin)
   linux/
-    nixos/             # NixOS system-level (auto-imported)
-    home/              # Linux-only home-manager (ghostty, plasma, gtk, mime, …)
+    nixos/             # NixOS system-level, desktop or headless (auto-imported)
+      desktop/         # Plasma, audio, gaming, desktop apps (graphical hosts only)
+    home/              # Linux-only home-manager (auto-imported)
+      desktop/         # ghostty, plasma, gtk, mime, … (graphical hosts only)
   darwin/
     nix-darwin/        # macOS system-level (auto-imported)
     home/              # macOS-only home-manager
@@ -44,7 +50,9 @@ wallpapers/            # Shared wallpapers
 `flake.nix` walks `modules/<os>/{nixos,nix-darwin}/` and pulls every `.nix` file in as a
 system module. The `home-linux.nix` / `home-darwin.nix` entry files do the same for
 `modules/common/` plus the appropriate `modules/<os>/home/`. Drop a new module into the right
-directory and rebuild — no flake edits required.
+directory and rebuild — no flake edits required. `desktop/` subdirectories are not walked by the
+common lists; `nixosDesktopModules` in `flake.nix` pulls them in for the graphical NixOS hosts,
+and darwin imports `common-system/desktop` directly.
 
 ## Secrets
 
@@ -67,12 +75,35 @@ Rebuild the host, then select any available `openrouter` model in OpenCode's `/m
 
 The relay currently inherits the upstream Actor's 2,048-token output limit for Chat and Responses requests. Long agent turns may stop at that limit.
 
+## MCP servers in Pi
+
+Pi gets the same MCP servers as the other agents, defined in `modules/common/pi.nix`: redash, notion, apify, home-assistant, and mezmo.
+
+Notion and apify use OAuth. Run `pi mcp login notion` and `pi mcp login apify` once per host. redash, home-assistant, and mezmo read their credentials from the environment (`REDASH_API_KEY`, `HOMEASSISTANT_TOKEN`, `MEZMO_API_KEY` in fish's `conf.d/secrets.fish`), so no secret lives in this repo.
+
+`mcp.json` is a read-only store symlink. View and sign in through `/mcp`, but change server definitions in `pi.nix` rather than in the TUI.
+
+## Pi packages
+
+Pi packages are installed with `pi install` and listed in the unmanaged `~/.pi/agent/settings.json`, so they are not declared in this repo. This host has:
+
+```sh
+pi install npm:pi-web-access
+pi install npm:pi-agent-browser-native
+pi install git:github.com/elpapi42/pi-fork
+pi install npm:pi-codex-goal
+pi install npm:pi-observational-memory
+pi install npm:@hypabolic/pi-hypa
+```
+
+`pi-web-access` works with no keys. `pi-agent-browser-native` needs `agent-browser` on PATH (nixpkgs provides 0.38.1) and Pi 1.0.0 or newer. nixpkgs ships Pi 0.99.2, so browser automation does not work until Pi updates upstream.
+
 ## Adding a new module
 
 1. Decide the scope:
    - Works on Linux **and** macOS, user-level → `modules/common/`
-   - Linux user-level only → `modules/linux/home/`
-   - NixOS system option → `modules/linux/nixos/`
+   - Linux user-level only → `modules/linux/home/` (GUI → `modules/linux/home/desktop/`)
+   - NixOS system option → `modules/linux/nixos/` (GUI → `modules/linux/nixos/desktop/`)
    - macOS user-level only → `modules/darwin/home/`
    - nix-darwin system option → `modules/darwin/nix-darwin/`
 2. Write a `{ ... }: { … }` module file.

@@ -68,6 +68,26 @@ in
         REDASH_API_KEY = "\${REDASH_API_KEY}";
       };
     };
+    # Credentials come from env vars exported by secrets.nix (private nix-secrets repo).
+    mcpServers.home-assistant = {
+      type = "stdio";
+      command = lib.getExe' pkgs.uv "uvx";
+      args = [ "ha-mcp" ];
+      env = {
+        HOMEASSISTANT_URL = "http://10.0.0.5:8123";
+        HOMEASSISTANT_TOKEN = "\${HOMEASSISTANT_TOKEN}";
+      };
+    };
+    mcpServers.mezmo = {
+      type = "http";
+      url = "https://mcp.mezmo.com/mcp";
+      headers.Authorization = "Bearer \${MEZMO_API_KEY}";
+    };
+    mcpServers.langfuse = {
+      type = "http";
+      url = "https://langfuse.apify.dev/api/public/mcp";
+      headers.Authorization = "\${LANGFUSE_AUTH}";
+    };
     settings = {
       # model = "claude-fable-5[1m]";
       enabledPlugins = {

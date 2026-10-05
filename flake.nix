@@ -110,10 +110,19 @@
           }
         ];
 
+      # Graphical NixOS hosts add these on top of nixosCommonModules; headless hosts skip them.
+      nixosDesktopModules =
+        (importDir ./modules/linux/nixos/desktop)
+        ++ (importDir ./modules/common-system/desktop)
+        ++ [
+          { home-manager.users.arto.imports = importDir ./modules/linux/home/desktop; }
+        ];
+
       # Modules shared by every nix-darwin host.
       darwinCommonModules =
         (importDir ./modules/darwin/nix-darwin)
         ++ (importDir ./modules/common-system)
+        ++ (importDir ./modules/common-system/desktop)
         ++ [
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew
@@ -152,21 +161,37 @@
     {
       nixosConfigurations.fukurowl-pc = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
-        modules = nixosCommonModules ++ [
-          { nixpkgs.hostPlatform = "x86_64-linux"; }
-          ./hosts/fukurowl-pc/default.nix
-          ./hosts/fukurowl-pc/disko-config.nix
-          ./hosts/fukurowl-pc/hardware-configuration.nix
-        ];
+        modules =
+          nixosCommonModules
+          ++ nixosDesktopModules
+          ++ [
+            { nixpkgs.hostPlatform = "x86_64-linux"; }
+            ./hosts/fukurowl-pc/default.nix
+            ./hosts/fukurowl-pc/disko-config.nix
+            ./hosts/fukurowl-pc/hardware-configuration.nix
+          ];
       };
 
       nixosConfigurations.fukurowl-thinkpad = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
+        modules =
+          nixosCommonModules
+          ++ nixosDesktopModules
+          ++ [
+            { nixpkgs.hostPlatform = "x86_64-linux"; }
+            ./hosts/fukurowl-thinkpad/default.nix
+            ./hosts/fukurowl-thinkpad/disko-config.nix
+            ./hosts/fukurowl-thinkpad/hardware-configuration.nix
+          ];
+      };
+
+      nixosConfigurations.fukurowl-devbox = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
         modules = nixosCommonModules ++ [
           { nixpkgs.hostPlatform = "x86_64-linux"; }
-          ./hosts/fukurowl-thinkpad/default.nix
-          ./hosts/fukurowl-thinkpad/disko-config.nix
-          ./hosts/fukurowl-thinkpad/hardware-configuration.nix
+          ./hosts/fukurowl-devbox/default.nix
+          ./hosts/fukurowl-devbox/disko-config.nix
+          ./hosts/fukurowl-devbox/hardware-configuration.nix
         ];
       };
 

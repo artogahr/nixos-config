@@ -1,5 +1,5 @@
-# NixOS-wide base configuration shared by all Linux hosts.
-# packages.nix and other NixOS modules in this directory are auto-imported by flake.nix.
+# NixOS-wide base configuration shared by all Linux hosts, desktop or headless.
+# Desktop-only settings live in ./desktop, which only the graphical hosts import.
 {
   config,
   pkgs,
@@ -34,101 +34,22 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    kernel.sysctl."vm.max_map_count" = 2147483642;
   };
 
   networking = {
     firewall.enable = false;
     networkmanager.enable = true;
-    extraHosts = "0.0.0.0 apresolve.spotify.com";
   };
 
-  hardware = {
-    enableRedistributableFirmware = true;
-    steam-hardware.enable = true;
-
-    bluetooth = {
-      enable = true;
-      settings.General.Experimental = true;
-    };
-  };
-
-  security.rtkit.enable = true;
+  hardware.enableRedistributableFirmware = true;
 
   time.timeZone = "Europe/Prague";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  fonts = {
-    enableDefaultPackages = true;
-    fontconfig = {
-      enable = true;
-      defaultFonts.monospace = [ "Cascadia Code" ];
-    };
-    packages = with pkgs; [
-      cascadia-code
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-color-emoji
-    ];
-  };
-
   services = {
-    pipewire = {
-      enable = true;
-      pulse.enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-
-      extraConfig.pipewire."99-sensible-settings" = {
-        context.properties = {
-          resample.quality = 10;
-          default.clock.quantum = 1024;
-        };
-      };
-    };
-
-    udisks2.enable = true;
-    gvfs.enable = true;
-    xserver.enable = true;
-
-    desktopManager.plasma6.enable = true;
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
-
     openssh = {
       enable = true;
       settings.PasswordAuthentication = true;
-    };
-
-    flatpak.enable = true;
-    fwupd.enable = true;
-
-    printing.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns4 = true; # network printer discovery
-    };
-
-    syncthing = {
-      enable = true;
-      user = "arto";
-      dataDir = "/home/arto";
-    };
-
-    geoclue2 = {
-      enable = true;
-      enableStatic = true;
-      staticLatitude = 50.000;
-      staticLongitude = 14.500;
-      staticAltitude = 200;
-      staticAccuracy = 10000;
-    };
-
-    logind.settings.Login = {
-      HandlePowerKey = "lock";
-      HandlePowerKeyLongPress = "suspend";
     };
   };
 
@@ -151,12 +72,9 @@
     ];
   };
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   programs = {
     fish.enable = true;
     nix-ld.enable = true;
-    firefox.enable = true;
     nh = {
       enable = true;
       flake = "/home/arto/workplace/nixos-config";
@@ -165,24 +83,12 @@
         extraArgs = "--keep-since 7d --keep 5";
       };
     };
-    dconf.enable = true;
     mosh.enable = true;
     bcc.enable = true;
-    steam = {
-      enable = true;
-      extraCompatPackages = with pkgs; [ proton-ge-bin ];
-    };
-    gamemode.enable = true;
-    kdeconnect.enable = true;
   };
 
   virtualisation = {
     docker.enable = true;
-    libvirtd = {
-      enable = true;
-      qemu.swtpm.enable = true;
-    };
-    spiceUSBRedirection.enable = true;
     podman.enable = true;
   };
 
@@ -190,7 +96,6 @@
     enable = true;
     flavor = "mocha";
     accent = "green";
-    cursors.enable = true;
     # The tty module reads the palette out of a derivation, which breaks evaluating
     # this host from a non-Linux machine. Same colours, inlined from catppuccin
     # palette rev 07d02aa (mocha), in the order its tty.nix uses.
