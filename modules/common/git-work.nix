@@ -8,7 +8,7 @@
 let
   signingKey =
     if pkgs.stdenv.hostPlatform.isDarwin then
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvruz8r3DI5LLUfK//haryWKgq8mE35nR7FZamfO/YR"
+      (import ../../ssh-keys.nix).macbook
     else
       "${config.home.homeDirectory}/.ssh/id_ed25519_signing.pub";
 in

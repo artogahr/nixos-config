@@ -1,5 +1,5 @@
 # Always-on headless dev agent box: NixOS VM on proxmox2, reached over Tailscale.
-{ config, lib, ... }:
+{ lib, ... }:
 {
   networking.hostName = "fukurowl-devbox";
 
@@ -30,13 +30,14 @@
   services.openssh.settings = {
     PasswordAuthentication = lib.mkForce false;
     KbdInteractiveAuthentication = false;
-    # Root logs in with arto's keys (minus the phone's), to bootstrap `passwd arto` and
+    # Root takes the computers' keys (not the phone's), to bootstrap `passwd arto` and
     # `tailscale up` after nixos-anywhere, and as a recovery path.
     PermitRootLogin = "prohibit-password";
   };
-  users.users.root.openssh.authorizedKeys.keys = lib.filter (
-    k: !lib.hasInfix "herdroid@" k
-  ) config.users.users.arto.openssh.authorizedKeys.keys;
+  users.users.root.openssh.authorizedKeys.keys = with import ../../ssh-keys.nix; [
+    legacy
+    macbook
+  ];
 
   # Start arto's user services (sops-nix secrets, agents) at boot, not only after a login.
   users.users.arto.linger = true;

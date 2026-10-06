@@ -67,12 +67,10 @@
       "storage" # udisks2: mount/unmount removable media without sudo
     ];
     shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKMu8p91vFMlCogmKOpImn/0gDpgs3jkKQk9h6Iw3Yj"
-      # MacBook, held by the 1Password SSH agent (also the git signing key)
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvruz8r3DI5LLUfK//haryWKgq8mE35nR7FZamfO/YR"
-      # Galaxy S24, herdroid app
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIACH2OlGYvVK5PmhJa/C55c0BqpOLNbVVZ+veZqlo1Qi herdroid@SM-S921B"
+    openssh.authorizedKeys.keys = with import ../../../ssh-keys.nix; [
+      legacy
+      macbook
+      phone
     ];
   };
 
