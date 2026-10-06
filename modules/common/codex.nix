@@ -70,7 +70,7 @@ in
           command = "npx";
           args = [
             "-y"
-            "@suthio/redash-mcp"
+            "@suthio/redash-mcp@0.0.15" # 0.0.16 crashes: imports zod/v4, which zod 4.6 dropped
           ];
           env.REDASH_URL = "https://charts.apify.com";
           env_vars = [ "REDASH_API_KEY" ];
