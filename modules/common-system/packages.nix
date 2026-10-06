@@ -27,6 +27,8 @@
           cursor-cli
           antigravity-cli
           nixfmt
+          sops
+          age
           nixd
           typst
           tinymist
