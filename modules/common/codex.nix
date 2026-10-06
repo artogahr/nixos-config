@@ -40,6 +40,8 @@ let
                 existing = tomllib.load(f)
         if os.path.islink(target):
             os.remove(target)
+        # ~/.codex doesn't exist yet on a fresh home directory.
+        os.makedirs(os.path.dirname(target), exist_ok=True)
         tmp = target + ".tmp"
         with open(tmp, "wb") as f:
             tomli_w.dump(merge(existing, seed), f)
