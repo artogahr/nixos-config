@@ -10,12 +10,14 @@ if [[ ! -s "$key_file" ]]; then
   exit 1
 fi
 
-# Fetch every input, including the private nix-secrets repo, as this user. The sudo rebuilds below
-# run as root, which has no GitHub credentials, and reuse the locked inputs already in the store.
+# Fetch every input, including the private nix-secrets repo, as this user. darwin-rebuild runs as
+# root, which has no GitHub credentials, and reuses the locked inputs already in the store.
 nix flake archive "$repo_root" >/dev/null
 
 case "$(uname -s):${1:-rebuild}" in
-  Linux:rebuild) exec sudo nixos-rebuild switch --flake "$repo_root" ;;
+  # --sudo evaluates and builds as this user and elevates only to activate; root would refuse to
+  # read a git checkout it doesn't own.
+  Linux:rebuild) exec nixos-rebuild switch --sudo --flake "$repo_root" ;;
   Linux:nh) exec nh os switch "$repo_root" ;;
   Darwin:rebuild) exec sudo darwin-rebuild switch --flake "$repo_root" ;;
   Darwin:nh) exec nh darwin switch "$repo_root" ;;
