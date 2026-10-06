@@ -12,6 +12,8 @@
     font-size = 14
     theme = dark:Catppuccin Frappe,light:Catppuccin Latte
     shell-integration = detect
-    window-padding-x = 10
+    window-padding-x = 0
+    window-padding-y = 0
+    window-padding-color = extend
   '';
 }
