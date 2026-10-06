@@ -1,10 +1,8 @@
 { ... }:
 
 {
-  programs.git.settings = {
-    user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvruz8r3DI5LLUfK//haryWKgq8mE35nR7FZamfO/YR";
-    gpg.format = "ssh";
-    "gpg \"ssh\"".program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-    commit.gpgsign = true;
-  };
+  # Sign through 1Password's SSH agent, but only where git-work.nix turns signing on
+  # (~/workplace/apify), so personal repos never trigger a 1Password prompt.
+  programs.git.settings."gpg \"ssh\"".program =
+    "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
 }
