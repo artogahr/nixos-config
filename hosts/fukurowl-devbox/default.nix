@@ -30,11 +30,13 @@
   services.openssh.settings = {
     PasswordAuthentication = lib.mkForce false;
     KbdInteractiveAuthentication = false;
-    # Root logs in with the same key as arto, to bootstrap `passwd arto` and `tailscale up`
-    # after nixos-anywhere, and as a recovery path.
+    # Root logs in with arto's keys (minus the phone's), to bootstrap `passwd arto` and
+    # `tailscale up` after nixos-anywhere, and as a recovery path.
     PermitRootLogin = "prohibit-password";
   };
-  users.users.root.openssh.authorizedKeys.keys = config.users.users.arto.openssh.authorizedKeys.keys;
+  users.users.root.openssh.authorizedKeys.keys = lib.filter (
+    k: !lib.hasInfix "herdroid@" k
+  ) config.users.users.arto.openssh.authorizedKeys.keys;
 
   # Start arto's user services (sops-nix secrets, agents) at boot, not only after a login.
   users.users.arto.linger = true;
