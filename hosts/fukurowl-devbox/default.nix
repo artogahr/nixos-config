@@ -36,5 +36,8 @@
   };
   users.users.root.openssh.authorizedKeys.keys = config.users.users.arto.openssh.authorizedKeys.keys;
 
+  # Start arto's user services (sops-nix secrets, agents) at boot, not only after a login.
+  users.users.arto.linger = true;
+
   system.stateVersion = lib.mkForce "26.11";
 }
