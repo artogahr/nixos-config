@@ -24,8 +24,6 @@
           ffmpeg
           docker-compose
           wireguard-tools
-          cursor-cli
-          antigravity-cli
           nixfmt
           sops
           age
