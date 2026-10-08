@@ -127,22 +127,6 @@
         "type": "github"
       }
     },
-    "homebrew-omlx": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1790932239,
-        "narHash": "sha256-reDW2Tzt4WbKxa1LYS5k6SjTULGwaFiKH12uYaaDef8=",
-        "owner": "jundot",
-        "repo": "omlx",
-        "rev": "5dcfe2430b73a86e871de13019c93e047f0aba9a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jundot",
-        "repo": "omlx",
-        "type": "github"
-      }
-    },
     "homebrew-whatcable": {
       "flake": false,
       "locked": {
@@ -276,7 +260,6 @@
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
-        "homebrew-omlx": "homebrew-omlx",
         "homebrew-whatcable": "homebrew-whatcable",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",

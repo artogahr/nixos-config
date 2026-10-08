@@ -9,7 +9,6 @@
     };
     brews = [
       "apify-cli"
-      "omlx"
       "kimi-code"
     ];
     # Required for casks from third-party taps: brew bundle refuses to load

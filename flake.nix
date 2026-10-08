@@ -49,11 +49,6 @@
       url = "github:Homebrew/homebrew-cask";
       flake = false;
     };
-    homebrew-omlx = {
-      url = "github:jundot/omlx";
-      flake = false;
-    };
-
     homebrew-whatcable = {
       url = "github:darrylmorley/homebrew-whatcable";
       flake = false;
@@ -135,14 +130,9 @@
               taps = {
                 "homebrew/homebrew-core" = inputs.homebrew-core;
                 "homebrew/homebrew-cask" = inputs.homebrew-cask;
-                "jundot/homebrew-omlx" = inputs.homebrew-omlx;
-
                 "darrylmorley/homebrew-whatcable" = inputs.homebrew-whatcable;
               };
-              trust.taps = [
-                "jundot/omlx"
-                "darrylmorley/whatcable"
-              ];
+              trust.taps = [ "darrylmorley/whatcable" ];
             };
             home-manager = {
               extraSpecialArgs = { inherit inputs importDir; };
