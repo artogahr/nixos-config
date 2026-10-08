@@ -34,8 +34,9 @@
       "codexbar"
       "vorssaint"
       "whatcable"
-      "1password-cli"
       "meetingbar"
+      "notion" # nixpkgs' notion-app lags upstream by months
+      "telegram" # the native macOS client; nixpkgs only has telegram-desktop
       "vlc"
     ];
   };
