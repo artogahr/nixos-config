@@ -96,6 +96,7 @@
 
   catppuccin = {
     enable = true;
+    autoEnable = true;
     flavor = "mocha";
     accent = "green";
     # The tty module reads the palette out of a derivation, which breaks evaluating
