@@ -7,18 +7,28 @@
     (
       { pkgs, ... }:
       {
+        programs = {
+          gh.enable = true;
+          htop.enable = true;
+          ripgrep.enable = true;
+          fd.enable = true;
+          jq.enable = true;
+          yazi = {
+            enable = true;
+            enableFishIntegration = false;
+            shellWrapperName = "y";
+          };
+          delta = {
+            enable = true;
+            enableGitIntegration = true;
+          };
+        };
+
         home.packages = with pkgs; [
           tree
-          gh
-          htop
-          ripgrep
-          fd
-          jq
-          delta
           wget
           unzip
           ncdu
-          yazi
           doggo
           unrar
           ffmpeg

@@ -28,12 +28,13 @@ in
   catppuccin.fish.enable = false;
   catppuccin.nvim.enable = false;
 
-  home.packages = with pkgs; [
-    bat
-    btop
-    direnv
-    zellij
-  ];
+  programs.bat.enable = true;
+  programs.btop.enable = true;
+  programs.zellij = {
+    enable = true;
+    # Integration would auto-start zellij in every fish shell.
+    enableFishIntegration = false;
+  };
 
   programs.direnv = {
     enable = true;
