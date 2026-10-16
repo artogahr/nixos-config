@@ -20,7 +20,6 @@
       "monitorcontrol"
       "ghostty"
       "claude"
-      "chatgpt" # also the Codex desktop app; the codex-app cask is deprecated in its favour
       "tidal"
       "steam"
       "stremio"
