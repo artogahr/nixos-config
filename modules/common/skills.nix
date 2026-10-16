@@ -3,7 +3,6 @@
 # User-level skill directories, per upstream docs:
 #   ~/.claude/skills      Claude Code (only path it reads)
 #   ~/.agents/skills      Codex and opencode (the cross-agent convention)
-#   ~/.kimi-code/skills   Kimi Code ($KIMI_CODE_HOME/skills)
 # opencode also reads ~/.claude/skills, so it is covered twice; harmless.
 {
   lib,
@@ -14,7 +13,6 @@ let
   skillDirs = [
     ".claude/skills"
     ".agents/skills"
-    ".kimi-code/skills"
   ];
 
   # nixpkgs' installAgentSkills hook installs to $out/share/skills/<pname>/<skill>/;

@@ -9,7 +9,6 @@
     };
     brews = [
       "apify-cli"
-      "kimi-code"
     ];
     # Required for casks from third-party taps: brew bundle refuses to load
     # darrylmorley/whatcable's cask unless the tap is declared here.
