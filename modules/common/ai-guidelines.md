@@ -63,3 +63,12 @@ Always identify yourself to other agents so that your messages aren't confused w
 - Say "passed", "sent", "merged" or "deployed" only after you saw it in the exit code, the transcript or the PR or run state. Output piped through `tail` hides the exit code.
 - Keep a warning until you checked it. A question from me such as "so it's fixed?" is not evidence. If an earlier claim was wrong, correct it where you wrote it and tell me.
 - Before you push or call work ready, report what you removed and the diff size. List the choices a reviewer could ask about with the reason for each. Give the build, input and run links. Say what you did not check.
+
+## Reviews
+
+- Compare the change with what the issue asks. Try to break it with the failure paths from the Evidence section.
+- A finding that adds code or tests must name the failure it prevents. Mark other findings as optional.
+- On a teammate's PR, I post your points under my name. Read every thread first. Do not reopen what the team already decided.
+- Back each point with a run of the PR build, a `file:line` or a link. Search the code before you ask for something that may already exist.
+- Say that a PR is ready to approve only when CI is green, someone ran its build and you read the bot findings.
+- When you ask another agent to review, give it the issue link and the smallest fix. Ask it to break the change and to list required and optional findings.
