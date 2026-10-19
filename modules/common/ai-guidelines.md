@@ -53,3 +53,13 @@ Always identify yourself to other agents so that your messages aren't confused w
 - Do not write tests for wrappers, glue code or cases nobody reported.
 - If an existing test fails, treat it as a sign that your change is wrong. Do not weaken, skip, delete or comment out the test. Do not change its fixture or expected value until I agree that the old behavior was wrong.
 - In tests against live data, check the structure or a wide range. Do not check a value you just saw.
+
+## Evidence
+
+- Test a change the way users will use it. For a scraper, run the PR build and production on the same input and compare the items field by field. Use the customer's input if there is one. Unit tests and local runs do not prove that it works. If a bug comes and goes, one good round of runs does not prove the fix.
+- Before review, check the failure paths. Examples are a request that fails midway, the fallback and a retry that reaches its limit. Check that every path that builds the output sets the new field. Change code only where data is lost or wrong, a result is charged twice or a loop never ends.
+- When a change alters what a production path requests, give the requests and bytes per result before and after. Take the numbers from real runs. If you add a new branch, say how often it runs on normal input.
+- Say how you know each fact, such as "ran X", "read Y in the code" or "guess, not checked". Keep this when you shorten text. Give the source of each number.
+- Say "passed", "sent", "merged" or "deployed" only after you saw it in the exit code, the transcript or the PR or run state. Output piped through `tail` hides the exit code.
+- Keep a warning until you checked it. A question from me such as "so it's fixed?" is not evidence. If an earlier claim was wrong, correct it where you wrote it and tell me.
+- Before you push or call work ready, report what you removed and the diff size. List the choices a reviewer could ask about with the reason for each. Give the build, input and run links. Say what you did not check.
