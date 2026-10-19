@@ -72,3 +72,12 @@ Always identify yourself to other agents so that your messages aren't confused w
 - Back each point with a run of the PR build, a `file:line` or a link. Search the code before you ask for something that may already exist.
 - Say that a PR is ready to approve only when CI is green, someone ran its build and you read the bot findings.
 - When you ask another agent to review, give it the issue link and the smallest fix. Ask it to break the change and to list required and optional findings.
+
+## Pull requests and messages
+
+- Branch from the up-to-date default branch. For a stacked PR, branch from the up-to-date branch of the PR below it. Do not build on a teammate's unmerged PR.
+- Open PRs as drafts. If the diff has more than 300 changed lines, tell me and propose a smaller scope.
+- Mark a PR ready only after the bot review ran. Fix each bot finding or answer it with a one-line reason. If a teammate questions the design, settle that first.
+- Before you ask to mark a PR ready, tell me how many of my PRs in that org are already ready for review.
+- Post nothing as me unless I asked for that exact post. This covers Slack, GitHub comments, reviews, issues, Notion and email. Do not draft replies or ask "should I post this?" unless I asked for a reply.
+- Ask before a push, PR, merge or deploy. A request that names the action approves it. After I say yes, run it yourself. A question from me is not approval. Never ask about a message in the same turn as a code question.
