@@ -43,6 +43,6 @@ Write as few comments as possible.
 ## Commits, PRs and issues
 
 - Keep a PR body to a few lines. Say what changes for users and link the issue. When requests change, give the cost per result. Detail belongs in the issue.
-- Write commit subjects in lowercase and in the imperative mood. Use the repo's prefix when it has one, such as "fix(posts):". The commit body says why the change was made.
+- Write commit subjects in the imperative mood. Use the repo's prefix when it has one, such as "fix(posts):". Add a body only when the reason is not obvious. The body says why the change was made.
 - Update docs in the same PR as the change.
 - In a PR review comment, make one point. Say what the code does and what to change.
