@@ -46,3 +46,10 @@ Always identify yourself to other agents so that your messages aren't confused w
 - Run `git log` on the files you will change. If an earlier attempt was reverted, read why.
 - Read the repo's CONTRIBUTING, DEVELOPMENT and AGENTS docs before you open a PR.
 - If someone already works on it, stop and tell me.
+
+## Tests
+
+- Write one test for each behavior you add or fix. Check that the test fails without your change.
+- Do not write tests for wrappers, glue code or cases nobody reported.
+- If an existing test fails, treat it as a sign that your change is wrong. Do not weaken, skip, delete or comment out the test. Do not change its fixture or expected value until I agree that the old behavior was wrong.
+- In tests against live data, check the structure or a wide range. Do not check a value you just saw.
