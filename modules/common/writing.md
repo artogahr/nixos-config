@@ -13,6 +13,8 @@ Work in the spirit of the quote "if I had more time, I would have written a shor
 - Do not end with a summary of what you already wrote unless I ask for one. Do not end with sentences such as "Hope this helps" or "Let me know if you want more".
 - Give no time or effort estimates.
 - When you edit my draft, fix only what is wrong and keep my tone. When I ask for a redraft, send the new draft in your next reply.
+- Put the content in your reply. Do not write it to a file and send me the path. I read your replies on a server and cannot easily open files there.
+- When you draft text for me to copy, such as a message or a comment, write it as plain text. Do not put it in a quote block.
 
 ## What to avoid
 

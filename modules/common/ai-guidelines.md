@@ -9,8 +9,7 @@ If a tool isn't available, use `nix shell nixpkgs#<package>` or suggest adding i
 
 ## Herdr
 
-You run inside a Herdr pane. When the task becomes clear, give the tab a name so
-it can be found later. Only do this if the tab has a number as the label and you are the only agent in it:
+You run inside a Herdr pane. When the task becomes clear, give the tab a name so it can be found later. Only do this if the tab has a number as the label and you are the only agent in it:
 
 ```bash
 herdr tab get "$HERDR_TAB_ID" | jq -r '.result.tab | .label == (.number|tostring)'
@@ -23,13 +22,13 @@ If the first prints `true` and the second prints `1`:
 herdr tab rename "$HERDR_TAB_ID" "PR 1331 review"
 ```
 
-Use the PR or issue number when the work has one, otherwise a few words naming
-the task. Rename once, near the start. Never rename a tab the user named.
+Use the PR or issue number when the work has one, otherwise a few words naming the task. Rename once, near the start. Never rename a tab the user named.
 
-If you need to talk to other agents, you can assume they have herdr skill too and can talk back.
+All agents have access to herdr. To talk to another agent, send it a direct message with `herdr agent prompt <agent> "..."`. It can answer you the same way.
 Don't block yourself waiting for their answer, assume they will answer you via herdr. 
 If someone is waiting for your answer, answer them via herdr, not via updating some file. 
 Always identify yourself to other agents so that your messages aren't confused with user's and in multi-agent workflows things don't get confusing.
+A prompt to a busy agent can wait in its input box. After you send it, check that the agent's transcript shows your message.
 
 ## Scope
 
@@ -81,3 +80,18 @@ Always identify yourself to other agents so that your messages aren't confused w
 - Before you ask to mark a PR ready, tell me how many of my PRs in that org are already ready for review.
 - Post nothing as me unless I asked for that exact post. This covers Slack, GitHub comments, reviews, issues, Notion and email. Do not draft replies or ask "should I post this?" unless I asked for a reply.
 - Ask before a push, PR, merge or deploy. A request that names the action approves it. After I say yes, run it yourself. A question from me is not approval. Never ask about a message in the same turn as a code question.
+
+## Shared state
+
+- Work in your own git worktree. Other agents may work in the same repo at the same time.
+- In a checkout you did not create, do not switch branches, change git config or install packages.
+- Do not use `git stash`. All worktrees of a repo share one stash list.
+- Commit each step that works. Stage files by path. Do not use `git add -A` or `git commit -a`. When we draft text together, commit a part only after I approve it.
+- Do not use `--no-verify` or force push. Do not amend or rewrite commits unless I ask. If a hook fails, fix the cause.
+
+## Finish the task yourself
+
+- Inside a task I asked for, do every step your tools can do. Examples are opening linked runs and PRs, running tests, watching CI to the end and looking up terms. Do not hand these steps to me.
+- When I ask which option you would pick, pick one and say why.
+- If a permission rule blocks a step I asked for, name the rule and ask me to allow it. Give me a command to run only when it needs me, such as an interactive login.
+- When I correct how you work and the rule applies beyond one repo, propose a line for `~/workplace/nixos-config/modules/common/ai-guidelines.md`. Improve an existing line before you add a new one.
