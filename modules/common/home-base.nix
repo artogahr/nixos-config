@@ -102,10 +102,6 @@ in
       permissions = {
         defaultMode = "auto";
         deny = [ "AskUserQuestion" ];
-        ask = [
-          "Bash(git push *)"
-          "Bash(gh pr create *)"
-        ];
       };
       extraKnownMarketplaces = {
         apify-agent-skills-internal = {
