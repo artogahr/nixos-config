@@ -1,0 +1,8 @@
+extends: existence
+message: "Colon before a capital: '%s'. Do not start a line with a label or put the point after a colon. Write a full sentence."
+level: error
+nonword: true
+scope:
+  - "~heading"
+tokens:
+  - "(?<!:[^ ]+?):\\s(?!I\\b)[A-Z][a-z]*\\b"

@@ -24,6 +24,7 @@ let
   skillSources = {
     herdr = fromPackage pkgs.herdr "herdr" "herdr";
     owed = ./skills/owed;
+    ai-review = ./ai-check/ai-review;
   };
 
   # A home.file source that does not resolve produces a dangling symlink, and every
