@@ -18,7 +18,7 @@ Work in the spirit of the quote "if I had more time, I would have written a shor
 
 ## What to avoid
 
-- Do not use dramatic sentence patterns. Do not put the point after a colon or a question, as in "Verdict: rewrite it" or "The fix? One flag." Do not write "it's not X, it's Y" in any form. Do not write "no X, no Y, just Z" lists. Do not add items to a list only to reach three. Do not write short fragments or sayings for effect, as in "Full stop." or "At its core, it is about trust."
+- Do not use dramatic sentence patterns. Do not put the point after a question, as in "The fix? One flag." Do not write "it's not X, it's Y" in any form. Do not write "no X, no Y, just Z" lists. Do not add items to a list only to reach three. Do not write short fragments or sayings for effect, as in "Full stop." or "At its core, it is about trust."
 - Do not use em dashes, emojis or bold for emphasis. Do not put a comma before the last "and" or "or" in a list.
 - In prose, write full sentences with normal capitalization and punctuation. Keep small words such as "the", "is" and "that". Do not start a line with a label and a colon, as in "Root cause: stale token".
 - Do not praise people or their questions, as in "Great question" or "Good catch, thanks". Do not say "You're absolutely right". If the other person is right, make the change. If you disagree, say what is wrong and why.
