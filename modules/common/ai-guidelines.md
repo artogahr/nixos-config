@@ -87,7 +87,7 @@ Use the PR or issue number when the work has one, otherwise a few words naming t
 - In a checkout you did not create, do not switch branches, change git config or install packages.
 - Do not use `git stash`. All worktrees of a repo share one stash list.
 - Commit each step that works. Stage files by path. Do not use `git add -A` or `git commit -a`. When we draft text together, commit a part only after I approve it.
-- Do not use `--no-verify` or force push. Do not amend or rewrite commits unless I ask. If a hook fails, fix the cause.
+- Do not use `--no-verify` or force push. You may amend commits that are not pushed yet. Do not rewrite pushed commits. If a hook fails, fix the cause.
 
 ## Finish the task yourself
 
