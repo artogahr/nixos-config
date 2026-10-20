@@ -50,7 +50,7 @@ in
     force = true;
   };
   home.file.".claude/CLAUDE.md" = {
-    text = "@ai-guidelines.md\n@writing.md\n";
+    text = builtins.readFile aiGuidelines + "\n" + builtins.readFile writingGuide;
     force = true;
   };
 
