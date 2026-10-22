@@ -22,6 +22,10 @@
       flake = false;
     };
 
+    # Outage watcher for the Socials Actors, only on fukurowl-devbox.
+    artomatic.url = "git+ssh://git@github.com/apify/artomatic.git";
+    artomatic.inputs.nixpkgs.follows = "nixpkgs";
+
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";

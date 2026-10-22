@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "artomatic": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792659751,
+        "narHash": "sha256-rT2KaNi3U4wgg7Cq5EjSEW6ul/Dh5UOGJSjd3Frd2RI=",
+        "ref": "refs/heads/main",
+        "rev": "226461fecd4f154440ff4bfcf022c43c68ee8bdb",
+        "revCount": 39,
+        "type": "git",
+        "url": "ssh://git@github.com/apify/artomatic.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/apify/artomatic.git"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -253,6 +273,7 @@
     },
     "root": {
       "inputs": {
+        "artomatic": "artomatic",
         "brew-src": "brew-src",
         "catppuccin": "catppuccin",
         "disko": "disko",

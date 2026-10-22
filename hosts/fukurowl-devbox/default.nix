@@ -1,6 +1,8 @@
 # Always-on headless dev agent box: NixOS VM on proxmox2, reached over Tailscale.
 { lib, ... }:
 {
+  imports = [ ./artomatic.nix ];
+
   networking.hostName = "fukurowl-devbox";
 
   services.qemuGuest.enable = true;
