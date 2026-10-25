@@ -3,15 +3,6 @@
 {
   networking.hostName = "fukurowl-pc";
 
-  fileSystems."/mnt/skhynix" = {
-    device = "/dev/disk/by-uuid/976767c1-fb41-49d0-9417-eeef4a4b8f2d";
-    fsType = "ext4";
-    options = [
-      "defaults"
-      "nofail"
-    ];
-  };
-
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = [
