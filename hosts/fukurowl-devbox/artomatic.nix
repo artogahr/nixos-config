@@ -11,6 +11,8 @@
         mode = "live";
         apifyTokenFile = config.sops.secrets.apify-token.path;
         mezmoKeyFile = config.sops.secrets.mezmo-api-key.path;
+        slackBotTokenFile = config.sops.secrets.artomatic-slack-bot-token.path;
+        slackAppTokenFile = config.sops.secrets.artomatic-slack-app-token.path;
         apifyOrgTokenFile = "${config.home.homeDirectory}/.config/artomatic/org-token";
         slack.dmChannel = "U0B434JALCQ";
         slack.extraMentions = [ "U0B68ETVDFD" ];
