@@ -1,6 +1,8 @@
-{ ... }:
+{ inputs, pkgs, ... }:
 
 {
+  home.packages = [ inputs.collie.packages.${pkgs.stdenv.hostPlatform.system}.collie ];
+
   # The skill herdr ships is linked into every agent's skill dir by skills.nix.
   programs.herdr = {
     enable = true;

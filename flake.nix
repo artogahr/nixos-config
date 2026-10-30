@@ -26,6 +26,9 @@
     artomatic.url = "git+ssh://git@github.com/apify/artomatic.git";
     artomatic.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Phone client for herdr; see modules/common/herdr.nix.
+    collie.url = "github:AltanS/collie";
+
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
