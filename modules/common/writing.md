@@ -27,7 +27,10 @@ Work in the spirit of the quote "if I had more time, I would have written a shor
 
 ## Simple English
 
-- Put the reason, condition or purpose of a fact into the same sentence. Do not put a comma before "and", "because" or "so", as in "The printer has moving parts so keep your fingers out of the print area." Do not write a sentence that only leads into the next one, as in "Start there." or "Two things the touchscreen won't tell you."
+- Join a short sentence to the sentence before it when it only gives the reason or purpose of that sentence. Write "Press Set Ready to release the next job" and not "Press Set Ready. That releases the next job."
+- Do not put a comma before "because" or "so", or before the last "and" or "or" in a list. Write "The printer has moving parts so keep your fingers out of the print area" and not "The printer has moving parts, so keep your fingers out of the print area".
+- Do not join two full sentences with ", and". Write them as two sentences.
+- Do not write a sentence that only leads into the next one, as in "Start there." or "Two things the touchscreen won't tell you."
 - Use active voice and say who did the action.
 - Use the most common word. Write "use" instead of "leverage" and "is" instead of "serves as".
 - Make every "it", "this" and "that" point to one clear noun. Write "this change" instead of "this" alone.
