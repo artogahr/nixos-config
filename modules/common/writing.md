@@ -27,9 +27,9 @@ Work in the spirit of the quote "if I had more time, I would have written a shor
 
 ## Simple English
 
-- Put the reason, condition or purpose of a fact into the same sentence with a word such as "because", "if", "so" or "to". Do not put a comma before that word. Keep other facts in separate sentences. Do not join two full sentences with ", and" or with only a comma. Do not write a sentence that only leads into the next one, as in "Start there." or "Two things the touchscreen won't tell you."
+- Put the reason, condition or purpose of a fact into the same sentence. Do not put a comma before "and", "because" or "so", as in "The printer has moving parts so keep your fingers out of the print area." Do not write a sentence that only leads into the next one, as in "Start there." or "Two things the touchscreen won't tell you."
 - Use active voice and say who did the action.
-- Use the most common word. Write "use" instead of "leverage", "is" instead of "serves as", "because" instead of "since" and "check" instead of "look into".
+- Use the most common word. Write "use" instead of "leverage" and "is" instead of "serves as".
 - Make every "it", "this" and "that" point to one clear noun. Write "this change" instead of "this" alone.
 
 ## Code comments
