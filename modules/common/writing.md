@@ -19,7 +19,7 @@ Work in the spirit of the quote "if I had more time, I would have written a shor
 ## What to avoid
 
 - Do not use dramatic sentence patterns. Do not put the point after a question, as in "The fix? One flag." Do not write "it's not X, it's Y" in any form. Do not write "no X, no Y, just Z" lists. Do not add items to a list only to reach three. Do not write short fragments or sayings for effect, as in "Full stop." or "At its core, it is about trust."
-- Do not use em dashes, emojis or bold for emphasis. Do not put a comma before the last "and" or "or" in a list.
+- Do not use em dashes, emojis or bold for emphasis.
 - In prose, write full sentences with normal capitalization and punctuation. Keep small words such as "the", "is" and "that". Do not start a line with a label and a colon, as in "Root cause: stale token".
 - Do not praise people or their questions, as in "Great question" or "Good catch, thanks". Do not say "You're absolutely right". If the other person is right, make the change. If you disagree, say what is wrong and why.
 - Say the point without announcing or stressing it. Do not use words such as "it's worth noting", "the key point", "this matters", "here's the thing", "honest", "honestly", "genuinely", "actually", "quietly", "moreover" or "additionally".
@@ -27,7 +27,8 @@ Work in the spirit of the quote "if I had more time, I would have written a shor
 
 ## Simple English
 
-- Write one fact per sentence. Do not join facts with ", and", ", so", ", which" or ", then". Use active voice and say who did the action.
+- Put the reason, condition or purpose of a fact into the same sentence with a word such as "because", "if", "so" or "to". Do not put a comma before that word. Keep other facts in separate sentences. Do not join two full sentences with ", and" or with only a comma. Do not write a sentence that only leads into the next one, as in "Start there." or "Two things the touchscreen won't tell you."
+- Use active voice and say who did the action.
 - Use the most common word. Write "use" instead of "leverage", "is" instead of "serves as", "because" instead of "since" and "check" instead of "look into".
 - Make every "it", "this" and "that" point to one clear noun. Write "this change" instead of "this" alone.
 
