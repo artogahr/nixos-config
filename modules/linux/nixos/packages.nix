@@ -4,7 +4,6 @@
   environment.systemPackages = with pkgs; [
     git
     btrfs-progs
-    inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.toolchain
     lm_sensors
     dmidecode
     sshfs
