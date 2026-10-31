@@ -48,8 +48,8 @@ Use the PR or issue number when the work has one, otherwise a few words naming t
 
 ## Tests
 
-- Write one test for each behavior you add or fix. Check that the test fails without your change.
-- Do not write other tests, such as tests for wrappers, glue code or cases nobody reported.
+- Write a test only where it protects a decision that can go wrong, such as a branch, a calculation or a parse. Do not test fixed values, one-line constants or text. Check that each test fails without your change.
+- Do not write other tests, such as tests for wrappers, glue code or cases nobody reported. Fewer tests and a small diff that a reviewer can read are better than high coverage.
 - If an existing test fails, treat it as a sign that your change is wrong. Do not weaken, skip, delete or comment out the test. Do not change its fixture or expected value until I agree that the old behavior was wrong.
 - In tests against live data, check the structure or a wide range. Do not check a value you just saw.
 
