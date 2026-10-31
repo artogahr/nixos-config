@@ -14,7 +14,7 @@ Work in the spirit of the quote "if I had more time, I would have written a shor
 - Give no time or effort estimates.
 - When you edit my draft, fix only what is wrong and keep my tone. When I ask for a redraft, send the new draft in your next reply.
 - Put the content in your reply. Do not write it to a file and send me the path. I read your replies on a server and cannot easily open files there.
-- When you draft text for me to copy, such as a message or a comment, write it as plain text. Do not put it in a quote block.
+- When you draft text for me to copy, such as a Slack message, a comment or the text of an issue or PR, put it in a fenced code block exactly as I should paste it so the terminal does not render it and I can see every link URL. Do not put it in a quote block.
 
 ## What to avoid
 
