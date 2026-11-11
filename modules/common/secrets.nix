@@ -16,6 +16,7 @@ in
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     secrets = {
       apify-token = { };
+      artomatic-apify-token = { };
       artomatic-slack-bot-token = { };
       artomatic-slack-app-token = { };
     }

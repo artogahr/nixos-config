@@ -9,7 +9,7 @@
       services.artomatic = {
         enable = true;
         mode = "live";
-        apifyTokenFile = config.sops.secrets.apify-token.path;
+        apifyTokenFile = config.sops.secrets.artomatic-apify-token.path;
         mezmoKeyFile = config.sops.secrets.mezmo-api-key.path;
         slackBotTokenFile = config.sops.secrets.artomatic-slack-bot-token.path;
         slackAppTokenFile = config.sops.secrets.artomatic-slack-app-token.path;
