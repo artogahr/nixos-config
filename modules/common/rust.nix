@@ -16,7 +16,6 @@ in
   ++ (with pkgs; [
     cargo-expand
     cargo-audit
-    cargo-outdated
     cargo-bloat
     cargo-flamegraph
     cargo-nextest
