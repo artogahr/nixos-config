@@ -2,7 +2,7 @@
 #
 # User-level skill directories, per upstream docs:
 #   ~/.claude/skills      Claude Code (only path it reads)
-#   ~/.agents/skills      Codex and opencode (the cross-agent convention)
+#   ~/.agents/skills      opencode (the cross-agent convention)
 # opencode also reads ~/.claude/skills, so it is covered twice; harmless.
 {
   lib,
