@@ -36,6 +36,10 @@
       "notion" # nixpkgs' notion-app lags upstream by months
       "telegram" # the native macOS client; nixpkgs only has telegram-desktop
       "vlc"
+      "tailscale-app" # the GUI app with its network extension; conflicts with the nix-darwin tailscaled service
     ];
+    masApps = {
+      WireGuard = 1451685025;
+    };
   };
 }
