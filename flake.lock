@@ -29,11 +29,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794909407,
-        "narHash": "sha256-OohvYUs70dAW4Bezuev9NBSY3Iirvfx/yV5fWuK3bb4=",
+        "lastModified": 1795115572,
+        "narHash": "sha256-cwpvWYXD+Vo2jwtga8RtLkRtkypGR0c5qsev7wJ1/SE=",
         "ref": "refs/heads/main",
-        "rev": "e2f9b6a58e062994f527c6e2212faf8f32e81355",
-        "revCount": 109,
+        "rev": "b7c8317008fd1faf7e2c67c2a3b3ced909ced416",
+        "revCount": 111,
         "type": "git",
         "url": "ssh://git@github.com/apify/artomatic.git"
       },
@@ -45,11 +45,11 @@
     "brew-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1795083233,
-        "narHash": "sha256-zrJu1IN7lYtXgXMCHtKAG57ETuTOqvI5yupEGdRPza8=",
+        "lastModified": 1795111454,
+        "narHash": "sha256-sywAZ/HnmNZcq4qKqwdaxjikviEhCFyjljHTZ6XLZDY=",
         "owner": "Homebrew",
         "repo": "brew",
-        "rev": "1f8f55ce63f7fec6a65ecbf00d032a48d3b7ad80",
+        "rev": "b39ed2c1958182c9fc90fa87366d4510021ecf75",
         "type": "github"
       },
       "original": {
@@ -81,11 +81,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1795009865,
-        "narHash": "sha256-gGEckBpp1+M/kg0w4rIumzPL1eRmA1PiKCaeXJYBg2Y=",
+        "lastModified": 1795123243,
+        "narHash": "sha256-FIdAElFmlcfIIUPy1bqrctXDfo8stI+zZLDG7MoZVkk=",
         "owner": "AltanS",
         "repo": "collie",
-        "rev": "314eb4ced087f16ea64802e82958eb404a5ec0be",
+        "rev": "3d8a598e98d5e432f2c8e2dab2d30fe97f5de2c5",
         "type": "github"
       },
       "original": {
@@ -137,11 +137,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1795083335,
-        "narHash": "sha256-C2IGWU9L0810ULdh06d5Oll2v4GamJ1adR6zA50+mfg=",
+        "lastModified": 1795125176,
+        "narHash": "sha256-SjbWeqsfdwme481/ffzF+s8e440ox12ci/pTBTmMUDE=",
         "owner": "Homebrew",
         "repo": "homebrew-cask",
-        "rev": "e3d07d1a8aa8522d3cf22c3adadc163cb71bb880",
+        "rev": "a5433a3b218a1de16bea640828a2e57f9a31ddef",
         "type": "github"
       },
       "original": {
@@ -153,11 +153,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1795083516,
-        "narHash": "sha256-bxPUQt33JW7a6RNnXnYBF5Umt7WYDVI3FZglsnjZFLY=",
+        "lastModified": 1795124590,
+        "narHash": "sha256-9fKpcj17K0brM/8hbLJPMXlqDc4AZ07WtClSP75hQxU=",
         "owner": "Homebrew",
         "repo": "homebrew-core",
-        "rev": "3ac10076ef2fde17c6b94de4b581d490095dd51d",
+        "rev": "441e2935acf465a74326db31ee23d06d16f25549",
         "type": "github"
       },
       "original": {
@@ -225,11 +225,11 @@
     "nix-secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1795084636,
-        "narHash": "sha256-3tYVlRDh81vEjlWwi2FMkqJ9sCOOkvaaeL+hUvusl8o=",
+        "lastModified": 1795094515,
+        "narHash": "sha256-W7/j7oEHBP1/8bVmmRyzOcijWAXwsOBIl90b9Bkxt9o=",
         "ref": "refs/heads/main",
-        "rev": "f3c6d6d7cc89cee624046d7b9fe862986e1dfddc",
-        "revCount": 14,
+        "rev": "53f4f6e40381dd47031300cf1a4ba761bfdc19be",
+        "revCount": 15,
         "type": "git",
         "url": "ssh://git@github.com/artogahr/nix-secrets.git"
       },
