@@ -30,6 +30,8 @@ in
     );
   };
 
+  home.sessionVariables.SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
+
   # Read each decrypted file directly, so no secret value is ever quoted into a script.
   programs.fish.shellInit = builtins.concatStringsSep "\n" (
     builtins.attrValues (
