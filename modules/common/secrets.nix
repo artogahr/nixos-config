@@ -17,6 +17,7 @@ in
     secrets = {
       apify-token = { };
       artomatic-apify-token = { };
+      artomatic-apify-proxy-password = { };
       artomatic-slack-bot-token = { };
       artomatic-slack-app-token = { };
     }
