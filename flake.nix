@@ -1,4 +1,3 @@
-# /nixos-config/flake.nix
 {
   description = "System Flake — NixOS + nix-darwin configurations for Arto's hosts";
 
@@ -16,25 +15,19 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Private repo with the sops-encrypted secrets; see modules/common/secrets.nix.
     nix-secrets = {
       url = "git+ssh://git@github.com/artogahr/nix-secrets.git";
       flake = false;
     };
 
-    # Outage watcher for the Socials Actors, only on fukurowl-devbox.
     artomatic.url = "git+ssh://git@github.com/apify/artomatic.git";
     artomatic.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Phone client for herdr; see modules/common/herdr.nix.
     collie.url = "github:AltanS/collie";
 
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
-
-    fenix.url = "github:nix-community/fenix";
-    fenix.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-darwin.url = "github:nix-darwin/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -70,7 +63,6 @@
       disko,
       home-manager,
       plasma-manager,
-      fenix,
       nix-darwin,
       nix-homebrew,
       ...
@@ -78,8 +70,6 @@
     let
       lib = nixpkgs.lib;
 
-      # Auto-import every regular .nix file in `dir`. Used so dropping a new module file
-      # into modules/<os>/{nixos,nix-darwin,home} picks it up without touching this file.
       importDir =
         dir:
         map (name: dir + "/${name}") (
@@ -88,7 +78,6 @@
           )
         );
 
-      # Modules shared by every NixOS host.
       nixosCommonModules =
         (importDir ./modules/linux/nixos)
         ++ (importDir ./modules/common-system)
@@ -112,7 +101,6 @@
           }
         ];
 
-      # Graphical NixOS hosts add these on top of nixosCommonModules; headless hosts skip them.
       nixosDesktopModules =
         (importDir ./modules/linux/nixos/desktop)
         ++ (importDir ./modules/common-system/desktop)
@@ -120,7 +108,6 @@
           { home-manager.users.arto.imports = importDir ./modules/linux/home/desktop; }
         ];
 
-      # Modules shared by every nix-darwin host.
       darwinCommonModules =
         (importDir ./modules/darwin/nix-darwin)
         ++ (importDir ./modules/common-system)

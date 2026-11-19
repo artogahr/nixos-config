@@ -25,7 +25,7 @@ in
   catppuccin.zed.enable = false;
 
   # extraPackages requires a non-null package, so on darwin go through PATH.
-  # The fenix toolchain in rust.nix already ships rustfmt + rust-analyzer.
+  # rust.nix already installs rustfmt + rust-analyzer.
   home.packages = lib.optionals isDarwin (
     lib.subtractLists [
       pkgs.rust-analyzer

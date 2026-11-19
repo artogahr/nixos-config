@@ -1,19 +1,11 @@
-{ pkgs, inputs, ... }:
-let
-  rust = inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.stable;
-in
+{ pkgs, ... }:
 {
-  home.packages = [
-    (rust.withComponents [
-      "cargo"
-      "clippy"
-      "rust-src"
-      "rustc"
-      "rustfmt"
-      "rust-analyzer"
-    ])
-  ]
-  ++ (with pkgs; [
+  home.packages = with pkgs; [
+    cargo
+    clippy
+    rustc
+    rustfmt
+    rust-analyzer
     cargo-expand
     cargo-audit
     cargo-bloat
@@ -24,7 +16,7 @@ in
     cargo-udeps
     cargo-machete
     cargo-zigbuild
-  ]);
+  ];
 
   programs.git.ignores = [
     "target/"
