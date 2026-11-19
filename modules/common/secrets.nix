@@ -21,6 +21,7 @@ in
       artomatic-apify-proxy-password = { };
       artomatic-slack-bot-token = { };
       artomatic-slack-app-token = { };
+      homebrew-github-api-token = { };
     }
     // builtins.listToAttrs (
       map (name: {
@@ -28,6 +29,10 @@ in
         value = { };
       }) (builtins.attrValues envSecrets)
     );
+    templates."homebrew-brew.env" = {
+      content = "HOMEBREW_GITHUB_API_TOKEN=${config.sops.placeholder.homebrew-github-api-token}\n";
+      path = "${config.home.homeDirectory}/.homebrew/brew.env";
+    };
   };
 
   home.sessionVariables.SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
