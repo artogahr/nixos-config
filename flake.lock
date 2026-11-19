@@ -134,54 +134,6 @@
         "type": "github"
       }
     },
-    "homebrew-cask": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1795596421,
-        "narHash": "sha256-rgRkp0yKg1QiV7Qvx1qOT+wl2suWmiPVEjL5XVDD5ps=",
-        "owner": "Homebrew",
-        "repo": "homebrew-cask",
-        "rev": "6322582ddecafdebd75bde68604da14087b26b94",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Homebrew",
-        "repo": "homebrew-cask",
-        "type": "github"
-      }
-    },
-    "homebrew-core": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1795598522,
-        "narHash": "sha256-VhIXBEq+2mWZxWZkXRnu+8qpTBtjYZtGLoNwBUFqPiE=",
-        "owner": "Homebrew",
-        "repo": "homebrew-core",
-        "rev": "bf72f2c0ae0b117fe98df389ef889066cd594fa9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Homebrew",
-        "repo": "homebrew-core",
-        "type": "github"
-      }
-    },
-    "homebrew-whatcable": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1795516016,
-        "narHash": "sha256-ryHRjJAsFZD4uZuekPyxhz2tVFimbACVEisH4ED+2Zs=",
-        "owner": "darrylmorley",
-        "repo": "homebrew-whatcable",
-        "rev": "fb1cb76890add32cf529083477b544483756c546",
-        "type": "github"
-      },
-      "original": {
-        "owner": "darrylmorley",
-        "repo": "homebrew-whatcable",
-        "type": "github"
-      }
-    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -314,9 +266,6 @@
         "collie": "collie",
         "disko": "disko",
         "home-manager": "home-manager",
-        "homebrew-cask": "homebrew-cask",
-        "homebrew-core": "homebrew-core",
-        "homebrew-whatcable": "homebrew-whatcable",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nix-secrets": "nix-secrets",

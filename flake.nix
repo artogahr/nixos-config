@@ -40,19 +40,6 @@
       url = "github:Homebrew/brew";
       flake = false;
     };
-
-    homebrew-core = {
-      url = "github:Homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:Homebrew/homebrew-cask";
-      flake = false;
-    };
-    homebrew-whatcable = {
-      url = "github:darrylmorley/homebrew-whatcable";
-      flake = false;
-    };
   };
 
   outputs =
@@ -119,13 +106,10 @@
               enable = true;
               user = "artogahr";
               autoMigrate = true;
-              mutableTaps = false;
-              taps = {
-                "homebrew/homebrew-core" = inputs.homebrew-core;
-                "homebrew/homebrew-cask" = inputs.homebrew-cask;
-                "darrylmorley/homebrew-whatcable" = inputs.homebrew-whatcable;
-              };
-              trust.taps = [ "darrylmorley/whatcable" ];
+              trust.taps = [
+                "darrylmorley/whatcable"
+                "lzt1008/powerflow"
+              ];
             };
             home-manager = {
               extraSpecialArgs = { inherit inputs importDir; };

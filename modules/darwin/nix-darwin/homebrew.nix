@@ -12,6 +12,7 @@
     taps = [
       "homebrew/cask"
       "darrylmorley/whatcable"
+      "lzt1008/powerflow"
     ];
     casks = [
       "monitorcontrol"
@@ -31,10 +32,11 @@
       "vorssaint"
       "whatcable"
       "meetingbar"
-      "notion" # nixpkgs' notion-app lags upstream by months
-      "telegram" # the native macOS client; nixpkgs only has telegram-desktop
+      "notion"
+      "telegram"
       "vlc"
-      "tailscale-app" # the GUI app with its network extension; conflicts with the nix-darwin tailscaled service
+      "tailscale-app"
+      "powerflow"
     ];
     masApps = {
       WireGuard = 1451685025;
