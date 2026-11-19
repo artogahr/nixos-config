@@ -155,19 +155,6 @@
           ];
       };
 
-      nixosConfigurations.fukurowl-thinkpad = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules =
-          nixosCommonModules
-          ++ nixosDesktopModules
-          ++ [
-            { nixpkgs.hostPlatform = "x86_64-linux"; }
-            ./hosts/fukurowl-thinkpad/default.nix
-            ./hosts/fukurowl-thinkpad/disko-config.nix
-            ./hosts/fukurowl-thinkpad/hardware-configuration.nix
-          ];
-      };
-
       nixosConfigurations.fukurowl-devbox = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = nixosCommonModules ++ [

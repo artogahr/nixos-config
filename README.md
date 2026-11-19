@@ -11,7 +11,6 @@ New to Nix? Start with [nix.dev](https://nix.dev/), the official documentation a
 | Host | System | Role |
 | --- | --- | --- |
 | `fukurowl-pc` | NixOS | Desktop |
-| `fukurowl-thinkpad` | NixOS | Laptop |
 | `fukurowl-devbox` | NixOS | Headless VM |
 | `fukurowl-macbook` | nix-darwin | MacBook |
 
