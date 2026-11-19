@@ -67,6 +67,7 @@
       enable = true;
       user = "arto";
       dataDir = "/home/arto";
+      settings = import ../../../../syncthing.nix "/home/arto";
     };
 
     geoclue2 = {

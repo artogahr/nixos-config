@@ -72,6 +72,12 @@ Rebuild after updating and commit `flake.lock` with the change.
 To add a host, create its configuration under `hosts/` and register it in
 `flake.nix`, using an existing host with the same platform as a starting point.
 
+## Syncthing
+
+`syncthing.nix` lists the Syncthing devices and the folders they share. The desktop and the MacBook apply it each time Syncthing starts. A device or folder added in the Syncthing web page is removed again at the next start.
+
+To add a device, start Syncthing on it once, add the output of `syncthing device-id` to `syncthing.nix` and rebuild every host in the list.
+
 ## Secrets
 
 Encrypted secrets live in the private [nix-secrets](https://github.com/artogahr/nix-secrets)
