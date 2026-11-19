@@ -8,6 +8,7 @@ let
     HOMEASSISTANT_TOKEN = "homeassistant-token";
     MEZMO_API_KEY = "mezmo-api-key";
     LANGFUSE_AUTH = "langfuse-auth";
+    APIFY_TOKEN = "apify-token";
   };
 in
 {
