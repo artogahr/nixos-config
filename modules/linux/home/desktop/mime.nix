@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   xdg.mimeApps.enable = true;
   xdg.configFile."mimeapps.list".force = true;

@@ -1,5 +1,5 @@
 # Desktop-specific configuration (AMD Ryzen + Radeon)
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   networking.hostName = "fukurowl-pc";
 

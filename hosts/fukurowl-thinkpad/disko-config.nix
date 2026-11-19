@@ -1,5 +1,5 @@
 # ThinkPad T14s Gen 3 disk configuration (ext4)
-{ lib, ... }:
+{ ... }:
 {
   disko.devices = {
     disk = {

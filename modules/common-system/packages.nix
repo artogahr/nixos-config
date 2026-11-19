@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   # CLI tools, installed per-user. sharedModules applies regardless of the differing usernames.
   home-manager.sharedModules = [

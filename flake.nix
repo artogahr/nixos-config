@@ -57,7 +57,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       catppuccin,
       disko,
