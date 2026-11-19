@@ -41,6 +41,7 @@
           typst
           tinymist
           typstyle
+          apify-cli
         ];
       }
     )
