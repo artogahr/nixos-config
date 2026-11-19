@@ -1,4 +1,3 @@
-# Desktop session, audio, gaming and hardware integrations for the graphical NixOS hosts.
 { pkgs, ... }:
 {
   boot.kernel.sysctl."vm.max_map_count" = 2147483642;

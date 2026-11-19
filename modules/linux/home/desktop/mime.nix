@@ -1,4 +1,3 @@
-# File type associations and Linux-only xdg desktop entries.
 { pkgs, lib, ... }:
 {
   xdg.mimeApps.enable = true;

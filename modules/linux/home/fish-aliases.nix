@@ -1,4 +1,3 @@
-# Linux-only fish aliases (NixOS rebuild shortcuts).
 { ... }:
 {
   programs.fish.shellAliases = {

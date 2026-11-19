@@ -13,7 +13,6 @@
     enable = true;
     settings = {
       theme = "default";
-      # cover_img_scale = 2.0;
       border_type = "Rounded";
       layout = {
         playback_window_height = 12;

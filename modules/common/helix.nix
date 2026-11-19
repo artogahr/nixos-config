@@ -3,7 +3,6 @@
 {
   programs.helix = {
     enable = true;
-    # package = pkgs.evil-helix;
     defaultEditor = false;
     settings = {
       theme = lib.mkForce "catppuccin-frappe-transparent";

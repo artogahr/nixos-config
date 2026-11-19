@@ -1,4 +1,3 @@
-# Linux desktop extras: wallpapers, easyeffects presets, Linux-only home packages, KDE quirks.
 { pkgs, lib, ... }:
 {
   home.file."Wallpapers".source = ../../../../wallpapers;

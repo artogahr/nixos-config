@@ -1,5 +1,3 @@
-# Entry point for home-manager on nix-darwin hosts.
-# Auto-imports every .nix file in modules/common and modules/darwin/home.
 {
   pkgs,
   lib,

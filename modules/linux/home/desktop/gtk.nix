@@ -1,4 +1,3 @@
-# GTK theming — Linux-only.
 { pkgs, lib, ... }:
 {
   gtk.enable = true;

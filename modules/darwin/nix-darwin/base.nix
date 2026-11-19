@@ -1,4 +1,3 @@
-# nix-darwin baseline shared by all macOS hosts.
 {
   inputs,
   pkgs,

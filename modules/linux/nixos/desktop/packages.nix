@@ -1,4 +1,3 @@
-# Desktop applications for the graphical NixOS hosts
 { pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [

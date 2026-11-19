@@ -11,7 +11,6 @@
   networking.localHostName = "fukurowl-macbook";
   networking.computerName = "fukurowl-macbook";
 
-  # Per-host packages installed system-wide (very minimal for now).
   environment.systemPackages = with pkgs; [
     git
   ];

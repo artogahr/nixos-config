@@ -2,7 +2,7 @@
 # input). Each host decrypts them with its own age key at ~/.config/sops/age/keys.txt.
 { config, inputs, ... }:
 let
-  # Exported to every fish shell (like the old conf.d file), so agents started from one can use them.
+  # Exported to every fish shell so agents started from one can use them.
   envSecrets = {
     REDASH_API_KEY = "redash-api-key";
     HOMEASSISTANT_TOKEN = "homeassistant-token";

@@ -1,6 +1,5 @@
-# Zed editor, shared across all hosts. On Linux the binary comes from
-# nixpkgs; the nix-built Zed on macOS can't install extensions, so there
-# the Homebrew cask ships the binary and this module only manages config.
+# The nix-built Zed on macOS can't install extensions, so there the Homebrew
+# cask ships the binary and this module only manages config.
 { pkgs, lib, ... }:
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
@@ -67,7 +66,6 @@ in
       session.trust_all_worktrees = true;
       active_pane_modifiers.inactive_opacity = 0.9;
 
-      # Keep Vim yanks out of the OS clipboard; use cmd+c / cmd+v for that.
       vim.use_system_clipboard = "never";
 
       inlay_hints.enabled = false;

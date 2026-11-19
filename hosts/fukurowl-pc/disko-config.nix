@@ -1,4 +1,3 @@
-# /nixos-config/disko-config.nix (Corrected)
 { lib, ... }:
 
 let

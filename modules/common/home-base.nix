@@ -1,5 +1,3 @@
-# Cross-platform home-manager baseline.
-# Shared by every host (NixOS and nix-darwin).
 { ... }:
 {
   home.stateVersion = "25.05";

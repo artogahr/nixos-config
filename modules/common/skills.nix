@@ -1,5 +1,3 @@
-# Declaratively install AI agent skills for every agent.
-#
 # User-level skill directories, per upstream docs:
 #   ~/.claude/skills      Claude Code (only path it reads)
 #   ~/.agents/skills      opencode (the cross-agent convention)

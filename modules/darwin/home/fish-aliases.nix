@@ -1,4 +1,3 @@
-# macOS-only fish aliases (nix-darwin rebuild shortcuts).
 { ... }:
 {
   programs.fish.shellAliases = {

@@ -94,7 +94,6 @@
     ]
   '';
 
-  # LACT for AMD GPU control
   systemd = {
     packages = with pkgs; [ lact ];
     services.lactd.wantedBy = [ "multi-user.target" ];
@@ -107,7 +106,6 @@
     HSA_OVERRIDE_GFX_VERSION = "10.3.0";
   };
 
-  # Desktop-specific packages
   environment.systemPackages = with pkgs; [
     lact
     radeontop

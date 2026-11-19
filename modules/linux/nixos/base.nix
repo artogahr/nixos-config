@@ -1,5 +1,3 @@
-# NixOS-wide base configuration shared by all Linux hosts, desktop or headless.
-# Desktop-only settings live in ./desktop, which only the graphical hosts import.
 {
   config,
   pkgs,

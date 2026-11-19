@@ -1,4 +1,3 @@
-# Ghostty terminal emulator configuration
 # Linux-only (not available in nixpkgs for macOS)
 { ... }:
 
