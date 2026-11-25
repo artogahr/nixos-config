@@ -29,11 +29,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795198080,
-        "narHash": "sha256-9lhfemxNQxEWALnUrulfXai/Gpdr4eSbRzp154T/5/8=",
+        "lastModified": 1795613263,
+        "narHash": "sha256-6U6KVZdhxlVghxtHDNSUxETBZIEqGoo3NAoqfCxxNbw=",
         "ref": "refs/heads/main",
-        "rev": "fcd9187a9b3e65b759617ab31f3062245e93335b",
-        "revCount": 113,
+        "rev": "b4019bfd41b338897d6b91533f2bbdc19d453634",
+        "revCount": 114,
         "type": "git",
         "url": "ssh://git@github.com/apify/artomatic.git"
       },

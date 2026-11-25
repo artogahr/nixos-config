@@ -16,6 +16,7 @@
         slackBotTokenFile = config.sops.secrets.artomatic-slack-bot-token.path;
         slackAppTokenFile = config.sops.secrets.artomatic-slack-app-token.path;
         apifyOrgTokenFile = "${config.home.homeDirectory}/.config/artomatic/org-token";
+        zenhubTokenFile = "${config.home.homeDirectory}/.config/artomatic/zenhub-token";
         gitSigningKey = "${config.home.homeDirectory}/.ssh/id_ed25519_signing";
         slack.dmChannel = "U0B434JALCQ";
         slack.extraMentions = [ "U0B68ETVDFD" ];
