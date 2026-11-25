@@ -22,10 +22,7 @@
     };
   };
 
-  # Same servers as the other agents. Secrets come from the environment
-  # (REDASH_API_KEY, HOMEASSISTANT_TOKEN, MEZMO_API_KEY, exported by secrets.nix),
-  # not stored in this repo. Notion and Apify use OAuth: run
-  # `pi mcp login <server>` once per host.
+  # Notion and Apify use OAuth: run `pi mcp login <server>` once per host.
   home.file.".pi/agent/mcp.json".text = builtins.toJSON {
     mcpServers = {
       redash = {

@@ -1,4 +1,4 @@
-# CodexBar plugins. The app comes from the Homebrew cask (modules/darwin/nix-darwin/homebrew.nix).
+# The app comes from the Homebrew cask in modules/darwin/nix-darwin/homebrew.nix.
 { lib, ... }:
 {
   # CodexBar rejects a plugin that is a symlink ("plugin path is not a regular file"), so the

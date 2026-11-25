@@ -1,4 +1,3 @@
-# Claude Code settings, MCP servers and the instruction files in ~/.claude.
 # opencode.nix also reads the guides from ~/.claude.
 {
   pkgs,
@@ -39,7 +38,6 @@ in
         REDASH_API_KEY = "\${REDASH_API_KEY}";
       };
     };
-    # Credentials come from env vars exported by secrets.nix (private nix-secrets repo).
     mcpServers.home-assistant = {
       type = "stdio";
       command = lib.getExe' pkgs.uv "uvx";

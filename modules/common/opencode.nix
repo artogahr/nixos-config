@@ -1,4 +1,3 @@
-# OpenCode uses the native OpenRouter catalog through the Apify relay.
 {
   pkgs,
   config,
@@ -28,7 +27,6 @@
       url = "https://mcp.apify.com";
       enabled = true;
     };
-    # Credentials come from env vars exported by secrets.nix (private nix-secrets repo).
     mcp.home-assistant = {
       type = "local";
       command = [
