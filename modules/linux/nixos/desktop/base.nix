@@ -105,6 +105,4 @@
     };
     spiceUSBRedirection.enable = true;
   };
-
-  catppuccin.cursors.enable = true;
 }
