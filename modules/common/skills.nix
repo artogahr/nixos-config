@@ -1,7 +1,6 @@
 # User-level skill directories, per upstream docs:
 #   ~/.claude/skills      Claude Code (only path it reads)
-#   ~/.agents/skills      opencode (the cross-agent convention)
-# opencode also reads ~/.claude/skills, so it is covered twice; harmless.
+#   ~/.agents/skills      Codex and opencode (the cross-agent convention)
 {
   lib,
   pkgs,
@@ -27,7 +26,7 @@ let
 
   # A home.file source that does not resolve produces a dangling symlink, and every
   # agent skips those without a word. Wrap each source so a wrong path fails the
-  # build instead — same trick home-manager's claude-code module uses internally.
+  # build instead.
   checked =
     name: src:
     pkgs.runCommandLocal "agent-skill-${name}" { } ''
