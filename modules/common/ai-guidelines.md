@@ -9,20 +9,9 @@ If a tool isn't available, use `nix shell nixpkgs#<package>` or suggest adding i
 
 ## Herdr
 
-You run inside a Herdr pane. When the task becomes clear, give the tab a name so it can be found later. Only do this if the tab has a number as the label and you are the only agent in it:
+You run inside a Herdr pane. When the task becomes clear, give the tab a name so it can be found later. You can do this even if the tab has been named already, as long as you have a name that would clearly identify the work being done. 
 
-```bash
-herdr tab get "$HERDR_TAB_ID" | jq -r '.result.tab | .label == (.number|tostring)'
-herdr agent list | jq --arg t "$HERDR_TAB_ID" '[.result.agents[]|select(.tab_id==$t)]|length'
-```
-
-If the first prints `true` and the second prints `1`:
-
-```bash
-herdr tab rename "$HERDR_TAB_ID" "PR 1331 review"
-```
-
-Use the PR or issue number when the work has one, otherwise a few words naming the task. Rename once, near the start. Never rename a tab the user named.
+Use the PR or issue number when the work has one, otherwise a few words naming the task. Rename once, near the start. If the tab name already makes sense, you may leave it. 
 
 - All agents have access to herdr. To talk to another agent, send it a direct message with `herdr agent prompt <agent> "..."`. It can answer you the same way.
 - Don't block yourself waiting for their answer. Assume they will answer you via herdr.
@@ -75,11 +64,12 @@ Use the PR or issue number when the work has one, otherwise a few words naming t
 ## Pull requests and messages
 
 - Branch from the up-to-date default branch. For a stacked PR, branch from the up-to-date branch of the PR below it. Do not build on a teammate's unmerged PR.
-- Open PRs as drafts. If the diff has more than 300 changed lines, tell me and propose a smaller scope.
-- Mark a PR ready only after the bot review ran. Fix each bot finding or answer it with a one-line reason. If a teammate questions the design, settle that first.
-- Before you ask to mark a PR ready, tell me how many of my PRs in that org are already ready for review.
+- If the diff has more than 300 changed lines, tell me and propose a smaller scope.
+- In some repos code review tools might run, such as CodeRabbit etc. Chcek each bot finding and fix it if it's a valid finding which should definitely be fixed in the PR. If a finding is not relevant, mark it as resolved. If a teammate questions the design, settle that first.
+- If a PR is a complicated PR that changes many things, and if it was opened in IG, FB or Zillow repos, add "Ask claude review" label to it, which will trigger a claude bot to review it and post comments if it finds anything. It won't post anything if it doesn't find anything.
 - Post nothing as me unless I asked for that exact post. This covers Slack, GitHub comments, reviews, issues, Notion and email. Do not draft replies or ask "should I post this?" unless I asked for a reply.
 - Ask before a push, PR, merge or deploy. A request that names the action approves it. After I say yes, run it yourself. A question from me is not approval. When you ask to post a message, ask nothing else in the same reply.
+- A question from me is never an ask to do an action. Only perform actions when I explicitly ask for them, otherwise just answer the question. 
 
 ## Shared state
 
