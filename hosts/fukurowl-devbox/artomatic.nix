@@ -20,11 +20,6 @@
         gitSigningKey = "${config.home.homeDirectory}/.ssh/id_ed25519_signing";
         slack.dmChannel = "U0B434JALCQ";
         slack.extraMentions = [ "U0B68ETVDFD" ];
-        homeAssistant = {
-          url = "http://10.0.0.5:8123";
-          tokenFile = config.sops.secrets.homeassistant-token.path;
-          notifyService = "mobile_app_galaxy_s24";
-        };
       };
     };
 }
