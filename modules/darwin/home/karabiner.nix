@@ -1,6 +1,10 @@
 # Karabiner-Elements config. The app comes from the Homebrew cask (modules/darwin/nix-darwin/homebrew.nix).
-# Changes made in the Karabiner UI fail because the config is read-only.
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   whileCaps = from: to: {
     type = "basic";
@@ -17,10 +21,7 @@ let
     };
     to = [ to ];
   };
-in
-{
-  # Karabiner watches the directory, so a symlink to the file alone is not reloaded.
-  xdg.configFile."karabiner".source = pkgs.writeTextDir "karabiner.json" (
+  seed = pkgs.writeText "karabiner.json" (
     builtins.toJSON {
       global.show_in_menu_bar = false;
       profiles = [
@@ -158,4 +159,13 @@ in
       ];
     }
   );
+  configFile = lib.escapeShellArg "${config.xdg.configHome}/karabiner/karabiner.json";
+in
+{
+  home.activation.seedKarabiner = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    if [[ ! -e ${configFile} && ! -L ${configFile} ]]; then
+      run mkdir -p -- ${lib.escapeShellArg "${config.xdg.configHome}/karabiner"}
+      run install -m 600 -- ${seed} ${configFile}
+    fi
+  '';
 }
